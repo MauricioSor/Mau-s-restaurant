@@ -1,0 +1,13 @@
+{
+    "usuarios":[
+        {
+            "id":1,"usuario":"mauricio@admin.com","contraseña":"123Abcd"
+        }
+    ],
+    "comidas":[
+        {
+            "id":1,"nombre":"sandwich","precio":400,"categoria":"simples","Pasos":"1.Cortar el pan <br>2. Poner dos fetas de queso 3. Dos fetas de salame, 3. Cerrar el pan","imagen":"https://cdn.pixabay.com/photo/2016/11/29/04/00/bread-1867208_1280.jpg"
+        }
+    ]
+}
+
