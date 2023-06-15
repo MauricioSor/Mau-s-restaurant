@@ -14,9 +14,9 @@ function App() {
     <BrowserRouter>
     <Menu></Menu>
       <Routes>
-        <Route end to='/'element={<Home></Home>}></Route>
-        <Route end to='/administrador'element={<Administrador></Administrador>}></Route>
-        <Route end to='*'  element={<Error></Error>}></Route>
+        <Route exact to='/'element={<Home></Home>}></Route>
+        <Route exact to='/administrador'element={<Administrador></Administrador>}></Route>
+        <Route exact to='*'  element={<Error></Error>}></Route>
       </Routes>
       <Footer></Footer>
     </BrowserRouter>
