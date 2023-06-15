@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Administrador = () => {
+const Error = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const Administrador = () => {
     );
 };
 
-export default Administrador;
+export default Error;

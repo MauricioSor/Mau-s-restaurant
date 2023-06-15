@@ -1,0 +1,28 @@
+.main {
+flex-grow: 1;
+}
+#root {
+	width: 100%;
+	min-height: 100vh;
+	color: #fff;
+	background: linear-gradient(60deg, blue, rgb(16, 36, 225), rgb(6, 56, 94), black);
+	background-size: 400% 400%;
+	position: relative;
+	animation: cambiar 10s ease-in-out infinite;
+	display: flex;
+	flex-direction: column;
+}
+
+@keyframes cambiar {
+	0% {
+		background-position: 0 50%;
+	}
+
+	50% {
+		background-position: 100% 50%;
+	}
+
+	100% {
+		background-position: 0 50%;
+	}
+}
