@@ -5,7 +5,7 @@ const RutasAdministrador = () => {
     return (
     <>
     <Routes>
-        <Route exact element={<Administrador></Administrador>}></Route>
+        <Route exact path="./administrador" element={<Administrador></Administrador>}></Route>
     </Routes>
     </>
     );

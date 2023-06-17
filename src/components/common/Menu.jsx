@@ -15,7 +15,7 @@ const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
     const enviarDatos = (usuario) => {
         console.log(usuario);
         iniciarSesion(usuario).then((respuesta) => {
-            respuesta ? (sessionStorage.setItem('usuario', JSON.stringify(respuesta)),setUsuarioLogueado(respuesta),reset()) : undefined
+            respuesta ? (sessionStorage.setItem('usuario', JSON.stringify(respuesta)),setUsuarioLogueado(respuesta),reset(),navegacion('/Administrador')) : undefined
         });
     }
     const navegacion = useNavigate();
@@ -88,7 +88,7 @@ const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
                         </Row>
                         <Form.Group className='text-end my-2 '>
                             <Button className='mx-1' variant='danger' onClick={handleClose}>Cancelar</Button>
-                            <Button className='mx-1' variant='primary' type='submit' >Enviar</Button>
+                            <Button className='mx-1' variant='primary' type='submit'onClick={handleClose}>Enviar</Button>
                         </Form.Group>
                     </Form>
                 </Container>
