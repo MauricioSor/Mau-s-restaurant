@@ -8,6 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react'
 function App() {
   const [receta, SetReceta] = useState({});
+  const usuarioSessionStorage = JSON.parse(sessionStorage.getItem('usuario')) || {}
+  const [usuarioLogueado, setUsuarioLogueado] = useState(usuarioSessionStorage);
 
 
   const consultaApi = async () => {
@@ -27,7 +29,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Menu></Menu>
+        <Menu usuarioLogueado={usuarioLogueado} setUsuarioLogueado={setUsuarioLogueado} ></Menu>
         <Routes>
           <Route exact path='/' element={<Home></Home>}></Route>
           <Route exact path='/administrador' element={<Administrador></Administrador>}></Route>

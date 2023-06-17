@@ -4,9 +4,10 @@ import { NavLink, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { iniciarSesion } from '../helpers/queries';
-import Swal from 'sweetalert2';
 
-const Menu = ({ setUsuarioLogueado }) => {
+import { useNavigate } from 'react-router-dom'
+
+const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
     const [show, setShow] = useState(false);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const handleClose = () => setShow(false);
@@ -18,6 +19,12 @@ const Menu = ({ setUsuarioLogueado }) => {
             respuesta ? (sessionStorage.setItem('usuario', JSON.stringify(respuesta)), setUsuarioLogueado(respuesta), reset()) : undefined
         });
     }
+    const navegacion = useNavigate();
+    const cerrarSesion = () => {
+        sessionStorage.removeItem('usuario');
+        setUsuarioLogueado({});
+        navegacion('/');
+    }
     return (
         <>
             <Navbar bg="primary" variant="dark">
@@ -25,8 +32,14 @@ const Menu = ({ setUsuarioLogueado }) => {
                     <Navbar.Brand as={Link} to="/">TusRecetas.com</Navbar.Brand>
                     <Nav className="ms-auto">
                         <NavLink className='mx-2 nav-item nav-link' end to='/'>Inicio</NavLink>
-                        <NavLink className='mx-2 nav-item nav-link' end to='/Administrador'>Administrador</NavLink>
-                        <NavLink className='mx-2 nav-item nav-link' end onClick={handleShow}>Login</NavLink>
+                        {
+                            (usuarioLogueado.email) ?
+                                (<>
+                                    <NavLink end className='nav-item nav-link' to='/administrador'>Administrador</NavLink>
+                                    <Button variant="dark" onClick={cerrarSesion}>Logout</Button>
+                                </>) 
+                                :<NavLink end className='nav-item nav-link' onClick={handleShow} >Login</NavLink>
+                        }
                     </Nav>
                 </Container>
             </Navbar>

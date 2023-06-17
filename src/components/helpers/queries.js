@@ -15,6 +15,7 @@ export const iniciarSesion = async (usuario) => {
                     icon: 'success',
                     confirmButtonText: 'Continuar'
                 });
+                return respuesta;
             } else {
                 Swal.fire({
                     title: '¡Contraseña Incorrecta!',
