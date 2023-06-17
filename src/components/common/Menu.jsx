@@ -35,9 +35,9 @@ const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
                             usuarioLogueado.id ?
                                 <>
                                     <NavLink end className='nav-item nav-link' to='/administrador'>Administrador</NavLink>
-                                    <Button variant="dark" onClick={cerrarSesion}>Logout</Button>
+                                    <Button variant="primary" className='border' onClick={cerrarSesion}>Cerrar Sesion</Button>
                                 </>
-                                :<NavLink end className='nav-item nav-link' onClick={handleShow} >Login</NavLink>
+                                :<NavLink end className='nav-item nav-link' onClick={handleShow} >Iniciar Sesion</NavLink>
                         }
                     </Nav>
                 </Container>
