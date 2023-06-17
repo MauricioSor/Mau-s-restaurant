@@ -49,3 +49,10 @@ export const buscarcomidas = async () => {
         console.log(error)
     }
 }
+export const crearReceta = async()=>{
+    try{
+    
+    }catch{
+
+    }
+}
