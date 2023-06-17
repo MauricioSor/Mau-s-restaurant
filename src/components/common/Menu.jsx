@@ -3,6 +3,8 @@ import { Container, Nav, Navbar, Button, Modal, Form, Row } from 'react-bootstra
 import { NavLink, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
+import { iniciarSesion } from '../helpers/queries';
+import Swal from 'sweetalert2';
 
 const Menu = () => {
     const [show, setShow] = useState(false);
@@ -10,8 +12,27 @@ const Menu = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const enviarDatos = () => {
 
+    const enviarDatos = (usuario) => {
+        console.log(usuario);
+        iniciarSesion(usuario).then((respuesta) => {
+            respuesta ? (
+                Swal.fire({
+                    title: 'Inicio de Sesion Correcto!',
+                    text: 'Tienes acceso a la ventana de Administracion',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                })
+            ) :
+                (
+                    Swal.fire({
+                        title: '¡Usuario No Registrado!',
+                        text: 'Debes tener permisos para continuar',
+                        icon: 'error',
+                        confirmButtonText: 'Cool'
+                    })
+                );
+        })
     }
     return (
         <>

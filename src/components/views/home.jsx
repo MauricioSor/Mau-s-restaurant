@@ -2,7 +2,6 @@ import React from 'react';
 import { Container, Carousel, Spinner } from 'react-bootstrap';
 import { buscarcomidas } from '../helpers/queries';
 import { useState, useEffect } from 'react';
-
 const Home = () => {
     const [mostrarSpinner, setMostrarSpinner] = useState(true);
     const [recetas,setRecetas]=useState({});
@@ -16,7 +15,7 @@ const Home = () => {
         setMostrarSpinner(true);
         buscarRecetas();
     }, []);
-
+    
     return (
         <>
             {
