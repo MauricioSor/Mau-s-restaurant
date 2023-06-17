@@ -6,33 +6,16 @@ import { useForm } from "react-hook-form";
 import { iniciarSesion } from '../helpers/queries';
 import Swal from 'sweetalert2';
 
-const Menu = () => {
+const Menu = ({setUsuarioLogueado}) => {
     const [show, setShow] = useState(false);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const enviarDatos = (usuario) => {
         console.log(usuario);
         iniciarSesion(usuario).then((respuesta) => {
-            respuesta ? (
-                Swal.fire({
-                    title: 'Inicio de Sesion Correcto!',
-                    text: 'Tienes acceso a la ventana de Administracion',
-                    icon: 'success',
-                    confirmButtonText: 'Cool'
-                })
-            ) :
-                (
-                    Swal.fire({
-                        title: '¡Usuario No Registrado!',
-                        text: 'Debes tener permisos para continuar',
-                        icon: 'error',
-                        confirmButtonText: 'Cool'
-                    })
-                );
-        })
+            respuesta?(sessionStorage.setItem('usuario', JSON.stringify(respuesta)), setUsuarioLogueado(respuesta), reset()):undefined});
     }
     return (
         <>
