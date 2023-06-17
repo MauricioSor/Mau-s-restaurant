@@ -4,7 +4,6 @@ import { NavLink, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { iniciarSesion } from '../helpers/queries';
-
 import { useNavigate } from 'react-router-dom'
 
 const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
@@ -16,7 +15,7 @@ const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
     const enviarDatos = (usuario) => {
         console.log(usuario);
         iniciarSesion(usuario).then((respuesta) => {
-            respuesta ? (sessionStorage.setItem('usuario', JSON.stringify(respuesta)), setUsuarioLogueado(respuesta), reset()) : undefined
+            respuesta ? (sessionStorage.setItem('usuario', JSON.stringify(respuesta)),setUsuarioLogueado(respuesta),reset()) : undefined
         });
     }
     const navegacion = useNavigate();
@@ -33,11 +32,11 @@ const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
                     <Nav className="ms-auto">
                         <NavLink className='mx-2 nav-item nav-link' end to='/'>Inicio</NavLink>
                         {
-                            (usuarioLogueado.email) ?
-                                (<>
+                            usuarioLogueado.id ?
+                                <>
                                     <NavLink end className='nav-item nav-link' to='/administrador'>Administrador</NavLink>
                                     <Button variant="dark" onClick={cerrarSesion}>Logout</Button>
-                                </>) 
+                                </>
                                 :<NavLink end className='nav-item nav-link' onClick={handleShow} >Login</NavLink>
                         }
                     </Nav>

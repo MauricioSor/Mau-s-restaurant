@@ -7,25 +7,9 @@ import Administrador from './components/views/Administrador'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react'
 function App() {
-  const [receta, SetReceta] = useState({});
-  const usuarioSessionStorage = JSON.parse(sessionStorage.getItem('usuario')) || {}
+  const usuarioSessionStorage = JSON.parse(sessionStorage.getItem('usuario')) || {};
   const [usuarioLogueado, setUsuarioLogueado] = useState(usuarioSessionStorage);
 
-
-  const consultaApi = async () => {
-    try {
-      const consulta = await fetch('http://localhost:3004/comidas');
-      const respuesta = await consulta.json();
-      SetReceta(respuesta);
-      console.log(respuesta);
-    } catch (error) {
-      console.log(error);
-    }
-
-  }
-  useEffect(() => {
-    consultaApi();
-  }, []);
   return (
     <>
       <BrowserRouter>

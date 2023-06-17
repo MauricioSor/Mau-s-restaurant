@@ -6,8 +6,9 @@ export const iniciarSesion = async (usuario) => {
     try {
         const consulta = await fetch(URL_usuarios);
         const respuesta = await consulta.json();
+        console.log(respuesta);
         const usuarioBuscado = respuesta.find((item) => item.email === usuario.email);
-        if (usuarioBuscado) {
+        if (usuarioBuscado){
             if (usuarioBuscado.password === usuario.password) {
                 Swal.fire({
                     title: 'Inicio de Sesión Correcto!',
@@ -15,7 +16,8 @@ export const iniciarSesion = async (usuario) => {
                     icon: 'success',
                     confirmButtonText: 'Continuar'
                 });
-                return respuesta;
+                console.log(respuesta);
+                return usuarioBuscado;
             } else {
                 Swal.fire({
                     title: '¡Contraseña Incorrecta!',
@@ -23,6 +25,7 @@ export const iniciarSesion = async (usuario) => {
                     icon: 'error',
                     confirmButtonText: 'Reintentar'
                 });
+                return null;
             }
         } else {
             Swal.fire({
@@ -31,6 +34,7 @@ export const iniciarSesion = async (usuario) => {
                 icon: 'error',
                 confirmButtonText: 'Reintentar'
             });
+            return null;
         }
     } catch (error) {
         console.log(error);
