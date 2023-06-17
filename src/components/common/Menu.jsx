@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { iniciarSesion } from '../helpers/queries';
 import Swal from 'sweetalert2';
 
-const Menu = ({setUsuarioLogueado}) => {
+const Menu = ({ setUsuarioLogueado }) => {
     const [show, setShow] = useState(false);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const handleClose = () => setShow(false);
@@ -15,7 +15,8 @@ const Menu = ({setUsuarioLogueado}) => {
     const enviarDatos = (usuario) => {
         console.log(usuario);
         iniciarSesion(usuario).then((respuesta) => {
-            respuesta?(sessionStorage.setItem('usuario', JSON.stringify(respuesta)), setUsuarioLogueado(respuesta), reset()):undefined});
+            respuesta ? (sessionStorage.setItem('usuario', JSON.stringify(respuesta)), setUsuarioLogueado(respuesta), reset()) : undefined
+        });
     }
     return (
         <>
