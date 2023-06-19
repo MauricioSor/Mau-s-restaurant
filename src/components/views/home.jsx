@@ -45,7 +45,7 @@ const Home = () => {
                                     ))}
                             </Carousel>
                         </Container>
-                        <CardComidas></CardComidas>
+                        <CardComidas recetas={recetas}></CardComidas>
                     </>}
         </>
     );

@@ -1,19 +1,28 @@
 import React from 'react';
-import {Card,Button} from 'react-bootstrap/'
+import { Card, Button, Container } from 'react-bootstrap/'
 import Comida from './Comida';
-const CardComidas = () => {
+import { buscarcomidas } from '../../helpers/queries';
+const CardComidas = ({ recetas }) => {
+
     return (
-        <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src="holder.js/100px180" />
-            <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-            </Card.Body>
-        </Card>
+        <>
+        <div><h1 className='text-start ms-2'>Nuestras Recetas</h1></div>
+        <Container className='d-flex justify-content-center my-2'>
+        {
+            recetas.map((item, index) => (
+                <Card className='mx-1' style={{ width: '18rem' }} key={index}>
+                    <Card.Img variant="top" src={item.imagen} />
+                    <Card.Body>
+                        <Card.Title>{item.nombre}</Card.Title>
+                        <Card.Text>
+                        {item.descripcion}
+                        </Card.Text>
+                        <Button variant="primary">Ver Detalle</Button>
+                    </Card.Body>
+                </Card>
+            ))}
+        </Container>
+        </>
     );
 };
 
