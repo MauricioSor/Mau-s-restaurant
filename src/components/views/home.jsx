@@ -2,27 +2,29 @@ import React from 'react';
 import { Container, Carousel, Spinner } from 'react-bootstrap';
 import { buscarcomidas } from '../helpers/queries';
 import { useState, useEffect } from 'react';
+import CardComidas from './comidas/CardComidas';
 const Home = () => {
     const [mostrarSpinner, setMostrarSpinner] = useState(true);
-    const [recetas,setRecetas]=useState({});
-    const buscarRecetas=()=> {
-        buscarcomidas().then((respuesta) =>{
-        setRecetas(respuesta);
-        setMostrarSpinner(false);
+    const [recetas, setRecetas] = useState({});
+    const buscarRecetas = () => {
+        buscarcomidas().then((respuesta) => {
+            setRecetas(respuesta);
+            setMostrarSpinner(false);
         })
-        }
+    }
     useEffect(() => {
         setMostrarSpinner(true);
         buscarRecetas();
     }, []);
-    
+
     return (
         <>
             {
                 mostrarSpinner ?
                     (<div className="my-5 d-flex justify-content-center">
                         <Spinner animation='border' variant='primary' />
-                    </div>) : (
+                    </div>) :
+                    <>
                         <Container className='d-flex justify-content-center'>
                             <Carousel style={{ height: '400px', width: '600px' }}>
                                 {
@@ -43,7 +45,8 @@ const Home = () => {
                                     ))}
                             </Carousel>
                         </Container>
-                    )}
+                        <CardComidas></CardComidas>
+                    </>}
         </>
     );
 };
