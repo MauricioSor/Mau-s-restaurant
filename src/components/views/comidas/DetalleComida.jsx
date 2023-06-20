@@ -2,10 +2,22 @@ import React from 'react';
 import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { borrarReceta } from '../../helpers/queries';
+import Swal from 'sweetalert2';
+import { useForm } from "react-hook-form";
+
 const DetalleComida = ({ item }) => {
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+
     const borrar = (comida) => {
-        borrarReceta(comida).then((respuesta) => {
-            respuesta.status == 201 ? (Swal.fire('Comida Eliminada', 'Actualizacion Exitosa', 'success'), reset()) : Swal.fire('Error al Eliminar', `El producto ${comidaNueva.nombre} no se pudo borrar`, 'error');
+        borrarReceta(comida.id).then((respuesta) => {
+            if (respuesta.status === 200) {
+                Swal.fire('Comida Eliminada', 'Actualizacion Exitosa', 'success');
+                reset();
+                return respuesta;
+            } else {
+                console.log(respuesta.status)
+                Swal.fire('Error al Eliminar', `El producto ${comida.nombre} no se pudo borrar`, 'error');
+            }
         })
     }
 
@@ -21,7 +33,7 @@ const DetalleComida = ({ item }) => {
                     <td>
                         <Container className='d-flex'>
                             <Link className='btn btn-warning' to={'/administrador/EditarComida/' + item.id}>Editar</Link>
-                            <Button onClick={()=>{borrar(item)}} variant='danger' type='submit'>Eliminar</Button>
+                            <Button onClick={() => { borrar(item) }} variant='danger' type='submit'>Eliminar</Button>
                         </Container>
                     </td>
                 </>

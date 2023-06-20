@@ -11,7 +11,7 @@ const Administrador = () => {
     respuesta?(setComidas(respuesta)):(Swal.fire('Error','Intente nuevamente','error'));    
     })
     },[]);
-
+    
     return (
         <section className="container mainSection">
             <div className="d-flex justify-content-between align-items-center my-3"> 

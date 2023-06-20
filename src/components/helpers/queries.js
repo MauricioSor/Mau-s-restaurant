@@ -81,23 +81,17 @@ export const editarReceta = async(comida,id)=>{
     headers:{
         "Content-Type": "application/json"
     },
-    body:JSON.stringify(comida)
-    
+    body: JSON.stringify(comida)    
     });
     return consulta;
     }catch(error){
         console.log(error);
     }
 }
-export const borrarReceta = async(comida,id)=>{
+export const borrarReceta = async(id)=>{
     try{
     const consulta = await fetch(URL_recetas+'/'+id,{
-    method: "DELETE",
-    headers:{
-        "Content-Type": "application/json"
-    },
-    body:JSON.stringify(comida)
-    
+    method: "DELETE"
     });
     return consulta;
     }catch(error){

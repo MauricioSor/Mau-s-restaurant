@@ -3,8 +3,9 @@ import { Form, Button } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { buscarcomida, editarReceta } from '../../helpers/queries';
-
+import Swal from 'sweetalert2';
 const EditarComida = () => {
+
     const { register, handleSubmit, formState: { errors }, reset,setValue } = useForm();
     const {id} = useParams();
 
@@ -19,9 +20,15 @@ const EditarComida = () => {
     })
     })
     const enviar=(productoEditado)=>{
-    editarReceta(productoEditado).then((respuesta)=>{
-    respuesta.status==201?(Swal.fire('Comida Guardada','Actualizacion Exitosa','success'),reset()):Swal.fire('Error al Modificar',`El producto ${comidaNueva.nombre} no se pudo modificar`,'error');
-    })
+    console.log(productoEditado);
+    console.log(productoEditado.id);
+    editarReceta(productoEditado,productoEditado.id).then((respuesta)=>{
+    if(respuesta===200){
+    Swal.fire('Comida Guardada','Actualizacion Exitosa','success')
+    reset();
+    }else{
+        Swal.fire('Error al Modificar',`El producto ${productoEditado.nombre} no se pudo modificar`,'error');
+    }})
     }
     return (
         <section className='container mainSection'>
@@ -32,7 +39,6 @@ const EditarComida = () => {
                     <Form.Label>Comida*</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Ej: Cafe"
                         {...register("nombre", {
                             required: "El nombre de la comida es obligatorio",
                             minLength: {
@@ -53,7 +59,6 @@ const EditarComida = () => {
                     <Form.Label>Precio*</Form.Label>
                     <Form.Control
                         type="number"
-                        placeholder="Ej: 50"
                         {...register("precio", {
                             required: "El precio del producto es obligatorio",
                             min: {
@@ -74,7 +79,6 @@ const EditarComida = () => {
                     <Form.Label>Imagen URL*</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Ej: https://www.pexels.com/es-es/vans-en-blanco-y-negro-fuera-de-la-decoracion-para-colgar-en-la-pared-1230679/"
                         {...register("imagen", {
                             required: "La imagen es obligatoria",
                         })}
@@ -85,15 +89,12 @@ const EditarComida = () => {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formPrecio">
                     <Form.Label>Categoria*</Form.Label>
-                    <Form.Select    {...register("categoria", {
+                    <Form.Control
+                    type='text'                    
+                    {...register("categoria", {
                         required: "La categoria es obligatoria",
                     })}>
-                        <option value="">Seleccione una opcion</option>
-                        <option value="bebida caliente">Bebida caliente</option>
-                        <option value="bebida fria">Bebida fria</option>
-                        <option value="dulce">Dulce</option>
-                        <option value="salado">Salado</option>
-                    </Form.Select>
+                    </Form.Control>
                     <Form.Text className="text-danger">
                         {errors.categoria?.message}
                     </Form.Text>

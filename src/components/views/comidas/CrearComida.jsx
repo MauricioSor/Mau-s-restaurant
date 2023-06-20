@@ -21,6 +21,27 @@ const CrearComida = () => {
                 <h1 className='mt-4'>Nuevo Producto</h1>
                 <hr />
                 <Form onSubmit={handleSubmit(guardar)}>
+                <Form.Group>
+                        <Form.Label>Codigo</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder='Ej:145632a'
+                            {...register('nombre', {
+                                required: "El nombre de Comida es obligatorio"
+                                , minLength: {
+                                    value: 1,
+                                    message: "La cantidad minima de caracteres es de 1"
+                                },
+                                maxLength: {
+                                    value: 16
+                                    , message: "La cantidad máxima de caracteres es 20"
+                                }
+                            })}
+                        />
+                        <Form.Text className="text-danger">
+                            {errors.nombre?.message}
+                        </Form.Text>
+                    </Form.Group>
                     <Form.Group>
                         <Form.Label>Nombre de Comida</Form.Label>
                         <Form.Control
@@ -46,7 +67,7 @@ const CrearComida = () => {
                         <Form.Label>Precio</Form.Label>
                         <Form.Control
                             type="number"
-                            placeholder='1200'
+                            placeholder='Ej: 1200'
                             {...register('precio', {
                                 required: "El precio de la Comida es obligatorio"
                                 , min: {
@@ -74,6 +95,27 @@ const CrearComida = () => {
                         />
                         <Form.Text className="text-danger">
                             {errors.imagen?.message}
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Categoria</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder='Ej: Bebida caliente'
+                            {...register('categoria', {
+                                required: "El nombre de categoria es obligatorio"                                
+                                , minLength: {
+                                    value: 2,
+                                    message: "La cantidad minima de caracteres es de 2 y maximo de 20"
+                                },
+                                maxLength: {
+                                    value: 16
+                                    , message: "La cantidad minima de caracteres es de 2 y maximo de 20"
+                                }
+                            })}
+                        />
+                        <Form.Text className="text-danger">
+                            {errors.categoria?.message}
                         </Form.Text>
                     </Form.Group>
                     <Button className='mt-2' variant="primary" type='submit'>Guardar</Button>

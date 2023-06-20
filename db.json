@@ -33,8 +33,9 @@
     },
     {
       "nombre": "cafe",
-      "precio": "500",
-      "imagen": "https://images.hola.com/imagenes/estar-bien/20200305162301/trucos-aprovechar-tiempo-gimnasio-lb/0-793-755/sacale-partido-gimnasio-t.jpg?tx=w_1200",
+      "precio": "600",
+      "imagen": "https://media.istockphoto.com/id/1159612483/es/foto/espresso-caliente-y-grano-de-caf%C3%A9-en-la-mesa-negra-con-enfoque-suave-y-sobre-la-luz-en-el.jpg?s=612x612&w=0&k=20&c=11iD49l1EXkjU-eWzdOeqPN346OpIVPNFzD8KyczW0c=",
+      "categoria": "Bebida Caliente",
       "id": 4
     }
   ]
