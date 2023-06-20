@@ -12,6 +12,7 @@ const EditarComida = () => {
     useEffect(()=>{
     buscarcomida(id).then((respuesta)=>{
     if(respuesta){
+    setValue('id',respuesta.id);
     setValue('nombre',respuesta.nombre);
     setValue('precio',respuesta.precio);
     setValue('imagen',respuesta.imagen);
@@ -23,7 +24,7 @@ const EditarComida = () => {
     console.log(productoEditado);
     console.log(productoEditado.id);
     editarReceta(productoEditado,productoEditado.id).then((respuesta)=>{
-    if(respuesta===200){
+    if(respuesta.status===200){
     Swal.fire('Comida Guardada','Actualizacion Exitosa','success')
     reset();
     }else{
@@ -35,6 +36,26 @@ const EditarComida = () => {
             <h1 className='display-3'>Editar Comida</h1>
             <hr />
             <Form onSubmit={handleSubmit(enviar)}>
+            <Form.Group className="mb-3" controlId="formNombreProdcuto">
+                    <Form.Label>Codigo*</Form.Label>
+                    <Form.Control
+                        type="text"
+                        {...register("id", {
+                            required: "El nombre de la comida es obligatorio",
+                            minLength: {
+                                value: 2,
+                                message: "La cantidad minima de caracteres es de 2 digitos",
+                            },
+                            maxLength: {
+                                value: 100,
+                                message: "La cantidad minima de caracteres es de 2 digitos",
+                            },
+                        })}
+                    />
+                    <Form.Text className="text-danger">
+                        {errors.id?.message}
+                    </Form.Text>
+                </Form.Group>
                 <Form.Group className="mb-3" controlId="formNombreProdcuto">
                     <Form.Label>Comida*</Form.Label>
                     <Form.Control

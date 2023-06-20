@@ -32,7 +32,7 @@ const DetalleComida = ({ item }) => {
                     <td>{item.categoria}</td>
                     <td>
                         <Container className='d-flex'>
-                            <Link className='btn btn-warning' to={'/administrador/EditarComida/' + item.id}>Editar</Link>
+                            <Link className='btn btn-warning mx-1' to={'/administrador/EditarComida/' + item.id}>Editar</Link>
                             <Button onClick={() => { borrar(item) }} variant='danger' type='submit'>Eliminar</Button>
                         </Container>
                     </td>

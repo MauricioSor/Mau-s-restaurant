@@ -11,9 +11,8 @@
       "id": 1,
       "nombre": "Sandwich",
       "precio": 2500,
-      "categoria": "simples",
-      "pasos": "1.Cortar el pan 2. Poner dos fetas de queso 3. Dos fetas de salame, 3. Cerrar el pan",
-      "imagen": "https://cdn.pixabay.com/photo/2016/11/29/04/00/bread-1867208_1280.jpg"
+      "imagen": "https://cdn.pixabay.com/photo/2016/11/29/04/00/bread-1867208_1280.jpg",
+      "categoria": "simples"
     },
     {
       "id": 2,
@@ -32,11 +31,11 @@
       "imagen": "https://media.istockphoto.com/id/1389527253/es/foto/pizza-vegetariana-por-encima-de-la-vista-minimalista-sobre-un-fondo-azul.jpg?s=612x612&w=0&k=20&c=X7hTaRfhbZLEUovzg6-tOhgBaSK1e4N2h2zWLID-1vI="
     },
     {
+      "id": 4,
       "nombre": "cafe",
       "precio": "600",
       "imagen": "https://media.istockphoto.com/id/1159612483/es/foto/espresso-caliente-y-grano-de-caf%C3%A9-en-la-mesa-negra-con-enfoque-suave-y-sobre-la-luz-en-el.jpg?s=612x612&w=0&k=20&c=11iD49l1EXkjU-eWzdOeqPN346OpIVPNFzD8KyczW0c=",
-      "categoria": "Bebida Caliente",
-      "id": 4
+      "categoria": "Bebida Caliente"
     }
   ]
 }
