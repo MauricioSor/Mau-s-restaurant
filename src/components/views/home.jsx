@@ -25,26 +25,25 @@ const Home = () => {
                         <Spinner animation='border' variant='primary' />
                     </div>) :
                     <>
-                        <Container className='d-flex justify-content-center'>
-                            <Carousel style={{ height: '400px', width: '600px' }}>
+                            <Carousel style={{ width:'100vw' }}>
                                 {
                                     recetas.map((item, index) => (
                                         <Carousel.Item key={index}>
                                             <div style={{ height: '400px' }}>
                                                 <img
-                                                    style={{ objectFit: 'cover', height: '100%', width: '100%' }}
+                                                    style={{ objectFit: 'cover', height: '100%', width: '100%',filter:'blur(5px)',filter: 'opacity(60%)'
+                                                }}
                                                     src={item.imagen}
                                                     alt={`Slide ${index + 1}`}
                                                 />
                                             </div>
                                             <Carousel.Caption>
-                                                <h3>{item.nombre}</h3>
+                                                <h1 className='display-1'>{item.nombre}</h1>
                                                 <p>{item.descripcion}</p>
                                             </Carousel.Caption>
                                         </Carousel.Item>
                                     ))}
                             </Carousel>
-                        </Container>
                         <CardComidas recetas={recetas}></CardComidas>
                     </>}
         </>

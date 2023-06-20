@@ -12,7 +12,7 @@
             "nombre": "Sandwich",
             "precio": 2500,
             "categoria": "simples",
-            "Pasos": "1.Cortar el pan <br>2. Poner dos fetas de queso 3. Dos fetas de salame, 3. Cerrar el pan",
+            "pasos": "1.Cortar el pan 2. Poner dos fetas de queso 3. Dos fetas de salame, 3. Cerrar el pan",
             "imagen": "https://cdn.pixabay.com/photo/2016/11/29/04/00/bread-1867208_1280.jpg"
         },
         {
@@ -20,7 +20,7 @@
             "nombre": "Fideos",
             "precio": 1500,
             "categoria": "simples",
-            "Pasos": "1.Cortar el pan <br>2. Poner dos fetas de queso 3. Dos fetas de salame, 3. Cerrar el pan",
+            "pasos": "1.Cortar el pan 2. Poner dos fetas de queso 3. Dos fetas de salame, 3. Cerrar el pan",
             "imagen": "https://media.istockphoto.com/id/120046925/es/foto/spaghetti-con-salsa-de-crema.jpg?s=612x612&w=0&k=20&c=Kixx21ctd5BMmZrIwhHN52qFnQQPtVztn4GcP9t1a48="
         },
         {
@@ -28,7 +28,7 @@
             "nombre": "Pizza",
             "precio": 1900,
             "categoria": "simples",
-            "Pasos": "1.Cortar el pan <br>2. Poner dos fetas de queso 3. Dos fetas de salame, 3. Cerrar el pan",
+            "pasos": "1.Cortar el pan 2. Poner dos fetas de queso 3. Dos fetas de salame, 3. Cerrar el pan",
             "imagen": "https://media.istockphoto.com/id/1389527253/es/foto/pizza-vegetariana-por-encima-de-la-vista-minimalista-sobre-un-fondo-azul.jpg?s=612x612&w=0&k=20&c=X7hTaRfhbZLEUovzg6-tOhgBaSK1e4N2h2zWLID-1vI="
         }
     ]

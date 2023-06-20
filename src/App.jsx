@@ -7,6 +7,7 @@ import Administrador from './components/views/Administrador'
 import Error from './components/views/Error'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react'
+import CrearComida from './components/views/comidas/CrearComida'
 function App() {
   const usuarioSessionStorage = JSON.parse(sessionStorage.getItem('usuario')) || {};
   const [usuarioLogueado, setUsuarioLogueado] = useState(usuarioSessionStorage);
@@ -19,6 +20,7 @@ function App() {
           <Route exact path='/' element={<Home></Home>}></Route>
           <Route exact path='/administrador' element={<Administrador></Administrador>}></Route>
           <Route exact path="*" element={<Error></Error>}></Route>
+          <Route exact path="/administrador/AgregarComida" element={<CrearComida></CrearComida>}></Route>
         </Routes>
         <Footer></Footer>
       </BrowserRouter>

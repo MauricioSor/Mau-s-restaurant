@@ -14,7 +14,10 @@ const Administrador = () => {
 
     return (
         <section className="container mainSection">
-            <h1 className="ms-3 display-4">Administrar</h1>
+            <div className="d-flex justify-content-between align-items-center my-3"> 
+            <h1 className="ms-3 display-4">Administrar Productos:</h1>
+            <Link className="btn btn-primary" to="/administrador/AgregarComida" >Agregar</Link>
+            </div>
             <hr />
             <Table responsive striped bordered hover className="text-center">
                 <thead>
