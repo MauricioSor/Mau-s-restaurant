@@ -51,8 +51,16 @@ export const buscarcomidas = async () => {
 }
 export const crearReceta = async()=>{
     try{
+    const consulta = await fetch(URL_recetas,{
+    method: "POST",
+    headers:{
+        "Content-Type": "application/json"
+    },
+    body:JSO.stringify(comidas)
     
-    }catch{
-
+    });
+    return consulta;
+    }catch(error){
+        console.log(error);
     }
 }
