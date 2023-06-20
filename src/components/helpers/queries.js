@@ -49,14 +49,23 @@ export const buscarcomidas = async () => {
         console.log(error)
     }
 }
-export const crearReceta = async()=>{
+export const buscarcomida = async (id) => {
+    try {
+        const consulta = await fetch(URL_recetas+'/'+id);
+        const respuesta = await consulta.json();
+        return respuesta;
+    } catch (error) {
+        console.log(error)
+    }
+}
+export const crearReceta = async(comida)=>{
     try{
     const consulta = await fetch(URL_recetas,{
     method: "POST",
     headers:{
         "Content-Type": "application/json"
     },
-    body:JSO.stringify(comidas)
+    body: JSON.stringify(comida)
     
     });
     return consulta;
@@ -65,14 +74,14 @@ export const crearReceta = async()=>{
     }
 }
 
-export const editarReceta = async()=>{
+export const editarReceta = async(comida,id)=>{
     try{
     const consulta = await fetch(URL_recetas+'/'+id,{
     method: "PUT",
     headers:{
         "Content-Type": "application/json"
     },
-    body:JSO.stringify(comidas)
+    body:JSON.stringify(comida)
     
     });
     return consulta;
@@ -80,14 +89,14 @@ export const editarReceta = async()=>{
         console.log(error);
     }
 }
-export const borrarReceta = async()=>{
+export const borrarReceta = async(comida,id)=>{
     try{
     const consulta = await fetch(URL_recetas+'/'+id,{
     method: "DELETE",
     headers:{
         "Content-Type": "application/json"
     },
-    body:JSO.stringify(comidas)
+    body:JSON.stringify(comida)
     
     });
     return consulta;
