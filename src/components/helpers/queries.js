@@ -64,3 +64,34 @@ export const crearReceta = async()=>{
         console.log(error);
     }
 }
+
+export const editarReceta = async()=>{
+    try{
+    const consulta = await fetch(URL_recetas+'/'+id,{
+    method: "PUT",
+    headers:{
+        "Content-Type": "application/json"
+    },
+    body:JSO.stringify(comidas)
+    
+    });
+    return consulta;
+    }catch(error){
+        console.log(error);
+    }
+}
+export const borrarReceta = async()=>{
+    try{
+    const consulta = await fetch(URL_recetas+'/'+id,{
+    method: "DELETE",
+    headers:{
+        "Content-Type": "application/json"
+    },
+    body:JSO.stringify(comidas)
+    
+    });
+    return consulta;
+    }catch(error){
+        console.log(error);
+    }
+}
