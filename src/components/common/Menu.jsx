@@ -26,20 +26,22 @@ const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
     }
     return (
         <>
-            <Navbar bg="primary" variant="dark">
+            <Navbar bg="primary" variant="dark" expand='lg'>
                 <Container>
                     <Navbar.Brand as={Link} to="/">TusRecetas.com</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <NavLink className='mx-2 nav-item nav-link' end to='/'>Inicio</NavLink>
+                        <NavLink className='nav-item nav-link' end to='/'>Inicio</NavLink>
                         {
-                            usuarioLogueado.id ?
+                            (usuarioLogueado.id)?
                                 <>
                                     <NavLink end className='nav-item nav-link' to='/administrador'>Administrador</NavLink>
                                     <Button variant="primary" className='border' onClick={cerrarSesion}>Cerrar Sesion</Button>
-                                </>
-                                :<NavLink end className='nav-item nav-link' onClick={handleShow} >Iniciar Sesion</NavLink>
+                                </>:<NavLink end className='nav-item nav-link' onClick={handleShow} >Iniciar Sesion</NavLink>
                         }
                     </Nav>
+                    </Navbar.Collapse>
                 </Container>
             </Navbar>
             <Modal className='border' show={show} onHide={handleClose}>

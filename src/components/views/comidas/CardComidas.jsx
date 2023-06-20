@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Button, Container } from 'react-bootstrap/'
-import Comida from './Comida';
-import { buscarcomidas } from '../../helpers/queries';
+import DetalleComida from './DetalleComida';
+
 const CardComidas = ({ recetas }) => {
 
     return (
@@ -11,7 +11,7 @@ const CardComidas = ({ recetas }) => {
         {
             recetas.map((item, index) => (
                 <Card className='mx-1' style={{ width: '18rem' }} key={index}>
-                    <Card.Img variant="top" src={item.imagen} />
+                    <Card.Img variant="top" src={item.imagen} style={{height:'180px'}} />
                     <Card.Body>
                         <Card.Title>{item.nombre}</Card.Title>
                         <Card.Text>
