@@ -4,7 +4,7 @@ import Home from './components/views/Home'
 import Menu from './components/common/Menu'
 import Footer from './components/common/Footer'
 import Error from './components/views/Error'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { useState } from 'react'
 import RutasProtegidas from './components/routes/RutasProtegidas'
 import RutasAdministrador from './components/routes/RutasAdministrador'
