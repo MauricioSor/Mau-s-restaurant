@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
-import Home from './components/views/Home'
+import Principal from './components/views/Principal'
 import Menu from './components/common/Menu'
 import Footer from './components/common/Footer'
 import Error from './components/views/Error'
@@ -17,7 +17,7 @@ function App() {
       <BrowserRouter>
         <Menu usuarioLogueado={usuarioLogueado} setUsuarioLogueado={setUsuarioLogueado} ></Menu>
         <Routes>
-          <Route exact path='/' element={<Home></Home>}></Route>
+          <Route exact path='/' element={<Principal></Principal>}></Route>
           <Route exact path='/administrador/*' element={<RutasProtegidas><RutasAdministrador></RutasAdministrador></RutasProtegidas>}></Route>
           <Route exact path="*" element={<Error></Error>}></Route>
         </Routes>

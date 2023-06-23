@@ -3,7 +3,7 @@ import { Container, Carousel, Spinner } from 'react-bootstrap';
 import { buscarcomidas } from '../helpers/queries';
 import { useState, useEffect } from 'react';
 import CardComidas from './comidas/CardComidas';
-const Home = () => {
+const Principal = () => {
     const [mostrarSpinner, setMostrarSpinner] = useState(true);
     const [recetas, setRecetas] = useState({});
     const buscarRecetas = () => {
@@ -50,4 +50,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Principal;
