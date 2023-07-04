@@ -3,22 +3,36 @@ import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { borrarReceta } from '../../helpers/queries';
 import Swal from 'sweetalert2';
-import { useForm } from "react-hook-form";
 
 const DetalleComida = ({ item }) => {
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const borrar = (comida) => {
-        borrarReceta(comida.id).then((respuesta) => {
-            if (respuesta.status === 200) {
-                Swal.fire('Comida Eliminada', 'Actualizacion Exitosa', 'success');
-                reset();
-                return respuesta;
-            } else {
-                console.log(respuesta.status)
-                Swal.fire('Error al Eliminar', `El producto ${comida.nombre} no se pudo borrar`, 'error');
+        Swal.fire({
+            title: 'Estas Seguro?',
+            text: "No podras revertir este cambio despues!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si,estoy seguro!',
+            cancelButtonText:'Cancelar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                borrarReceta(comida.id).then((respuesta) => {
+                    if (respuesta.status === 200) {
+                        Swal.fire('Comida Eliminada', 'Actualizacion Exitosa', 'success');
+                        reset();
+                        window.location.reload();
+                        return respuesta;
+                    } else {
+                        console.log(respuesta.status)
+                        Swal.fire('Error al Eliminar', `El producto ${comida.nombre} no se pudo borrar`, 'error');
+                    }
+                })
             }
         })
+
+
     }
 
     return (

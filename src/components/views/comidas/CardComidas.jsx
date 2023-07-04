@@ -1,8 +1,10 @@
 import React from 'react';
 import { Card, Button, Container } from 'react-bootstrap/'
 import DetalleComida from './DetalleComida';
-
+import { useNavigate } from 'react-router-dom';
+import Detalle from './Detalle';
 const CardComidas = ({ recetas }) => {
+    const navegar = useNavigate();
 
     return (
         <>
@@ -17,7 +19,7 @@ const CardComidas = ({ recetas }) => {
                         <Card.Text className='text-truncate'>
                         {item.pasos}
                         </Card.Text>
-                        <Button variant="primary">Ver Detalle</Button>
+                        <Button type='submit' onClick={()=>{navegar('/DetalleComida')}} variant="primary">Ver Detalle</Button>
                     </Card.Body>
                 </Card>
             ))}
