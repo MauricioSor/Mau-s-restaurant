@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { useState } from 'react'
 import RutasProtegidas from './components/routes/RutasProtegidas'
 import RutasAdministrador from './components/routes/RutasAdministrador'
-import Detalle from './components/views/comidas/Detalle'
 function App() {
   const usuarioSessionStorage = JSON.parse(sessionStorage.getItem('usuario')) || {};
   const [usuarioLogueado, setUsuarioLogueado] = useState(usuarioSessionStorage);
@@ -21,7 +20,6 @@ function App() {
           <Route exact path='/' element={<Principal></Principal>}></Route>
           <Route exact path='/administrador/*' element={<RutasProtegidas><RutasAdministrador></RutasAdministrador></RutasProtegidas>}></Route>
           <Route exact path="*" element={<Error></Error>}></Route>
-          <Route exact path="/DetalleComida" element={<Detalle/>}></Route>
         </Routes>
         <Footer></Footer>
       </BrowserRouter>
