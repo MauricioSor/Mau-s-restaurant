@@ -54,7 +54,7 @@ const CrearComida = () => {
                                     message: "La cantidad minima de caracteres es de 2 y maximo de 20"
                                 },
                                 maxLength: {
-                                    value: 16
+                                    value: 20
                                     , message: "La cantidad minima de caracteres es de 2 y maximo de 20"
                                 }
                             })}
@@ -75,7 +75,7 @@ const CrearComida = () => {
                                     message: "La cantidad minima es de $20"
                                 },
                                 max: {
-                                    value: 10000
+                                    value: 100000
                                     , message: "La cantidad maxima es de $10000"
                                 }
                             })}
@@ -109,7 +109,7 @@ const CrearComida = () => {
                                     message: "La cantidad minima de caracteres es de 2 y maximo de 20"
                                 },
                                 maxLength: {
-                                    value: 16
+                                    value: 20
                                     , message: "La cantidad minima de caracteres es de 2 y maximo de 20"
                                 }
                             })}

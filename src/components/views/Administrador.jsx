@@ -6,6 +6,7 @@ import DetalleComida from "./comidas/DetalleComida";
 import { buscarcomidas } from "../helpers/queries";
 const Administrador = () => {
     const [comidas,setComidas]= useState([]);
+    
     useEffect(() =>{
     buscarcomidas().then((respuesta)=>{
     respuesta?(setComidas(respuesta)):(Swal.fire('Error','Intente nuevamente','error'));    

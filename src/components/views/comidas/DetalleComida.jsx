@@ -15,10 +15,10 @@ const DetalleComida = ({ item }) => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si,estoy seguro!',
-            cancelButtonText:'Cancelar'
-          }).then((result) => {
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
             if (result.isConfirmed) {
-                borrarReceta(comida.id).then((respuesta) => {
+                borrarReceta(comida._id).then((respuesta) => {
                     if (respuesta.status === 200) {
                         Swal.fire('Comida Eliminada', 'Actualizacion Exitosa', 'success');
                         reset();
@@ -31,22 +31,19 @@ const DetalleComida = ({ item }) => {
                 })
             }
         })
-
-
     }
-
     return (
         <tr>
             {
                 <>
-                    <td>{item.id}</td>
+                    <td>{item._id}</td>
                     <td>{item.nombre}</td>
                     <td>{item.precio}</td>
                     <td>{item.imagen}</td>
                     <td>{item.categoria}</td>
                     <td>
                         <Container className='d-flex'>
-                            <Link className='btn btn-warning mx-1' to={'/administrador/EditarComida/' + item.id}>Editar</Link>
+                            <Link className='btn btn-warning mx-1' to={'/administrador/EditarComida/' + item._id}>Editar</Link>
                             <Button onClick={() => { borrar(item) }} variant='danger' type='submit'>Eliminar</Button>
                         </Container>
                     </td>

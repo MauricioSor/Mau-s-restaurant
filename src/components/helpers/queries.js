@@ -1,15 +1,20 @@
-const URL_usuarios = import.meta.env.VITE_USUARIOS;
-const URL_recetas = import.meta.env.VITE_RECETAS;
+const URL_recetas_listar = import.meta.env.VITE_RECETAS_LISTA;
+const URL_receta_agregar = import.meta.env.VITE_RECETAS_AGREGAR;
+const URL_receta = import.meta.env.VITE_RECETAS_BUSCAR_BORRAR_EDITAR;
+const URL_usuario = import.meta.env.VITE_USUARIOS_BUSCAR_EDITAR_BORRAR
+const URL_usuarios_listar = import.meta.env.VITE_USUARIOS_LISTAR;
+const URL_usuario_crear=import.meta.env.VITE_USUARIOS_AGREGAR;
+
 import Swal from 'sweetalert2';
 
 export const iniciarSesion = async (usuario) => {
     try {
-        const consulta = await fetch(URL_usuarios);
+        const consulta = await fetch(URL_usuarios_listar);
         const respuesta = await consulta.json();
         console.log(respuesta);
         const usuarioBuscado = respuesta.find((item) => item.email === usuario.email);
         if (usuarioBuscado){
-            if (usuarioBuscado.password === usuario.password) {
+            if (usuarioBuscado.contraseña === usuario.contraseña) {
                 Swal.fire({
                     title: 'Inicio de Sesión Correcto!',
                     text: 'Tienes acceso a la ventana de Administración',
@@ -42,16 +47,17 @@ export const iniciarSesion = async (usuario) => {
 };
 export const buscarcomidas = async () => {
     try {
-        const consulta = await fetch(URL_recetas);
+        const consulta = await fetch(URL_recetas_listar);
         const respuesta = await consulta.json();
         return respuesta;
     } catch (error) {
         console.log(error)
     }
 }
-export const buscarcomida = async (id) => {
+export const buscarcomida = async (_id) => {
     try {
-        const consulta = await fetch(URL_recetas+'/'+id);
+        console.log(_id)
+        const consulta = await fetch(URL_receta+'/'+_id);
         const respuesta = await consulta.json();
         return respuesta;
     } catch (error) {
@@ -60,7 +66,7 @@ export const buscarcomida = async (id) => {
 }
 export const crearReceta = async(comida)=>{
     try{
-    const consulta = await fetch(URL_recetas,{
+    const consulta = await fetch(URL_receta_agregar,{
     method: "POST",
     headers:{
         "Content-Type": "application/json"
@@ -76,7 +82,7 @@ export const crearReceta = async(comida)=>{
 
 export const editarReceta = async(comida,id)=>{
     try{
-    const consulta = await fetch(URL_recetas+'/'+id,{
+    const consulta = await fetch(URL_receta+'/'+id,{
     method: "PUT",
     headers:{
         "Content-Type": "application/json"
@@ -90,7 +96,7 @@ export const editarReceta = async(comida,id)=>{
 }
 export const borrarReceta = async(id)=>{
     try{
-    const consulta = await fetch(URL_recetas+'/'+id,{
+    const consulta = await fetch(URL_receta+'/'+id,{
     method: "DELETE"
     });
     return consulta;

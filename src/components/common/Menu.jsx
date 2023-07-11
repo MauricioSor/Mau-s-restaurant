@@ -34,7 +34,7 @@ const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
                     <Nav className="ms-auto">
                         <NavLink className='nav-item nav-link' end to='/'>Inicio</NavLink>
                         {
-                            (usuarioLogueado.id)?
+                            (usuarioLogueado._id)?
                                 <>
                                     <NavLink end className='nav-item nav-link' to='/administrador'>Administrador</NavLink>
                                     <Button variant="primary" className='border' onClick={cerrarSesion}>Cerrar Sesion</Button>
@@ -75,16 +75,16 @@ const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
                                     type="password"
                                     placeholder="Ingrese Contraseña"
                                     defaultValue="123Abcde"
-                                    {...register('password', {
-                                        required: 'El password es obligatorio',
+                                    {...register('contraseña', {
+                                        required: 'La contraseña es obligatoria',
                                         pattern: {
                                             value: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
-                                            message: 'El password debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. No puede tener otros símbolos.'
+                                            message: 'La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. No puede tener otros símbolos.'
                                         }
                                     })}
                                 />
                                 <Form.Text className="text-danger">
-                                    {errors.password?.message}
+                                    {errors.contraseña?.message}
                                 </Form.Text>
                             </Form.Group>
                         </Row>

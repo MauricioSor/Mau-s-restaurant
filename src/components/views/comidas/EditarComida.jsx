@@ -1,28 +1,31 @@
-import { useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button ,Spinner} from 'react-bootstrap';
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { buscarcomida, editarReceta } from '../../helpers/queries';
 import Swal from 'sweetalert2';
+import { useState,useEffect } from 'react';
 const EditarComida = () => {
 
     const { register, handleSubmit, formState: { errors }, reset,setValue } = useForm();
-    const {id} = useParams();
-
+    const {_id} = useParams();
+    const[spinner,setSpinner]=useState(true);
+    
     useEffect(()=>{
-    buscarcomida(id).then((respuesta)=>{
+    console.log(_id)
+    buscarcomida(_id).then((respuesta)=>{
     if(respuesta){
-    setValue('id',respuesta.id);
+    setValue('_id',respuesta._id);
     setValue('nombre',respuesta.nombre);
     setValue('precio',respuesta.precio);
     setValue('imagen',respuesta.imagen);
     setValue('categoria',respuesta.categoria);
-    }
-    })
-    })
+    setSpinner(false)
+    }})
+},[])
+
     const enviar=(productoEditado)=>{
     console.log(productoEditado);
-    console.log(productoEditado.id);
+    console.log(productoEditado._id);
     editarReceta(productoEditado,productoEditado.id).then((respuesta)=>{
     if(respuesta.status===200){
     Swal.fire('Comida Guardada','Actualizacion Exitosa','success')
@@ -35,12 +38,18 @@ const EditarComida = () => {
         <section className='container mainSection'>
             <h1 className='display-3'>Editar Comida</h1>
             <hr />
-            <Form onSubmit={handleSubmit(enviar)}>
+            {
+                spinner?
+                (<div className='d-flex justify-content-center'>
+                    <Spinner></Spinner>
+                </div>):
+                <>
+                            <Form onSubmit={handleSubmit(enviar)}>
             <Form.Group className="mb-3" controlId="formNombreProdcuto">
                     <Form.Label>Codigo*</Form.Label>
                     <Form.Control
                         type="text"
-                        {...register("id", {
+                        {...register("_id", {
                             required: "El nombre de la comida es obligatorio",
                             minLength: {
                                 value: 2,
@@ -53,7 +62,7 @@ const EditarComida = () => {
                         })}
                     />
                     <Form.Text className="text-danger">
-                        {errors.id?.message}
+                        {errors._id?.message}
                     </Form.Text>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formNombreProdcuto">
@@ -124,6 +133,9 @@ const EditarComida = () => {
                 Modificar
                 </Button>
             </Form>
+                </>
+            }
+
         </section>
     );
 };
