@@ -21,27 +21,6 @@ const CrearComida = () => {
                 <h1 className='mt-4'>Nuevo Producto</h1>
                 <hr />
                 <Form onSubmit={handleSubmit(guardar)}>
-                <Form.Group>
-                        <Form.Label>Codigo</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder='Ej:145632a'
-                            {...register('nombre', {
-                                required: "El nombre de Comida es obligatorio"
-                                , minLength: {
-                                    value: 1,
-                                    message: "La cantidad minima de caracteres es de 1"
-                                },
-                                maxLength: {
-                                    value: 16
-                                    , message: "La cantidad máxima de caracteres es 20"
-                                }
-                            })}
-                        />
-                        <Form.Text className="text-danger">
-                            {errors.nombre?.message}
-                        </Form.Text>
-                    </Form.Group>
                     <Form.Group>
                         <Form.Label>Nombre de Comida</Form.Label>
                         <Form.Control

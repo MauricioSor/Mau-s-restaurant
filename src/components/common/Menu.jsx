@@ -13,7 +13,6 @@ const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
     const handleShow = () => setShow(true);
 
     const enviarDatos = (usuario) => {
-        console.log(usuario);
         iniciarSesion(usuario).then((respuesta) => {
             respuesta ? (sessionStorage.setItem('usuario', JSON.stringify(respuesta)),setUsuarioLogueado(respuesta),reset(),navegacion('/Administrador')) : undefined
         });

@@ -11,7 +11,6 @@ export const iniciarSesion = async (usuario) => {
     try {
         const consulta = await fetch(URL_usuarios_listar);
         const respuesta = await consulta.json();
-        console.log(respuesta);
         const usuarioBuscado = respuesta.find((item) => item.email === usuario.email);
         if (usuarioBuscado){
             if (usuarioBuscado.contraseña === usuario.contraseña) {
@@ -21,7 +20,6 @@ export const iniciarSesion = async (usuario) => {
                     icon: 'success',
                     confirmButtonText: 'Continuar'
                 });
-                console.log(respuesta);
                 return usuarioBuscado;
             } else {
                 Swal.fire({
@@ -56,7 +54,6 @@ export const buscarcomidas = async () => {
 }
 export const buscarcomida = async (_id) => {
     try {
-        console.log(_id)
         const consulta = await fetch(URL_receta+'/'+_id);
         const respuesta = await consulta.json();
         return respuesta;
