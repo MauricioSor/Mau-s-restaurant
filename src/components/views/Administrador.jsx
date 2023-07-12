@@ -1,4 +1,4 @@
-import { Table, Button } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";

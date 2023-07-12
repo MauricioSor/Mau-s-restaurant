@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { crearReceta } from '../../helpers/queries';
 const CrearComida = () => {
     const { register, handleSubmit, formState: { errors }, reset, } = useForm();
-
+    
     const guardar = (comidaNueva) => {
         console.log(comidaNueva);
         crearReceta(comidaNueva).then((respuesta) => {
@@ -70,6 +70,7 @@ const CrearComida = () => {
                             placeholder='Ej: https://media.istockphoto.com/id/1462145716/es/foto/jugosos-bocados-de-carne-de-nueva-york.jpg?s=612x612&w=0&k=20&c=V8iCuI1dUVBjqajE9MDC8thQxBvL2RJkvbqqXL7IV0A='
                             {...register('imagen', {
                                 required: "El imagen de Comida es obligatorio"
+                                
                             })}
                         />
                         <Form.Text className="text-danger">

@@ -101,3 +101,18 @@ export const borrarReceta = async(id)=>{
         console.log(error);
     }
 }
+export const crearUsuario = async(usuario)=>{
+    try{
+        console.log(usuario)
+        const consulta = await fetch(URL_usuario_crear,{
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(usuario)
+        });
+        return consulta;
+    }catch(error){
+        console.log(error);
+    }
+}
