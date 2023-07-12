@@ -21,7 +21,9 @@ const DetalleComida = ({ item }) => {
                 borrarReceta(comida._id).then((respuesta) => {
                     if (respuesta.status === 200) {
                         Swal.fire('Comida Eliminada', 'Actualizacion Exitosa', 'success');
-                        window.location.reload();
+                        setTimeout(()=>{
+                            window.location.reload();
+                        },2500)
                         return respuesta;
                     } else {
                         console.log(respuesta.status)

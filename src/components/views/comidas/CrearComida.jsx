@@ -2,15 +2,16 @@ import { Form, Button } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import Swal from 'sweetalert2';
 import { crearReceta } from '../../helpers/queries';
+import { useNavigate } from 'react-router-dom';
 const CrearComida = () => {
     const { register, handleSubmit, formState: { errors }, reset, } = useForm();
-    
+    const navegar= useNavigate();
     const guardar = (comidaNueva) => {
         console.log(comidaNueva);
         crearReceta(comidaNueva).then((respuesta) => {
             if (respuesta.status === 201) {
             Swal.fire('Comida Guardada', 'Guardado Exitoso', 'success')
-            reset();
+            navegar('/administrador')
             } else {
                 Swal.fire('Error al Guardar', `El producto ${comidaNueva.nombre} no se pudo guardar`, 'error');
             }
