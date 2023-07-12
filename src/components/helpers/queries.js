@@ -103,7 +103,6 @@ export const borrarReceta = async(id)=>{
 }
 export const crearUsuario = async(usuario)=>{
     try{
-        console.log(usuario)
         const consulta = await fetch(URL_usuario_crear,{
             method: "POST",
             headers:{
