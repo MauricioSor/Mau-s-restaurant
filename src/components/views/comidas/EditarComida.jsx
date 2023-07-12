@@ -1,5 +1,5 @@
 import { Form, Button ,Spinner} from 'react-bootstrap';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { buscarcomida, editarReceta } from '../../helpers/queries';
 import Swal from 'sweetalert2';
@@ -9,7 +9,8 @@ const EditarComida = () => {
     const { register, handleSubmit, formState: { errors }, reset,setValue } = useForm();
     const {_id} = useParams();
     const[spinner,setSpinner]=useState(true);
-    
+    const navegar= useNavigate();
+
     useEffect(()=>{
     console.log(_id)
     buscarcomida(_id).then((respuesta)=>{
@@ -23,13 +24,13 @@ const EditarComida = () => {
     }})
 },[])
 
-    const enviar=(productoEditado)=>{
+    const enviar = (productoEditado)=>{
     console.log(productoEditado);
     console.log(productoEditado._id);
-    editarReceta(productoEditado,productoEditado.id).then((respuesta)=>{
-    if(respuesta.status===200){
+    editarReceta(productoEditado,productoEditado._id).then((respuesta)=>{
+    if(respuesta.status===201){
     Swal.fire('Comida Guardada','Actualizacion Exitosa','success')
-    reset();
+    navegar('/administrador');
     }else{
         Swal.fire('Error al Modificar',`El producto ${productoEditado.nombre} no se pudo modificar`,'error');
     }})
