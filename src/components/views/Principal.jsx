@@ -31,7 +31,7 @@ const Principal = () => {
                                         <Carousel.Item key={index}>
                                             <div style={{ height: '400px' }}>
                                                 <img
-                                                    style={{ objectFit: 'cover', height: '100%', width: '100%',filter:'blur(5px)',filter: 'opacity(60%)'
+                                                    style={{ objectFit: 'cover', height: '100%', width: '100%',filter:'blur(10px)',filter: 'opacity(55%)'
                                                 }}
                                                     src={item.imagen}
                                                     alt={`Slide ${index + 1}`}
@@ -39,7 +39,6 @@ const Principal = () => {
                                             </div>
                                             <Carousel.Caption>
                                                 <h1 className='display-1'>{item.nombre}</h1>
-                                                <p>{item.descripcion}</p>
                                             </Carousel.Caption>
                                         </Carousel.Item>
                                     ))}

@@ -41,7 +41,7 @@ const DetalleComida = ({ item }) => {
                     <td>{item.nombre}</td>
                     <td>{item.precio}</td>
                     <td>{item.imagen}</td>
-                    <td>{item.descripcion}</td>
+                    <td className='text-truncate' style={{maxWidth:'20px'}}>{item.descripcion}</td>
                     <td>{item.categoria}</td>
                     <td>
                         <Container className='d-flex'>

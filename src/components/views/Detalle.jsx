@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Spinner, Card, Container } from 'react-bootstrap'
+import { Spinner, Card, Container, Col, Row } from 'react-bootstrap'
 import { buscarcomida } from "../helpers/queries";
 const Detalle = () => {
 
@@ -27,14 +27,27 @@ const Detalle = () => {
                         <Spinner></Spinner>
                     </div>) :
                     <>
-                        <Container className="mainSection">
+                        <Container className="mt-2 mainSection">
                             <Card>
-                                <Card.Img variant="start" src={receta.imagen} />
-                                <Card.Body>
-                                    <Card.Text>
-                                        {receta.descripcion}
-                                    </Card.Text>
-                                </Card.Body>
+                                <Row>
+                                    <Col md={6}>
+                                        <Card.Img variant="top" src={receta.imagen} />
+                                    </Col>
+                                    <Col md={6}>
+                                        <Card.Title className="text-center display-4">{receta.nombre}</Card.Title>
+                                        <Card.Body>
+                                            <Card.Text>
+                                                <span>Valor: <strong>${receta.precio}</strong></span>
+                                                <br />
+                                                <p className="text-center">Descripcion:{receta.descripcion}</p> 
+                                                <br/>
+                                            </Card.Text>
+                                            <Card.Footer className="align-self-start">
+                                            <p className="text">{receta.categoria}</p>
+                                            </Card.Footer>
+                                        </Card.Body>
+                                    </Col>
+                                </Row>
                             </Card>
                             <br />
                         </Container>

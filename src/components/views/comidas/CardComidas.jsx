@@ -12,12 +12,14 @@ const navegar=useNavigate();
             recetas.map((item, index) => (
                 <Card className='mx-1' style={{ width: '18rem' }} key={index}>
                     <Card.Img variant="top" src={item.imagen} style={{height:'180px'}} />
-                    <Card.Body>
+                    <Card.Body className='d-flex flex-column'>
                         <Card.Title className='text-center'>{item.nombre}</Card.Title>
                         <Card.Text className='text-truncate'>
-                        {item.pasos}
+                        <p className='text-center'><strong >${item.precio}</strong></p>
                         </Card.Text>
-                        <Button type='submit' onClick={()=>{navegar('/Detalle/'+item._id)}} variant="primary">Ver Detalle</Button>
+                        <div className='text-center'>
+                        <Button className='mt-auto' type='submit' onClick={()=>{navegar('/Detalle/'+item._id)}} variant="primary">Ver Detalle</Button>
+                        </div>
                     </Card.Body>
                 </Card>
             ))}
