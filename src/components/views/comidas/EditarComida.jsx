@@ -19,6 +19,7 @@ const EditarComida = () => {
     setValue('nombre',respuesta.nombre);
     setValue('precio',respuesta.precio);
     setValue('imagen',respuesta.imagen);
+    setValue('descripcion',respuesta.descripcion);
     setValue('categoria',respuesta.categoria);
     setSpinner(false)
     }})
@@ -84,6 +85,47 @@ const EditarComida = () => {
                     />
                     <Form.Text className="text-danger">
                         {errors.nombre?.message}
+                    </Form.Text>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formNombreProdcuto">
+                    <Form.Label>Comida*</Form.Label>
+                    <Form.Control
+                        type="text"
+                        {...register("nombre", {
+                            required: "El nombre de la comida es obligatorio",
+                            minLength: {
+                                value: 2,
+                                message: "La cantidad minima de caracteres es de 2 digitos",
+                            },
+                            maxLength: {
+                                value: 100,
+                                message: "La cantidad minima de caracteres es de 2 digitos",
+                            },
+                        })}
+                    />
+                    <Form.Text className="text-danger">
+                        {errors.nombre?.message}
+                    </Form.Text>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Descripcion</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder='Pj.Chipá'
+                        {...register('descripcion', {
+                            required: "La descripcion es un campo obligatorio"
+                            , minLength: {
+                                value: 20,
+                                message: "La cantidad minima de caracteres es de 2"
+                            },
+                            maxLength: {
+                                value: 500
+                                , message: "La cantidad maxima es de 500"
+                            }
+                        })}
+                    />
+                    <Form.Text className="text-danger">
+                        {errors.descripcion?.message}
                     </Form.Text>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formPrecio">
