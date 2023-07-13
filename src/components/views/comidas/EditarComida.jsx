@@ -139,8 +139,8 @@ const EditarComida = () => {
                                 message: "El precio minimo es de $1",
                             },
                             max: {
-                                value: 10000,
-                                message: "El precio maximo es de $10000",
+                                value: 999999,
+                                message: "El precio maximo es de $999999",
                             },
                         })}
                     />
