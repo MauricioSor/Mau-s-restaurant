@@ -74,7 +74,7 @@ const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
                                 <Form.Control
                                     type="password"
                                     placeholder="Ingrese Contraseña"
-                                    defaultValue="123Abcde"
+                                    defaultValue="Mauricio123"
                                     {...register('contraseña', {
                                         required: 'La contraseña es obligatoria',
                                         pattern: {
