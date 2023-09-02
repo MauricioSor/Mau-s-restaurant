@@ -25,6 +25,7 @@ const Principal = () => {
                         <Spinner animation='border' variant='primary' />
                     </div>) :
                     <>
+                    <Container>
                             <Carousel style={{ width:'100vw' }}>
                                 {
                                     recetas.map((item, index) => (
@@ -43,6 +44,7 @@ const Principal = () => {
                                         </Carousel.Item>
                                     ))}
                             </Carousel>
+                            </Container>
                         <CardComidas recetas={recetas}></CardComidas>
                     </>}
         </>
