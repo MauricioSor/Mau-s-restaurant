@@ -24,9 +24,8 @@ const Principal = () => {
                     (<div className="my-5 d-flex justify-content-center">
                         <Spinner animation='border' variant='primary' />
                     </div>) :
-                    <>
-                    <Container>
-                            <Carousel style={{ width:'100vw' }}>
+                    <>      
+                            <Carousel style={{ width:'100' }}>
                                 {
                                     recetas.map((item, index) => (
                                         <Carousel.Item key={index}>
@@ -44,9 +43,9 @@ const Principal = () => {
                                         </Carousel.Item>
                                     ))}
                             </Carousel>
-                            </Container>
                         <CardComidas recetas={recetas}></CardComidas>
-                    </>}
+                    </>
+                    }
         </>
     );
 };
