@@ -1,18 +1,50 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Spinner, Card, Container, Col, Row } from 'react-bootstrap'
+import { Spinner, Card, Container, Col, Row,Badge,Stack } from 'react-bootstrap'
 import { buscarcomida } from "../helpers/queries";
-const Detalle = () => {
 
+const Detalle = () => {
     const { id } = useParams();
     const [receta, setReceta] = useState();
     const [mostrarSpinner, setMostrarSpinner] = useState(true);
-
+    const [badge,setBadge]=useState();
     const buscarRecetas = () => {
         buscarcomida(id).then((respuesta) => {
             setReceta(respuesta);
             setMostrarSpinner(false);
+            capsula(respuesta.categoria);
         })
+    }
+    const capsula = (categoria) => {
+        switch (categoria) {
+            case "Calientes":
+                setBadge("danger");
+                break;
+            case "Bebida Caliente":
+                setBadge("danger");
+                break;
+            case "Bebida fria":
+                setBadge("info");
+                break;
+            case "Simples":
+                setBadge("light");
+                break;
+            case "Frio":
+                setBadge("info");
+                break;
+            case "Pastas":
+                setBadge("warning");
+                break;
+            case "Sandwich":
+                setBadge("success");
+                break;
+            case "Minutas":
+                setBadge("secondary");
+                break;
+            case "Guarnicion":
+                setBadge("secondary");
+                break;
+        }
     }
     useEffect(() => {
         console.log(id);
@@ -39,11 +71,11 @@ const Detalle = () => {
                                             <Card.Text>
                                                 <span>Valor: <strong>${receta.precio}</strong></span>
                                                 <br />
-                                                <p className="text-center">Descripcion:{receta.descripcion}</p> 
-                                                <br/>
+                                                <p className="text-start">{receta.descripcion}</p>
+                                                <br />
                                             </Card.Text>
                                             <Card.Footer className="align-self-start">
-                                            <p className="text">{receta.categoria}</p>
+                                                <Badge bg={badge} className="text">{receta.categoria}</Badge>
                                             </Card.Footer>
                                         </Card.Body>
                                     </Col>
