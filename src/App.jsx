@@ -1,3 +1,4 @@
+//#region Imports
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 import Principal from './components/views/Principal'
@@ -9,10 +10,12 @@ import { useState } from 'react'
 import RutasProtegidas from './components/routes/RutasProtegidas'
 import RutasAdministrador from './components/routes/RutasAdministrador'
 import Detalle from './components/views/Detalle'
+//#endregion
 function App() {
+//#region States
   const usuarioSessionStorage = JSON.parse(sessionStorage.getItem('usuario')) || {};
   const [usuarioLogueado, setUsuarioLogueado] = useState(usuarioSessionStorage);
-
+//#endregion
   return (
     <>
       <BrowserRouter>
@@ -21,13 +24,13 @@ function App() {
           <Route exact path='/' element={<Principal />} />
           <Route exact path='/administrador/*' element={
             <RutasProtegidas>
-              <RutasAdministrador />
+              <RutasAdministrador/>
             </RutasProtegidas>
           } />
-          <Route exact path='/detalle/:id' element={<Detalle />} />
-          **<Route exact path="*" element={<Error></Error>}></Route>**
+          <Route exact path='/detalle/:id' element={<Detalle/>} />
+          **<Route exact path="*" element={<Error/>}/>**
         </Routes>
-        <Footer></Footer>
+        <Footer/>
       </BrowserRouter>
     </>
   )

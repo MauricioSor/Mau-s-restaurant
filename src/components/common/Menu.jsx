@@ -1,3 +1,4 @@
+//#region Imports
 import React from 'react';
 import { Container, Nav, Navbar, Button, Modal, Form, Row } from 'react-bootstrap';
 import { NavLink, Link } from 'react-router-dom';
@@ -5,16 +6,21 @@ import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { iniciarSesion } from '../helpers/queries';
 import { useNavigate } from 'react-router-dom'
+//#endregion
 
 const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
+    //#region states
     const [show, setShow] = useState(false);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    //#endregion
+    //#region functions
     const enviarDatos = (usuario) => {
         iniciarSesion(usuario).then((respuesta) => {
-            respuesta ? (sessionStorage.setItem('usuario', JSON.stringify(respuesta)),setUsuarioLogueado(respuesta),reset(),navegacion('/Administrador')) : undefined
+            respuesta ? 
+            (sessionStorage.setItem('usuario', JSON.stringify(respuesta)),setUsuarioLogueado(respuesta),reset(),navegacion('/Administrador')) 
+            : undefined
         });
     }
     const navegacion = useNavigate();
@@ -23,11 +29,12 @@ const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
         setUsuarioLogueado({});
         navegacion('/');
     }
+    //#endregion
     return (
         <>
             <Navbar bg="primary" variant="dark" expand='lg'>
                 <Container>
-                    <Navbar.Brand as={Link} to="/">TusRecetas.com</Navbar.Brand>
+                    <Navbar.Brand as={Link} to="/">Mau's restobar</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
@@ -35,10 +42,12 @@ const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
                         {
                             (usuarioLogueado._id)?
                                 <>
-                                    <NavLink end className='nav-item nav-link' to='administrador/Registro'>Registro</NavLink>
+                                {/* Preguntar por roles para el empleado */}
+                                    <NavLink end className='nav-item nav-link' to='administrador/Registro'>Registrar empleado</NavLink>
                                     <NavLink end className='nav-item nav-link' to='/administrador'>Administrador</NavLink>
                                     <Button variant="primary" className='border' onClick={cerrarSesion}>Cerrar Sesion</Button>
-                                </>:<NavLink end className='nav-item nav-link' onClick={handleShow} >Iniciar Sesion</NavLink>
+                                </>:
+                                <NavLink end className='nav-item nav-link' onClick={handleShow} >Iniciar Sesion</NavLink>
                         }
                     </Nav>
                     </Navbar.Collapse>

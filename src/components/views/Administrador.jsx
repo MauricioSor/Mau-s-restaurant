@@ -1,19 +1,18 @@
+//#region Imports
 import { Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import DetalleComida from "./comidas/DetalleComida";
 import { buscarcomidas } from "../helpers/queries";
+//#endregion
 const Administrador = () => {
-
     const [comidas, setComidas] = useState([]);
-
     useEffect(() => {
         buscarcomidas().then((respuesta) => {
             respuesta ? (setComidas(respuesta)) : (Swal.fire('Error', 'Ocurrió un error en el servidor. Porfavor intente nuevamente', 'error'));
         })
     }, []);
-
     return (
         <section className="container mainSection">
             <div className="d-flex justify-content-between align-items-center my-3">

@@ -1,13 +1,18 @@
+//#region Imports
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Spinner, Card, Container, Col, Row,Badge,Stack } from 'react-bootstrap'
 import { buscarcomida } from "../helpers/queries";
+//#endregion
 
 const Detalle = () => {
+//#region States
     const { id } = useParams();
     const [receta, setReceta] = useState();
     const [mostrarSpinner, setMostrarSpinner] = useState(true);
     const [badge,setBadge]=useState();
+//#endregion
+//#region Functions
     const buscarRecetas = () => {
         buscarcomida(id).then((respuesta) => {
             setReceta(respuesta);
@@ -51,6 +56,7 @@ const Detalle = () => {
         setMostrarSpinner(true);
         buscarRecetas(id);
     }, [])
+//#endregion
     return (
         <>
             {
@@ -84,7 +90,6 @@ const Detalle = () => {
                             <br />
                         </Container>
                     </>
-
             }
         </>
     );

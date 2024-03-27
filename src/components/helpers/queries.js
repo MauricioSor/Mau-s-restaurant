@@ -1,11 +1,12 @@
+//#region Imports Enviroments
 const URL_recetas_listar = import.meta.env.VITE_RECETAS_LISTA;
 const URL_receta_agregar = import.meta.env.VITE_RECETAS_AGREGAR;
 const URL_receta = import.meta.env.VITE_RECETAS_BUSCAR_BORRAR_EDITAR;
 const URL_usuario = import.meta.env.VITE_USUARIOS_BUSCAR_EDITAR_BORRAR
 const URL_usuarios_listar = import.meta.env.VITE_USUARIOS_LISTAR;
 const URL_usuario_crear=import.meta.env.VITE_USUARIOS_AGREGAR;
-
 import Swal from 'sweetalert2';
+//#endregion
 
 export const iniciarSesion = async (usuario) => {
     try {
