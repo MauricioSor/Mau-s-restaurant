@@ -16,12 +16,16 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Menu usuarioLogueado={usuarioLogueado} setUsuarioLogueado={setUsuarioLogueado} ></Menu>
+        <Menu usuarioLogueado={usuarioLogueado} setUsuarioLogueado={setUsuarioLogueado} />
         <Routes>
-          <Route exact path='/' element={<Principal></Principal>}></Route>
-          <Route exact path='/administrador/*' element={<RutasProtegidas><RutasAdministrador></RutasAdministrador></RutasProtegidas>}></Route>
-          <Route exact path='/detalle/:id' element={<Detalle></Detalle>}></Route>
-          <Route exact path="*" element={<Error></Error>}></Route>
+          <Route exact path='/' element={<Principal />} />
+          <Route exact path='/administrador/*' element={
+            <RutasProtegidas>
+              <RutasAdministrador />
+            </RutasProtegidas>
+          } />
+          <Route exact path='/detalle/:id' element={<Detalle />} />
+          **<Route exact path="*" element={<Error></Error>}></Route>**
         </Routes>
         <Footer></Footer>
       </BrowserRouter>
