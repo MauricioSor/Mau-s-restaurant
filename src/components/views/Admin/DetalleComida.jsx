@@ -1,7 +1,7 @@
 //#region Imports
 import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { borrarReceta } from '../../helpers/queries';
+import { borrarComida } from '../../helpers/queries';
 import Swal from 'sweetalert2';
 //#endregion
 
@@ -19,7 +19,7 @@ const DetalleComida = ({ item }) => {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                borrarReceta(comida._id).then((respuesta) => {
+                borrarComida(comida._id).then((respuesta) => {
                     if (respuesta.status === 200) {
                         Swal.fire('Comida Eliminada', 'Actualizacion Exitosa', 'success');
                         setTimeout(() => {

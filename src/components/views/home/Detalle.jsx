@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Spinner, Card, Container, Col, Row,Badge,Stack } from 'react-bootstrap'
-import { buscarcomida } from "../../helpers/queries";
+import { buscarComida } from "../../helpers/queries";
 //#endregion
 
 const Detalle = () => {
@@ -14,7 +14,7 @@ const Detalle = () => {
 //#endregion
 //#region Functions
     const buscarRecetas = () => {
-        buscarcomida(id).then((respuesta) => {
+        buscarComida(id).then((respuesta) => {
             setReceta(respuesta);
             setMostrarSpinner(false);
             capsula(respuesta.categoria);

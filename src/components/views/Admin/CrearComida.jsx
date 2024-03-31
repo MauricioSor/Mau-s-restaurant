@@ -2,7 +2,7 @@
 import { Form, Button } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import Swal from 'sweetalert2';
-import { crearReceta } from '../../helpers/queries';
+import { crearComida } from '../../helpers/queries';
 import { useNavigate } from 'react-router-dom';
 //#endregion
 const CrearComida = () => {
@@ -13,7 +13,7 @@ const CrearComida = () => {
 //#region Functions
     const guardar = (comidaNueva) => {
         console.log(comidaNueva);
-        crearReceta(comidaNueva).then((respuesta) => {
+        crearComida(comidaNueva).then((respuesta) => {
             if (respuesta.status === 201) {
                 Swal.fire('Comida Guardada', 'Guardado Exitoso', 'success')
                 navegar('/administrador')

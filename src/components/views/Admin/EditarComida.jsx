@@ -2,7 +2,7 @@
 import { Form, Button, Spinner } from 'react-bootstrap';
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { buscarcomida, editarReceta } from '../../helpers/queries';
+import { buscarComida, editarComida } from '../../helpers/queries';
 import Swal from 'sweetalert2';
 import { useState, useEffect } from 'react';
 //#endregion
@@ -16,7 +16,7 @@ const EditarComida = () => {
     //#endregion
     //#region Functions
     useEffect(() => {
-        buscarcomida(_id).then((respuesta) => {
+        buscarComida(_id).then((respuesta) => {
             if (respuesta) {
                 setValue('_id', respuesta._id);
                 setValue('nombre', respuesta.nombre);
@@ -32,7 +32,7 @@ const EditarComida = () => {
     const enviar = (productoEditado) => {
         console.log(productoEditado);
         console.log(productoEditado._id);
-        editarReceta(productoEditado, productoEditado._id).then((respuesta) => {
+        editarComida(productoEditado, productoEditado._id).then((respuesta) => {
             if (respuesta.status === 201) {
                 Swal.fire('Comida Guardada', 'Actualizacion Exitosa', 'success')
                 navegar('/administrador');

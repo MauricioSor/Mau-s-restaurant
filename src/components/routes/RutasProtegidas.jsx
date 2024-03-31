@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import RutasAdministrador from './RutasAdministrador';
+import RutasUser from './RutasUser';
 
 const RutasProtegidas = ({ children }) => {
     const usuarioLogueado = JSON.parse(sessionStorage.getItem('usuario')) || null;
@@ -10,7 +11,7 @@ const RutasProtegidas = ({ children }) => {
         if(rol=="Admin"){
             return <RutasAdministrador/>
         }else{
-            return 
+            return <RutasUser/>
         }
     }
 };

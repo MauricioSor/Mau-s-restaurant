@@ -6,7 +6,7 @@ const RutasUser = () => {
     return (
         <>
         <Routes>
-            <Route exact path='' element={<UserDashBoard/>}/>
+            <Route exact path='/' element={<UserDashBoard/>}/>
         </Routes>
         </>
     );

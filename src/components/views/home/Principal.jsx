@@ -1,9 +1,11 @@
 //#region Imports
 import React from 'react';
 import { Container, Carousel, Spinner } from 'react-bootstrap';
-import { buscarcomidas } from '../../helpers/queries';
+import { buscarComidas } from '../../helpers/queries';
 import { useState, useEffect } from 'react';
 import CardComidas from './CardComidas';
+import Swal from 'sweetalert2';
+
 //#endregion
 
 const Principal = () => {
@@ -13,14 +15,15 @@ const Principal = () => {
 //#endregion
 //#region Functions
     const buscarRecetas = () => {
-        buscarcomidas().then((respuesta) => {
-            setRecetas(respuesta);
+        buscarComidas().then((respuesta) => {
+            console.log(respuesta);
+            setRecetas(respuesta.data);
             setMostrarSpinner(false);
         })
     }
     useEffect(() => {
         setMostrarSpinner(true);
-        buscarRecetas();
+        buscarRecetas()
     }, []);
 //#endregion
     return (

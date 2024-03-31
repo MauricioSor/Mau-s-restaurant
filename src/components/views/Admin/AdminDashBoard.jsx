@@ -4,15 +4,20 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import DetalleComida from "./DetalleComida";
-import { buscarcomidas } from "../../helpers/queries";
+import { buscarComidas } from "../../helpers/queries";
 //#endregion
 
 const Administrador = () => {
     const [comidas, setComidas] = useState([]);
 
     useEffect(() => {
-        buscarcomidas().then((respuesta) => {
-            respuesta ? (setComidas(respuesta)) : (Swal.fire('Error', 'Ocurrió un error en el servidor. Porfavor intente nuevamente', 'error'));
+        buscarComidas().then((respuesta) => {
+            if(respuesta){
+                (setComidas(respuesta.data)) 
+            } 
+            else{
+                (Swal.fire('Error', 'Ocurrió un error en el servidor. Porfavor intente nuevamente', 'error'));
+            }
         })
     }, []);
     return (
