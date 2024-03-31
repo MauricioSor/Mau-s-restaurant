@@ -4,6 +4,7 @@ const URL_comida_editar = import.meta.env.VITE_COMIDAS_BUSCAR_BORRAR_EDITAR;
 const URL_comida = import.meta.env.VITE_COMIDAS_AGREGAR;
 
 const URL_usuario = import.meta.env.VITE_USUARIOS_AUTENTICACION;
+const URL_usuarios_listar = import.meta.env.VITE_USUARIOS_TODOS;
 const URL_usuario_editar = import.meta.env.VITE_USUARIOS_EDITAR;
 const URL_usuario_crear = import.meta.env.VITE_USUARIOS_AGREGAR;
 import axios from 'axios';
@@ -22,6 +23,14 @@ export const iniciarSesion = async (usuario) => {
         console.log(error);
     }
 };
+export const listarUsuarios = async () => {
+    try {
+        const consulta = await axios.get(URL_usuarios_listar)
+        return consulta
+    } catch (error) {
+        return(error);
+    }
+};
 export const crearUsuario = async (usuario) => {
     try {
         const consulta = await axios(URL_usuario_crear, {
@@ -36,10 +45,24 @@ export const crearUsuario = async (usuario) => {
         console.log(error);
     }
 }
+export const modificarUsuario = async (usuario) => {
+    try {
+        const consulta = await axios.delete(URL_usuario_editar, {
+            method: "UPDATE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(usuario)
+        });
+        return consulta.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
 export const borrarUsuario = async (usuario) => {
     try {
-        const consulta = await axios.delete(URL_usuario_crear, {
-            method: "POST",
+        const consulta = await axios.delete(URL_usuario_editar, {
+            method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
             },

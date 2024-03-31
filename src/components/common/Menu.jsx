@@ -57,7 +57,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                                             <Button variant="primary" className='border' onClick={cerrarSesion}>Cerrar Sesion</Button>
                                             </>:
                                         <>
-                                            <NavLink end className='nav-item nav-link' to='/user'>Dashboard</NavLink>
+                                            <NavLink end className='nav-item nav-link' to='/Usuario'>Dashboard</NavLink>
                                             <Button variant="primary" className='border' onClick={cerrarSesion}>Cerrar Sesion</Button>
                                         </>
                                         :

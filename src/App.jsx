@@ -28,7 +28,7 @@ function App() {
               <RutasAdministrador />
             </RutasProtegidas>
           } />
-          <Route exact path="/user/*" element={
+          <Route exact path="/usuario/*" element={
           <RutasProtegidas>
           </RutasProtegidas>}/>
           **<Route exact path="/*" element={<Error />} />**
