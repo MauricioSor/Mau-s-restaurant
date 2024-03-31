@@ -52,7 +52,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                                 (usuarioLogueado) ?
                                             (rol=="Admin")?
                                             <>
-                                            <NavLink end className='nav-item nav-link' to='administrador/Registro'>Registrar empleado</NavLink>
+                                            <NavLink end className='nav-item nav-link' to='administrador/AdminEmpleados'>Registrar empleado</NavLink>
                                             <NavLink end className='nav-item nav-link' to='/administrador'>Administrar</NavLink>
                                             <Button variant="primary" className='border' onClick={cerrarSesion}>Cerrar Sesion</Button>
                                             </>:

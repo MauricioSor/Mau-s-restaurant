@@ -1,7 +1,7 @@
 //#region Imports
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Spinner, Card, Container, Col, Row,Badge,Stack } from 'react-bootstrap'
+import { Spinner, Card, Container, Col, Row,Badge } from 'react-bootstrap'
 import { buscarComida } from "../../helpers/queries";
 //#endregion
 

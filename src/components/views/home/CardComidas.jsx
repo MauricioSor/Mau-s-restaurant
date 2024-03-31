@@ -1,6 +1,6 @@
 //#region Imports
 import React from 'react';
-import { Card, Button, Container, Row, Col } from 'react-bootstrap/'
+import { Card, Button, Container, Row } from 'react-bootstrap/'
 import { useNavigate } from 'react-router-dom';
 const CardComidas = ({ recetas }) => {
     const navegar = useNavigate();
