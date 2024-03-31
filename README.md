@@ -1,4 +1,4 @@
-# Backend de comidas "Mau-restó"
+# Frontend comidas "Mau-restó"
 
 ## Dev 🧑‍💻🧑‍💻
 - [MauricioSor](https://github.com/MauricioSor)
