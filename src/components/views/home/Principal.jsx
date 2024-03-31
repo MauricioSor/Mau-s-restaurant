@@ -1,9 +1,9 @@
 //#region Imports
 import React from 'react';
 import { Container, Carousel, Spinner } from 'react-bootstrap';
-import { buscarcomidas } from '../helpers/queries';
+import { buscarcomidas } from '../../helpers/queries';
 import { useState, useEffect } from 'react';
-import CardComidas from './comidas/CardComidas';
+import CardComidas from './CardComidas';
 //#endregion
 
 const Principal = () => {

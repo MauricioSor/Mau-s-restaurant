@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Spinner, Card, Container, Col, Row,Badge,Stack } from 'react-bootstrap'
-import { buscarcomida } from "../helpers/queries";
+import { buscarcomida } from "../../helpers/queries";
 //#endregion
 
 const Detalle = () => {

@@ -1,7 +1,7 @@
 //#region Imports
 import { Form, Button } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
-import { crearUsuario } from '../helpers/queries';
+import { crearUsuario } from '../../helpers/queries';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 //#endregion
@@ -25,7 +25,7 @@ const RegistrarUsuario = () => {
     return (
         <div>
             <div className="mt-5 mainSection">
-                <h2 className='ms-3 mt-3'>Registrar Usuario Nuevo</h2>
+                <h2 className='ms-3 mt-3'>Registrar empleado</h2>
                 <hr className='mx-3' />
                 <div className='row justify-content-center mx-2'>
                     <div className='col-12 col-sm-8 col-md-6 col-xl-4'>
@@ -52,7 +52,7 @@ const RegistrarUsuario = () => {
                                 {errors.nombre?.message}
                             </Form.Text>
                             <Form.Group className="mb-2">
-                                <Form.Label>Correo electronico*</Form.Label>
+                                <Form.Label>Correo electrónico*</Form.Label>
                                 <Form.Control
                                     type='String'
                                     placeholder="Ingrese un email"
@@ -95,11 +95,10 @@ const RegistrarUsuario = () => {
                                     {errors.contraseña?.message}
                                 </Form.Text>
                             </Form.Group>
-                            <div className="row">
+                            <div className="text-center">
                                 <Button
                                     className="mt-3 btn btn-info btn-lg btn-block mb-2"
-                                    type="submit"
-                                >
+                                    type="submit">
                                     Registrar
                                 </Button>
                             </div>

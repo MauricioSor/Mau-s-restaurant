@@ -18,9 +18,15 @@ const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
     //#region functions
     const enviarDatos = (usuario) => {
         iniciarSesion(usuario).then((respuesta) => {
-            respuesta ? 
-            (sessionStorage.setItem('usuario', JSON.stringify(respuesta)),setUsuarioLogueado(respuesta),reset(),navegacion('/Administrador')) 
-            : undefined
+            if(respuesta){
+                sessionStorage.setItem('usuario', JSON.stringify(respuesta))
+                sessionStorage.setItem('rol', JSON.stringify(respuesta))
+                setUsuarioLogueado(respuesta)
+                reset()
+                navegacion('/Administrador') 
+            }else{
+                undefined
+            }
         });
     }
     const navegacion = useNavigate();

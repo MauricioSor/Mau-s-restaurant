@@ -7,6 +7,7 @@ const URL_usuarios_listar = import.meta.env.VITE_USUARIOS_LISTAR;
 const URL_usuario_crear=import.meta.env.VITE_USUARIOS_AGREGAR;
 import Swal from 'sweetalert2';
 //#endregion
+//#region Endpoints de Usuarios
 
 export const iniciarSesion = async (usuario) => {
     try {
@@ -44,6 +45,22 @@ export const iniciarSesion = async (usuario) => {
         console.log(error);
     }
 };
+export const crearUsuario = async(usuario)=>{
+    try{
+        const consulta = await fetch(URL_usuario_crear,{
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(usuario)
+        });
+        return consulta;
+    }catch(error){
+        console.log(error);
+    }
+}
+//#endregion
+//#region Endpoints de Comidas 
 export const buscarcomidas = async () => {
     try {
         const consulta = await fetch(URL_recetas_listar);
@@ -102,17 +119,4 @@ export const borrarReceta = async(id)=>{
         console.log(error);
     }
 }
-export const crearUsuario = async(usuario)=>{
-    try{
-        const consulta = await fetch(URL_usuario_crear,{
-            method: "POST",
-            headers:{
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(usuario)
-        });
-        return consulta;
-    }catch(error){
-        console.log(error);
-    }
-}
+//#endregion

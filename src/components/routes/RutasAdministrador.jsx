@@ -1,9 +1,9 @@
 //#region Imports
 import { Routes, Route } from "react-router-dom";
-import Administrador from "../views/Administrador";
-import CrearComida from "../views/comidas/CrearComida";
-import EditarComida from "../views/comidas/EditarComida";
-import RegistrarUsuario from "../views/RegistrarUsuario";
+import Administrador from "../views/Admin/AdminDashBoard";
+import CrearComida from "../views/Admin/CrearComida";
+import EditarComida from "../views/Admin/EditarComida";
+import RegistrarUsuario from "../views/Admin/RegistrarUsuario";
 //#endregion
 const RutasAdministrador = () => {
     return (
