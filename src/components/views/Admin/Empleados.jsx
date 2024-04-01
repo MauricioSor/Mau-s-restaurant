@@ -4,17 +4,7 @@ import { Link } from 'react-router-dom';
 import { borrarUsuario } from '../../helpers/queries';
 import Swal from 'sweetalert2';
 
-const Empleados = ({ item, detallesEmpleado, handleShow }) => {
-
-    const borrar = (item) => {
-        borrarUsuario(item).then((resp) => {
-            if (resp.status == 201) {
-                Swal.fire("Borrado exitoso", "", "success")
-            } else {
-                Swal.fire("Ocurrió un error", "Intente nuevamente mas tarde", "error")
-            }
-        })
-    }
+const Empleados = ({ item, detallesEmpleado, handleShow,borrar }) => {
     return (
         <>
             <tr>
@@ -35,15 +25,11 @@ const Empleados = ({ item, detallesEmpleado, handleShow }) => {
                                             showCancelButton: true,
                                             confirmButtonColor: "#3085d6",
                                             cancelButtonColor: "#d33",
-                                            confirmButtonText: "Yes, delete it!"
+                                            confirmButtonText: "Si, eliminar!",
+                                            cancelButtonText:"Cancelar"
                                         }).then((result) => {
                                             if (result.isConfirmed) {
                                                 borrar(item);
-                                                Swal.fire({
-                                                    title: "Deleted!",
-                                                    text: "Your file has been deleted.",
-                                                    icon: "success"
-                                                });
                                             }
                                         });
                                     }}

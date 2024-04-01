@@ -28,7 +28,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                 sessionStorage.setItem('rol', JSON.stringify(respuesta.data.rol))
                 setUsuarioLogueado(respuesta)
                 reset()
-                respuesta.data.rol=="Admin"?navegacion('/Administrador'):navegacion("/user")
+                respuesta.data.rol=="Admin"?navegacion('/Administrador'):navegacion("/usuario")
                 Swal.fire(`Bienvenido ${respuesta.data.usuario}`,"Iniciaste sesión","success")
             } else {
                 Swal.fire(`Nombre de usuario o contraseña incorrectos`,"Verifique los datos e intente nuevamente","error")

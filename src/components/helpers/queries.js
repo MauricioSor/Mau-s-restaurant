@@ -7,7 +7,13 @@ const URL_usuario = import.meta.env.VITE_USUARIOS_AUTENTICACION;
 const URL_usuarios_listar = import.meta.env.VITE_USUARIOS_TODOS;
 const URL_usuario_editar = import.meta.env.VITE_USUARIOS_EDITAR;
 const URL_usuario_crear = import.meta.env.VITE_USUARIOS_AGREGAR;
-const URL_usuario_eliminar=import.meta.env.VITE_USUARIOS_ELIMINAR
+const URL_usuario_eliminar=import.meta.env.VITE_USUARIOS_ELIMINAR;
+
+const URL_pedido = import.meta.env.VITE_PEDIDOS_BUSCAR;
+const URL_pedidos_listar = import.meta.env.VITE_PEDIDOS_LISTAR;
+const URL_pedido_editar = import.meta.env.VITE_PEDIDOS_MODIFICAR;
+const URL_pedido_crear = import.meta.env.VITE_PEDIDOS_CREAR;
+const URL_pedido_eliminar=import.meta.env.VITE_PEDIDOS_ELIMINAR
 import axios from 'axios';
 import Swal from 'sweetalert2';
 //#endregion
@@ -104,6 +110,52 @@ export const borrarComida = async (id) => {
         const consulta = await fetch(URL_comida_editar + '/' + id, {
             method: "DELETE"
         });
+        return consulta;
+    } catch (error) {
+        console.log(error);
+    }
+}
+//#endregion
+//#region Endpoints de Pedidos
+
+export const buscarPedido = async (pedido) => {
+    try {
+        const consulta = await axios.post(URL_pedido,{
+            email:pedido.email,
+            contraseña:pedido.contraseña
+        })
+        return consulta
+    } catch (error) {
+        console.log(error);
+    }
+};
+export const listarPedidos = async () => {
+    try {
+        const consulta = await axios.get(URL_pedidos_listar)
+        return consulta
+    } catch (error) {
+        return(error);
+    }
+};
+export const crearPedido = async (pedido) => {
+    try {
+        const consulta = await axios.post(URL_pedido_crear,pedido)
+        return consulta;
+    } catch (error) {
+        return(error);
+    }
+}
+export const modificarPedido = async (pedido) => {
+    try {
+        const consulta = await axios.put(URL_pedido_editar,pedido);
+        return consulta;
+    } catch (error) {
+        console.error("Error al modificar pedido:", error);
+    }
+}
+export const borrarPedido = async (pedido) => {
+    try {
+        const consulta = await axios.delete(URL_pedido_eliminar+`${pedido._id}`);
         return consulta;
     } catch (error) {
         console.log(error);

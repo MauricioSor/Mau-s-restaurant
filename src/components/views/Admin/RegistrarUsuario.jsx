@@ -16,7 +16,7 @@ const RegistrarUsuario = () => {
         crearUsuario(usuario).then((respuesta) => {
             if (respuesta.status === 201) {
                 Swal.fire("Exito al crear usuario", "Usuario registrador exitosamente", "success");
-                navegacion("/administrador/registro");
+                navegacion("/administrador/AdminEmpleados");
             } else {
                 Swal.fire("Eror al cargar usuario", "No se pudo cargar usuario nuevo, Intentelo nuevamente mas tarde", "error");
             }

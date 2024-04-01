@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Container, Nav, Modal, Spinner, Table, Form } from 'react-bootstrap';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import Empleados from './Empleados';
-import { listarUsuarios, modificarUsuario } from '../../helpers/queries';
+import { borrarUsuario, listarUsuarios, modificarUsuario } from '../../helpers/queries';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 
@@ -33,7 +33,18 @@ const AdminEmpleados = () => {
     const detallesEmpleado = (empleado) => {
         setEmpleado(empleado)
     }
-
+    const borrar = (item) => {
+        borrarUsuario(item).then((resp) => {
+            if (resp.status == 201) {
+                Swal.fire("Borrado exitoso", "", "success")
+                setSpinner(true)
+                listarUsuarios().then((resp)=>setEmpleados(resp.data));
+                setSpinner(false)
+            } else {
+                Swal.fire("Ocurrió un error", "Intente nuevamente mas tarde", "error")
+            }
+        })
+    }
     const modificarEmpleado = (empleado) => {
         modificarUsuario(empleado).then((resp)=>{
             if(resp.status==201){
@@ -52,7 +63,7 @@ const AdminEmpleados = () => {
         <Container>
             <Container className='d-flex justify-content-between my-5'>
                 <h1>Administrar Empleados</h1>
-                <Link className="btn btn-primary" to="/administrador/Registro" >Registrar empleado</Link>
+                <Link className="btn btn-primary text-center align-self-center" to="/administrador/Registro" >Registrar empleado</Link>
             </Container>
             {spinner ?
                 <Container className='d-flex justify-content-center align-items-center'>
@@ -72,7 +83,7 @@ const AdminEmpleados = () => {
                         <tbody>
                             {
                                 empleados.map((item, index) => (
-                                    <Empleados key={index} item={item} handleShow={handleShow} detallesEmpleado={detallesEmpleado} />
+                                    <Empleados key={index} borrar={borrar} item={item} handleShow={handleShow} detallesEmpleado={detallesEmpleado} />
                                 ))
                             }
                         </tbody>
