@@ -12,7 +12,6 @@ const CrearComida = () => {
 //#endregion
 //#region Functions
     const guardar = (comidaNueva) => {
-        console.log(comidaNueva);
         crearComida(comidaNueva).then((respuesta) => {
             if (respuesta.status === 201) {
                 Swal.fire('Comida Guardada', 'Guardado Exitoso', 'success')

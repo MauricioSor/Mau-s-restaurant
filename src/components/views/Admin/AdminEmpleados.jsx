@@ -8,16 +8,20 @@ import { useForm } from 'react-hook-form';
 
 const AdminEmpleados = () => {
     const [empleados, setEmpleados] = useState([])
-    const [empleado, setEmpleado] = useState("")
+    const [empleado, setEmpleado] = useState("");
     const [spinner, setSpinner] = useState(true)
-    const { register, handleSubmit, formState: { errors }, reset, } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset} = useForm();
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleClose = () => {
+        reset()
+        setEmpleado("")
+        setShow(false)
+    }
+
+    const handleShow = () => (reset(),setShow(true));
     useEffect(() => {
         listarUsuarios().then((resp) => {
-            console.log(resp);
             if (resp.status == 200) {
                 setSpinner(false)
                 setEmpleados(resp.data)
@@ -29,10 +33,16 @@ const AdminEmpleados = () => {
     const detallesEmpleado = (empleado) => {
         setEmpleado(empleado)
     }
+
     const modificarEmpleado = (empleado) => {
-        modificarUsuario().then((resp)=>{
+        modificarUsuario(empleado).then((resp)=>{
             if(resp.status==201){
-                Swal.fire("success","Modificado exitosamente","success")
+                setSpinner(true)
+                listarUsuarios().then((resp)=>setEmpleados(resp.data));
+                setSpinner(false)
+                handleClose();
+                Swal.fire("Modificado exitosamente","","success")
+                setEmpleado("")
             }else{
                 Swal.fire("error","Error al modificar,intente nuevamente mas tarde","error")
             }
@@ -77,9 +87,9 @@ const AdminEmpleados = () => {
                                     <Form.Label>Nombre</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        value={empleado.nombre}
+                                        defaultValue={empleado.nombre}
                                         {...register("nombre", {
-                                            require: "true"
+                                            required: "El campo debe tenerun nombre"
                                         })
                                         }
                                     />
@@ -89,11 +99,11 @@ const AdminEmpleados = () => {
                                     <Form.Label>Email</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        value={empleado.email}
+                                        defaultValue={empleado.email}
                                         {...register("email", {
-                                            require: "true"
-                                        })
-                                        }
+                                            required: "El campo debe tener un correo"
+                                        
+                                        })}
                                     />
                                     <Form.Text className="text-danger">
                                         {errors.email?.message}
@@ -101,14 +111,26 @@ const AdminEmpleados = () => {
                                     <Form.Label>Contraseña</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        value={empleado.contraseña}
+                                        defaultValue={empleado.contraseña}
                                         {...register("contraseña", {
-                                            require: "true"
+                                            required: "El campo debe tener una contraseña"
                                         })
                                         }
                                     />
                                     <Form.Text className="text-danger">
                                         {errors.contraseña?.message}
+                                    </Form.Text>
+                                <Form.Label>Rol</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        defaultValue={empleado.rol}
+                                        {...register("rol", {
+                                            required: "El campo debe tener un rol"
+                                        })
+                                        }
+                                    />
+                                    <Form.Text className="text-danger">
+                                        {errors.rol?.message}
                                     </Form.Text>
                                 </Form.Group>
                                 <Button type='submit' variant='primary'>Guardar cambios</Button>

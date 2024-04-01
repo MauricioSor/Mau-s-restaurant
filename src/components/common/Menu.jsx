@@ -6,6 +6,8 @@ import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { iniciarSesion } from '../helpers/queries';
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2';
+
 //#endregion
 
 const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
@@ -27,15 +29,17 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                 setUsuarioLogueado(respuesta)
                 reset()
                 respuesta.data.rol=="Admin"?navegacion('/Administrador'):navegacion("/user")
-                
+                Swal.fire(`Bienvenido ${respuesta.data.usuario}`,"Iniciaste sesión","success")
             } else {
-                undefined
+                Swal.fire(`Nombre de usuario o contraseña incorrectos`,"Verifique los datos e intente nuevamente","error")
             }
         });
     }
     const cerrarSesion = () => {
         sessionStorage.removeItem('usuario');
+        sessionStorage.removeItem('rol');
         setUsuarioLogueado();
+        Swal.fire(`Sesión cerrada`,"","success")
         navegacion('/');
     }
     //#endregion

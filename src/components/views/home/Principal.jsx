@@ -40,7 +40,7 @@ const Principal = () => {
                                     <Carousel.Item key={index}>
                                         <div style={{ height: '400px' }}>
                                             <img
-                                                style={{ objectFit: 'cover', height: '100%', width: '100%', filter: 'blur(10px)', filter: 'opacity(55%)' }}
+                                                style={{ objectFit: 'cover', height: '100%', width: '100%', filter: 'blur(10px),opacity(55%)' }}
                                                 src={item.imagen}
                                                 alt={`Slide ${index + 1}`}
                                             />

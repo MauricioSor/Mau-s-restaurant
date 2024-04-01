@@ -7,6 +7,7 @@ const URL_usuario = import.meta.env.VITE_USUARIOS_AUTENTICACION;
 const URL_usuarios_listar = import.meta.env.VITE_USUARIOS_TODOS;
 const URL_usuario_editar = import.meta.env.VITE_USUARIOS_EDITAR;
 const URL_usuario_crear = import.meta.env.VITE_USUARIOS_AGREGAR;
+const URL_usuario_eliminar=import.meta.env.VITE_USUARIOS_ELIMINAR
 import axios from 'axios';
 import Swal from 'sweetalert2';
 //#endregion
@@ -33,42 +34,24 @@ export const listarUsuarios = async () => {
 };
 export const crearUsuario = async (usuario) => {
     try {
-        const consulta = await axios(URL_usuario_crear, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(usuario)
-        });
-        return consulta.data;
+        const consulta = await axios.post(URL_usuario_crear,usuario)
+        return consulta;
     } catch (error) {
-        console.log(error);
+        return(error);
     }
 }
 export const modificarUsuario = async (usuario) => {
     try {
-        const consulta = await axios.delete(URL_usuario_editar, {
-            method: "UPDATE",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(usuario)
-        });
-        return consulta.data;
+        const consulta = await axios.put(URL_usuario_editar,usuario);
+        return consulta;
     } catch (error) {
-        console.log(error);
+        console.error("Error al modificar usuario:", error);
     }
 }
 export const borrarUsuario = async (usuario) => {
     try {
-        const consulta = await axios.delete(URL_usuario_editar, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(usuario)
-        });
-        return consulta.data;
+        const consulta = await axios.delete(URL_usuario_eliminar+`${usuario._id}`);
+        return consulta;
     } catch (error) {
         console.log(error);
     }
@@ -108,18 +91,12 @@ export const crearComida = async (comida) => {
     }
 }
 
-export const editarComida = async (comida, id) => {
+export const editarComida = async (comida) => {
     try {
-        const consulta = await fetch(URL_comida_editar + '/' + id, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(comida)
-        });
+        const consulta = await axios.put(URL_comida_editar,comida);
         return consulta;
     } catch (error) {
-        console.log(error);
+        return(error);
     }
 }
 export const borrarComida = async (id) => {
