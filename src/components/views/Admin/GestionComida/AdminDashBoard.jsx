@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import DetalleComida from "./DetalleComida";
-import { buscarComidas } from "../../helpers/queries";
+import { buscarComidas } from "../../../helpers/queries";
 //#endregion
 
 const Administrador = () => {

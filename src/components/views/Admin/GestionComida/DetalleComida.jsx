@@ -1,7 +1,7 @@
 //#region Imports
 import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { borrarComida } from '../../helpers/queries';
+import { borrarComida } from '../../../helpers/queries';
 import Swal from 'sweetalert2';
 //#endregion
 

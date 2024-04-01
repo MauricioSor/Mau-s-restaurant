@@ -2,7 +2,7 @@
 import { Form, Button, Spinner } from 'react-bootstrap';
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { buscarComida, editarComida } from '../../helpers/queries';
+import { buscarComida, editarComida } from '../../../helpers/queries';
 import Swal from 'sweetalert2';
 import { useState, useEffect } from 'react';
 //#endregion

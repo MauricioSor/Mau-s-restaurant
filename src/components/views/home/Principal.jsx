@@ -9,14 +9,17 @@ import Swal from 'sweetalert2';
 //#endregion
 
 const Principal = () => {
-//#region States
+    //#region States
     const [mostrarSpinner, setMostrarSpinner] = useState(true);
     const [recetas, setRecetas] = useState({});
-//#endregion
-//#region Functions
+    const [pedidos, setPedidos] = useState("")
+    //#endregion
+    //#region Functions
+    const agregarPedido=(pedido)=>{
+        setPedidos(pedido)
+    }
     const buscarRecetas = () => {
         buscarComidas().then((respuesta) => {
-            console.log(respuesta);
             setRecetas(respuesta.data);
             setMostrarSpinner(false);
         })
@@ -25,7 +28,7 @@ const Principal = () => {
         setMostrarSpinner(true);
         buscarRecetas()
     }, []);
-//#endregion
+    //#endregion
     return (
         <>
             {
@@ -53,7 +56,7 @@ const Principal = () => {
                                     </Carousel.Item>
                                 ))}
                         </Carousel>
-                        <CardComidas recetas={recetas}/>
+                        <CardComidas agregarPedido={agregarPedido} recetas={recetas} />
                     </>
             }
         </>

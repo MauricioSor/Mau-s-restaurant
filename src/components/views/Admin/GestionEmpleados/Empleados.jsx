@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Carousel, Form, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { borrarUsuario } from '../../helpers/queries';
+import { borrarUsuario } from '../../../helpers/queries';
 import Swal from 'sweetalert2';
 
 const Empleados = ({ item, detallesEmpleado, handleShow,borrar }) => {

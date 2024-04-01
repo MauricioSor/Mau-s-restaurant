@@ -10,6 +10,9 @@ import { useState } from 'react'
 import RutasProtegidas from './components/routes/RutasProtegidas'
 import RutasAdministrador from './components/routes/RutasAdministrador'
 import Detalle from './components/views/home/Detalle'
+import Carrito from './components/views/home/Pedido/Carrito'
+import RealizarPedido from './components/views/home/Pedido/RealizarPedido'
+
 //#endregion
 function App() {
   //#region States
@@ -23,9 +26,11 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Principal />} />
           <Route exact path='/detalle/:id' element={<Detalle />} />
+          <Route exact path='/carrito' element={<Carrito />} />
+          <Route exact path='/RealizarPedido' element={<RealizarPedido />} />
           <Route exact path='/administrador/*' element={
             <RutasProtegidas>
-              <RutasAdministrador />
+              <RutasAdministrador/>
             </RutasProtegidas>
           } />
           <Route exact path="/usuario/*" element={

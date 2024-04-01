@@ -2,10 +2,9 @@
 import React from 'react';
 import { Card, Button, Container, Row } from 'react-bootstrap/'
 import { useNavigate } from 'react-router-dom';
-const CardComidas = ({ recetas }) => {
+//#endregion
+const CardComidas = ({ recetas,agregarPedido }) => {
     const navegar = useNavigate();
-    //#endregion
-
     return (
         <>
             <div>

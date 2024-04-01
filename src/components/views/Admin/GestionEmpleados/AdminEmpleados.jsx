@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Container, Nav, Modal, Spinner, Table, Form } from 'react-bootstrap';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import Empleados from './Empleados';
-import { borrarUsuario, listarUsuarios, modificarUsuario } from '../../helpers/queries';
+import { borrarUsuario, listarUsuarios, modificarUsuario } from '../../../helpers/queries';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 

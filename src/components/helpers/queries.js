@@ -74,7 +74,7 @@ export const buscarComidas = async () => {
 }
 export const buscarComida = async (_id) => {
     try {
-        const consulta = await fetch(URL_comida + '/' + _id);
+        const consulta = await fetch(URL_comida_editar + _id);
         const respuesta = await consulta.json();
         return respuesta;
     } catch (error) {

@@ -8,16 +8,17 @@ import { buscarComida } from "../../helpers/queries";
 const Detalle = () => {
 //#region States
     const { id } = useParams();
-    const [receta, setReceta] = useState();
+    const [comida, setComida] = useState([]);
     const [mostrarSpinner, setMostrarSpinner] = useState(true);
     const [badge,setBadge]=useState();
 //#endregion
 //#region Functions
-    const buscarRecetas = () => {
+    const buscarComidas = () => {
         buscarComida(id).then((respuesta) => {
-            setReceta(respuesta);
-            setMostrarSpinner(false);
+            if(respuesta.status)
+            setComida(respuesta);
             capsula(respuesta.categoria);
+            setMostrarSpinner(false);
         })
     }
     const capsula = (categoria) => {
@@ -52,9 +53,8 @@ const Detalle = () => {
         }
     }
     useEffect(() => {
-        console.log(id);
         setMostrarSpinner(true);
-        buscarRecetas(id);
+        buscarComidas(id);
     }, [])
 //#endregion
     return (
@@ -62,26 +62,26 @@ const Detalle = () => {
             {
                 mostrarSpinner ?
                     (<div className="d-flex justify-content-center">
-                        <Spinner></Spinner>
+                        <Spinner/>
                     </div>) :
                     <>
                         <Container className="mt-2 mainSection">
                             <Card>
                                 <Row>
                                     <Col md={6}>
-                                        <Card.Img variant="top" src={receta.imagen} />
+                                        <Card.Img variant="top" src={comida.imagen} />
                                     </Col>
                                     <Col md={6}>
-                                        <Card.Title className="text-center display-4">{receta.nombre}</Card.Title>
+                                        <Card.Title className="text-center display-4">{comida.nombre}</Card.Title>
                                         <Card.Body>
                                             <Card.Text>
-                                                <span>Valor: <strong>${receta.precio}</strong></span>
+                                                <span>Valor: <strong>{comida.precio}</strong></span>
                                                 <br />
-                                                <p className="text-start">{receta.descripcion}</p>
+                                                <p className="text-start">{comida.descripcion}</p>
                                                 <br />
                                             </Card.Text>
                                             <Card.Footer className="align-self-start">
-                                                <Badge bg={badge} className="text">{receta.categoria}</Badge>
+                                                <Badge bg={badge} className="text">{comida.categoria}</Badge>
                                             </Card.Footer>
                                         </Card.Body>
                                     </Col>

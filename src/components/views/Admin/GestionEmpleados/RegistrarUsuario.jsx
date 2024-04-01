@@ -1,7 +1,7 @@
 //#region Imports
 import { Form, Button } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
-import { crearUsuario } from '../../helpers/queries';
+import { crearUsuario } from '../../../helpers/queries';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 //#endregion

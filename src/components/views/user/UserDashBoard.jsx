@@ -1,10 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Container, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { listarPedidos } from '../../helpers/queries';
+import Pedido from './Pedido';
 
 const UserDashBoard = () => {
+    const [pedidos, setPedidos] = useState([])
+    const [spinner, setSpinner] = useState(true)
     useEffect(() => {
-        //cargar pedidos
+        listarPedidos().then((resp)=>{
+            if(resp.status==200){
+                setPedidos(resp.data)
+                setSpinner(false)
+            }
+        })
         
     }, [])
     return (
@@ -24,9 +33,9 @@ const UserDashBoard = () => {
                     </thead>
                     <tbody>
                         {
-                            pedidos.map((item, index) => {
-                                <Pedidos key={index} item={item} />
-                            })
+                            pedidos.map((item, index) => (
+                                <Pedido key={index} item={item} />
+                            ))
                         }
                     </tbody>
                 </Table>

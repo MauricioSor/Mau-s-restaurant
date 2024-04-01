@@ -65,7 +65,10 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                                             <Button variant="primary" className='border' onClick={cerrarSesion}>Cerrar Sesion</Button>
                                         </>
                                         :
-                                        <NavLink end className='nav-item nav-link' onClick={handleShow} >Iniciar Sesion</NavLink>
+                                        <>
+                                        <Button  className='nav-item nav-link' onClick={handleShow} >Iniciar Sesion</Button>
+                                        <NavLink end className='nav-item nav-link' to={"/Carrito"} >Mi Carrito</NavLink>
+                                        </>
                             }
                         </Nav>
                     </Navbar.Collapse>
