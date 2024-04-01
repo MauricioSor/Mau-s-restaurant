@@ -1,10 +1,14 @@
 //#region Imports
 import React from 'react';
 import { Card, Button, Container, Row } from 'react-bootstrap/'
-import { useNavigate } from 'react-router-dom';
 //#endregion
-const CardComidas = ({ recetas,agregarPedido }) => {
-    const navegar = useNavigate();
+const CardComidas = ({ recetas }) => {
+
+    const realizarPedido = (comida) => {
+        let pedidoExistente = JSON.parse(localStorage.getItem("pedido")) || [];
+        pedidoExistente.push(comida._id);
+        localStorage.setItem("pedido", JSON.stringify(pedidoExistente));
+    }
     return (
         <>
             <div>
@@ -27,9 +31,10 @@ const CardComidas = ({ recetas,agregarPedido }) => {
                                         <Button
                                             className='mt-auto'
                                             type='submit'
-                                            onClick={() => { navegar('/Detalle/' + item._id) }}
+                                            onClick={() => { realizarPedido(item) }}
+                                            /* onClick={() => { navegar('/Detalle/' + item._id) }} */
                                             variant="primary">
-                                            Ver Detalle
+                                            Agregar a mi carrito
                                         </Button>
                                     </div>
                                 </Card.Body>

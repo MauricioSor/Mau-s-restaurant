@@ -1,8 +1,9 @@
 //#region Imports
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Spinner, Card, Container, Col, Row,Badge } from 'react-bootstrap'
+import { Spinner, Card, Container, Col, Row,Badge,Button } from 'react-bootstrap'
 import { buscarComida } from "../../helpers/queries";
+import RealizarPedido from "./Pedido/RealizarPedido";
 //#endregion
 
 const Detalle = () => {
@@ -17,45 +18,16 @@ const Detalle = () => {
         buscarComida(id).then((respuesta) => {
             if(respuesta.status)
             setComida(respuesta);
-            capsula(respuesta.categoria);
             setMostrarSpinner(false);
         })
-    }
-    const capsula = (categoria) => {
-        switch (categoria) {
-            case "Calientes":
-                setBadge("danger");
-                break;
-            case "Bebida Caliente":
-                setBadge("danger");
-                break;
-            case "Bebida fria":
-                setBadge("info");
-                break;
-            case "Simples":
-                setBadge("light");
-                break;
-            case "Frio":
-                setBadge("info");
-                break;
-            case "Pastas":
-                setBadge("warning");
-                break;
-            case "Sandwich":
-                setBadge("success");
-                break;
-            case "Minutas":
-                setBadge("secondary");
-                break;
-            case "Guarnicion":
-                setBadge("secondary");
-                break;
-        }
     }
     useEffect(() => {
         setMostrarSpinner(true);
         buscarComidas(id);
     }, [])
+    const realizarPedido=()=>{
+        localStorage.setItem("pedido",comida)
+    }
 //#endregion
     return (
         <>
@@ -75,13 +47,13 @@ const Detalle = () => {
                                         <Card.Title className="text-center display-4">{comida.nombre}</Card.Title>
                                         <Card.Body>
                                             <Card.Text>
-                                                <span>Valor: <strong>{comida.precio}</strong></span>
+                                                <p>Precio:{comida.precio}</p>
                                                 <br />
                                                 <p className="text-start">{comida.descripcion}</p>
                                                 <br />
                                             </Card.Text>
                                             <Card.Footer className="align-self-start">
-                                                <Badge bg={badge} className="text">{comida.categoria}</Badge>
+                                                <Button  className="text-center">Agregar al carrito</Button>
                                             </Card.Footer>
                                         </Card.Body>
                                     </Col>

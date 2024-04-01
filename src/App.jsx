@@ -16,7 +16,7 @@ import RealizarPedido from './components/views/home/Pedido/RealizarPedido'
 //#endregion
 function App() {
   //#region States
-  const usuarioSessionStorage = JSON.parse(sessionStorage.getItem('usuario')) || null;
+  const usuarioSessionStorage = JSON.parse(sessionStorage.getItem('usuario')) ||null;
   const [usuarioLogueado, setUsuarioLogueado] = useState(usuarioSessionStorage);
   //#endregion
   return (

@@ -1,9 +1,20 @@
+import { useEffect } from "react";
 
-const MiCarrito = () => {
+const MiCarrito = ({item}) => {
+    useEffect(()=>{
+    },[])
     return (
-        <div>
-            
-        </div>
+        <tr>
+            {
+                <>
+                <td><img src={item.imagen} alt="" className="object-fit-contain" style={{width:"100px",height:"100px"}}/></td>
+                <td>{item.nombre}</td>
+                <td>{item.precio}</td>
+                {/* <td>{item.}</td>
+                <td>{item.}</td> */}
+                </>
+            }
+        </tr>
     );
 };
 

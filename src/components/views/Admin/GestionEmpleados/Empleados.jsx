@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 
 const Empleados = ({ item, detallesEmpleado, handleShow,borrar }) => {
     return (
-        <>
+        
             <tr>
                 {
                     <>
@@ -40,7 +40,6 @@ const Empleados = ({ item, detallesEmpleado, handleShow,borrar }) => {
                     </>
                 }
             </tr>
-        </>
     );
 };
 

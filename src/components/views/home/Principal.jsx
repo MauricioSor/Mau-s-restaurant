@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 const Principal = () => {
     //#region States
     const [mostrarSpinner, setMostrarSpinner] = useState(true);
-    const [recetas, setRecetas] = useState({});
+    const [recetas, setRecetas] = useState("");
     const [pedidos, setPedidos] = useState("")
     //#endregion
     //#region Functions

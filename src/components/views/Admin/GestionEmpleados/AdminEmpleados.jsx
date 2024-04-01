@@ -10,7 +10,7 @@ const AdminEmpleados = () => {
     const [empleados, setEmpleados] = useState([])
     const [empleado, setEmpleado] = useState("");
     const [spinner, setSpinner] = useState(true)
-    const { register, handleSubmit, formState: { errors }, reset} = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [show, setShow] = useState(false);
 
     const handleClose = () => {
@@ -19,7 +19,7 @@ const AdminEmpleados = () => {
         setShow(false)
     }
 
-    const handleShow = () => (reset(),setShow(true));
+    const handleShow = () => (reset(), setShow(true));
     useEffect(() => {
         listarUsuarios().then((resp) => {
             if (resp.status == 200) {
@@ -38,7 +38,7 @@ const AdminEmpleados = () => {
             if (resp.status == 201) {
                 Swal.fire("Borrado exitoso", "", "success")
                 setSpinner(true)
-                listarUsuarios().then((resp)=>setEmpleados(resp.data));
+                listarUsuarios().then((resp) => setEmpleados(resp.data));
                 setSpinner(false)
             } else {
                 Swal.fire("Ocurrió un error", "Intente nuevamente mas tarde", "error")
@@ -46,18 +46,18 @@ const AdminEmpleados = () => {
         })
     }
     const modificarEmpleado = (empleado) => {
-        modificarUsuario(empleado).then((resp)=>{
-            if(resp.status==201){
+        modificarUsuario(empleado).then((resp) => {
+            if (resp.status == 201) {
                 setSpinner(true)
-                listarUsuarios().then((resp)=>setEmpleados(resp.data));
+                listarUsuarios().then((resp) => setEmpleados(resp.data));
                 setSpinner(false)
                 handleClose();
-                Swal.fire("Modificado exitosamente","","success")
+                Swal.fire("Modificado exitosamente", "", "success")
                 setEmpleado("")
-            }else{
-                Swal.fire("error","Error al modificar,intente nuevamente mas tarde","error")
+            } else {
+                Swal.fire("error", "Error al modificar,intente nuevamente mas tarde", "error")
             }
-    })
+        })
     }
     return (
         <Container>
@@ -90,7 +90,7 @@ const AdminEmpleados = () => {
                     </Table>
                     <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton>
-                        <Modal.Title>Modificar Empleado</Modal.Title>
+                            <Modal.Title>Modificar Empleado</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <Form onSubmit={handleSubmit(modificarEmpleado)}>
@@ -113,7 +113,7 @@ const AdminEmpleados = () => {
                                         defaultValue={empleado.email}
                                         {...register("email", {
                                             required: "El campo debe tener un correo"
-                                        
+
                                         })}
                                     />
                                     <Form.Text className="text-danger">
@@ -131,7 +131,7 @@ const AdminEmpleados = () => {
                                     <Form.Text className="text-danger">
                                         {errors.contraseña?.message}
                                     </Form.Text>
-                                <Form.Label>Rol</Form.Label>
+                                    <Form.Label>Rol</Form.Label>
                                     <Form.Control
                                         type="text"
                                         defaultValue={empleado.rol}
