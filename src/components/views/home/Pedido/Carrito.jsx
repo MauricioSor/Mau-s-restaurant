@@ -5,18 +5,29 @@ import { NavLink } from 'react-router-dom';
 import { buscarComida } from '../../../helpers/queries';
 
 const Carrito = () => {
+    
     const [pedidos, setPedidos] = useState("")
     const [spinner, setSpinner] = useState(false)
 
     useEffect(() => {
         const pedido = JSON.parse(localStorage.getItem("pedido") || "[]");
         if (pedido.length > 0) {
-            Promise.all(pedido.map(id => buscarComida(id)))
-                .then(respuestas => {
-                    const nuevosPedidos = respuestas.map(resp => resp);
-                    setPedidos(pedidos => [...pedidos, ...nuevosPedidos]);
-                })
+            Promise.all(pedido.map(id => buscarComida(id))).then(respuesta => {
+                const uniqueMap = {};
+                respuesta.forEach(item => {
+                    if (!uniqueMap[item.id]) {
+                        uniqueMap[item.id] = { ...item, cantidad: 1 };
+                    } else {
+                        uniqueMap[item.id].cantidad++;
+                    }
+                });
+                const nuevosPedidos = Object.values(uniqueMap);
+                
+                setPedidos(pedidos => [...pedidos, ...nuevosPedidos]);
+                setSpinner(true)
+            })
                 .catch(error => {
+                    setSpinner(true)
                     console.error("Error al buscar detalles de los pedidos:", error);
                 });
         }
@@ -28,36 +39,35 @@ const Carrito = () => {
     return (
         <Container>
             <h1>Carrito de compras</h1>
-            {pedidos.length>1 ?
+            {spinner ?
                 (<>
-                    {spinner ?
+                    {pedidos.length > 0 ?
                         <>
                             <Table responsive striped bordered hover className="text-center">
                                 <thead>
                                     <tr>
-                                        <th>Imagen</th>
                                         <th>Producto</th>
-                                        <th>Precio</th> 
+                                        <th>Precio</th>
+                                        <th>Cantidad</th>
+                                        <th>Subtotal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        
-                                        {
-                                            pedidos.map((item, index) => (
-                                                <MiCarrito key={index} item={item} />
-                                            ))
-                                        }
-                                        
+                                    {
+                                        pedidos.map((item, index) => (
+                                            <MiCarrito key={index} item={item} />
+                                        ))
+                                    }
                                 </tbody>
                             </Table>
                             <NavLink className='btn btn-primary' to={"/RealizarPedido"}>Realizar pedido</NavLink>
                         </> :
-                        <Container className='d-flex justify-content-center'>
-                            <Spinner variant='primary'/>
-                        </Container>
-                        }
-                </> ):
-                    <h2>Vaya! Parece que aún no te has decidido... De cualquier forma, aqui estaremos para usted.</h2>
+                        <h2>Vaya! Parece que aún no te has decidido... De cualquier forma, aqui estaremos para usted.</h2>
+                    }
+                </>) :
+                <Container className='d-flex justify-content-center'>
+                    <Spinner variant='primary' />
+                </Container>
             }
         </Container >
     );
