@@ -17,7 +17,7 @@ const Detalle = () => {
     const buscarComidas = () => {
         buscarComida(id).then((respuesta) => {
             if(respuesta.status)
-            setComida(respuesta);
+            setComida(respuesta.data);
             setMostrarSpinner(false);
         })
     }

@@ -12,15 +12,17 @@ const AdminEmpleados = () => {
     const [spinner, setSpinner] = useState(true)
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [show, setShow] = useState(false);
-
+    const [carga, setCarga] = useState(false)
     const handleClose = () => {
         reset()
         setEmpleado("")
         setShow(false)
+        setCarga(false)
     }
 
     const handleShow = () => (reset(), setShow(true));
     useEffect(() => {
+        setEmpleado(true)
         listarUsuarios().then((resp) => {
             if (resp.status == 200) {
                 setSpinner(false)
@@ -32,6 +34,7 @@ const AdminEmpleados = () => {
     }, [])
     const detallesEmpleado = (empleado) => {
         setEmpleado(empleado)
+        setCarga(true)
     }
     const borrar = (item) => {
         borrarUsuario(item).then((resp) => {
@@ -93,59 +96,66 @@ const AdminEmpleados = () => {
                             <Modal.Title>Modificar Empleado</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <Form onSubmit={handleSubmit(modificarEmpleado)}>
-                                <Form.Group>
-                                    <Form.Label>Nombre</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        defaultValue={empleado.nombre}
-                                        {...register("nombre", {
-                                            required: "El campo debe tenerun nombre"
-                                        })
-                                        }
-                                    />
-                                    <Form.Text className="text-danger">
-                                        {errors.nombre?.message}
-                                    </Form.Text>
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        defaultValue={empleado.email}
-                                        {...register("email", {
-                                            required: "El campo debe tener un correo"
-
-                                        })}
-                                    />
-                                    <Form.Text className="text-danger">
-                                        {errors.email?.message}
-                                    </Form.Text>
-                                    <Form.Label>Contraseña</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        defaultValue={empleado.contraseña}
-                                        {...register("contraseña", {
-                                            required: "El campo debe tener una contraseña"
-                                        })
-                                        }
-                                    />
-                                    <Form.Text className="text-danger">
-                                        {errors.contraseña?.message}
-                                    </Form.Text>
-                                    <Form.Label>Rol</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        defaultValue={empleado.rol}
-                                        {...register("rol", {
-                                            required: "El campo debe tener un rol"
-                                        })
-                                        }
-                                    />
-                                    <Form.Text className="text-danger">
-                                        {errors.rol?.message}
-                                    </Form.Text>
-                                </Form.Group>
-                                <Button type='submit' variant='primary'>Guardar cambios</Button>
-                            </Form>
+                            {
+                                carga ?
+                                    (
+                                        <>
+                                            <Form onSubmit={handleSubmit(modificarEmpleado)}>
+                                                <Form.Group>
+                                                    <Form.Label>Nombre</Form.Label>
+                                                    <Form.Control
+                                                        type="text"
+                                                        defaultValue={empleado.nombre}
+                                                        {...register("nombre", {
+                                                            required: "El campo debe tenerun nombre"
+                                                        })
+                                                        }
+                                                    />
+                                                    <Form.Text className="text-danger">
+                                                        {errors.nombre?.message}
+                                                    </Form.Text>
+                                                    <Form.Label>Email</Form.Label>
+                                                    <Form.Control
+                                                        type="text"
+                                                        defaultValue={empleado.email}
+                                                        {...register("email", {
+                                                            required: "El campo debe tener un correo"
+                                                        })}
+                                                    />
+                                                    <Form.Text className="text-danger">
+                                                        {errors.email?.message}
+                                                    </Form.Text>
+                                                    <Form.Label>Contraseña</Form.Label>
+                                                    <Form.Control
+                                                        type="text"
+                                                        defaultValue={empleado.contraseña}
+                                                        {...register("contraseña", {
+                                                            required: "El campo debe tener una contraseña"
+                                                        })
+                                                        }
+                                                    />
+                                                    <Form.Text className="text-danger">
+                                                        {errors.contraseña?.message}
+                                                    </Form.Text>
+                                                    <Form.Label>Rol</Form.Label>
+                                                    <Form.Control
+                                                        type="text"
+                                                        defaultValue={empleado.rol.nombre}
+                                                        {...register("rol", {
+                                                            required: "El campo debe tener un rol"
+                                                        })
+                                                        }
+                                                    />
+                                                    <Form.Text className="text-danger">
+                                                        {errors.rol?.message}
+                                                    </Form.Text>
+                                                </Form.Group>
+                                                <Button type='submit' variant='primary'>Guardar cambios</Button>
+                                            </Form>
+                                        </>
+                                    ) :
+                                    <></>
+                            }
                         </Modal.Body>
                     </Modal>
                 </>

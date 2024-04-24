@@ -8,13 +8,18 @@ const Carrito = () => {
     
     const [pedidos, setPedidos] = useState("")
     const [spinner, setSpinner] = useState(false)
+    const [carga, setCarga] = useState(false)
+    const ActivarCarga =()=>{setCarga(true)}
+
+    //useEffect(()=>{console.log(pedidos.length);},[])
 
     useEffect(() => {
         const pedido = JSON.parse(localStorage.getItem("pedido") || "[]");
         if (pedido.length > 0) {
+            ActivarCarga();
             Promise.all(pedido.map(id => buscarComida(id))).then(respuesta => {
                 const uniqueMap = {};
-                respuesta.forEach(item => {
+                respuesta.data.forEach(item => {
                     if (!uniqueMap[item.id]) {
                         uniqueMap[item.id] = { ...item, cantidad: 1 };
                     } else {
@@ -22,7 +27,6 @@ const Carrito = () => {
                     }
                 });
                 const nuevosPedidos = Object.values(uniqueMap);
-                
                 setPedidos(pedidos => [...pedidos, ...nuevosPedidos]);
                 setSpinner(true)
             })
@@ -31,18 +35,14 @@ const Carrito = () => {
                     console.error("Error al buscar detalles de los pedidos:", error);
                 });
         }
-        setSpinner(true)
     }, []);
-    useEffect(() => {
-        console.log(pedidos);
-    }, [pedidos])
     return (
         <Container>
             <h1>Carrito de compras</h1>
-            {spinner ?
+            {carga ?
                 (<>
-                    {pedidos.length > 0 ?
-                        <>
+                    {spinner ?
+                        (<>
                             <Table responsive striped bordered hover className="text-center">
                                 <thead>
                                     <tr>
@@ -61,13 +61,13 @@ const Carrito = () => {
                                 </tbody>
                             </Table>
                             <NavLink className='btn btn-primary' to={"/RealizarPedido"}>Realizar pedido</NavLink>
-                        </> :
-                        <h2>Vaya! Parece que aún no te has decidido... De cualquier forma, aqui estaremos para usted.</h2>
+                        </>) :
+                        (<Container className='d-flex justify-content-center my-5'>
+                            Cargando<Spinner variant='primary' className='ms-3'/>
+                        </Container>)
                     }
                 </>) :
-                <Container className='d-flex justify-content-center'>
-                    <Spinner variant='primary' />
-                </Container>
+                    <h2>Vaya! Parece que aún no te has decidido... De cualquier forma, aqui estaremos para usted.</h2>
             }
         </Container >
     );

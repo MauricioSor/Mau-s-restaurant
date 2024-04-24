@@ -6,7 +6,7 @@ const RegistrarVenta = () => {
         <Container>
             <h1>Registro de Ventas</h1>
             <Form>
-                
+            
             </Form>
         </Container>
     );

@@ -12,7 +12,7 @@ const Administrador = () => {
 
     useEffect(() => {
         buscarComidas().then((respuesta) => {
-            if(respuesta){
+            if(respuesta.status==200){
                 (setComidas(respuesta.data)) 
             } 
             else{
@@ -24,7 +24,7 @@ const Administrador = () => {
         <section className="container mainSection">
             <div className="d-flex justify-content-between align-items-center my-3">
                 <h1 className="ms-3 display-4">Administrar comidas:</h1>
-                <Link className="btn btn-primary" to="/administrador/AgregarComida" >Nuevo producto</Link>
+                <Link className="btn btn-primary" to="/Administrador/ComidaNueva" >Nuevo producto</Link>
             </div>
             <hr />
             <Table responsive striped bordered hover className="text-center">

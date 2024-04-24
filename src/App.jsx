@@ -12,11 +12,12 @@ import RutasAdministrador from './components/routes/RutasAdministrador'
 import Detalle from './components/views/home/Detalle'
 import Carrito from './components/views/home/Pedido/Carrito'
 import RealizarPedido from './components/views/home/Pedido/RealizarPedido'
+import RutasUser from './components/routes/RutasUser'
 
 //#endregion
 function App() {
   //#region States
-  const usuarioSessionStorage = JSON.parse(sessionStorage.getItem('usuario')) ||null;
+  const usuarioSessionStorage = JSON.parse(sessionStorage.getItem('usuario')) || null;
   const [usuarioLogueado, setUsuarioLogueado] = useState(usuarioSessionStorage);
   //#endregion
   return (
@@ -26,16 +27,17 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Principal />} />
           <Route exact path='/detalle/:id' element={<Detalle />} />
-          <Route exact path='/carrito' element={<Carrito />} />
+          <Route exact path='/MiCarrito' element={<Carrito />} />
           <Route exact path='/RealizarPedido' element={<RealizarPedido />} />
-          <Route exact path='/administrador/*' element={
+          <Route exact path='/Administrador/*' element={
             <RutasProtegidas>
               <RutasAdministrador/>
             </RutasProtegidas>
           } />
-          <Route exact path="/usuario/*" element={
-          <RutasProtegidas>
-          </RutasProtegidas>}/>
+          <Route exact path="/Usuario/*" element={
+            <RutasProtegidas>
+              <RutasUser />
+            </RutasProtegidas>} />
           **<Route exact path="/*" element={<Error />} />**
         </Routes>
         <Footer />

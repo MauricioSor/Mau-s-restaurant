@@ -12,11 +12,11 @@ const RegistrarUsuario = () => {
     //#endregion
     //#region Functions
     const cargar = (usuario) => {
-        console.log(usuario);
+        usuario.rol="662722f03488bf7046be0a0a"
         crearUsuario(usuario).then((respuesta) => {
             if (respuesta.status === 201) {
                 Swal.fire("Exito al crear usuario", "Usuario registrador exitosamente", "success");
-                navegacion("/administrador/AdminEmpleados");
+                navegacion("/Administrador/Empleados");
             } else {
                 Swal.fire("Eror al cargar usuario", "No se pudo cargar usuario nuevo, Intentelo nuevamente mas tarde", "error");
             }
@@ -95,7 +95,7 @@ const RegistrarUsuario = () => {
                                 <Form.Text className='text-danger'>
                                     {errors.contraseña?.message}
                                 </Form.Text>
-                                <Form.Control
+{/*                                 <Form.Control
                                     className='d-none'
                                     value="empleado"
                                     {...register("rol", {
@@ -110,7 +110,7 @@ const RegistrarUsuario = () => {
                                         }
                                     })
                                     }
-                                />
+                                /> */}
                             </Form.Group>
                             <div className="text-center">
                                 <Button

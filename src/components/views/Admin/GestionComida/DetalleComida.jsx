@@ -27,7 +27,6 @@ const DetalleComida = ({ item }) => {
                         }, 2500)
                         return respuesta;
                     } else {
-                        console.log(respuesta.status)
                         Swal.fire('Error al Eliminar', `El producto ${comida.nombre} no se pudo borrar`, 'error');
                     }
                 })

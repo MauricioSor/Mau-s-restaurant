@@ -6,14 +6,13 @@ import Swal from 'sweetalert2';
 
 const Empleados = ({ item, detallesEmpleado, handleShow,borrar }) => {
     return (
-        
-            <tr>
+        <tr>
                 {
                     <>
                         <td>{item.nombre}</td>
                         <td>{item.email}</td>
                         <td>{item.contraseña}</td>
-                        <td>{item.rol}</td>
+                        <td>{item.rol.nombre}</td>
                         <td>{
                             <>
                                 <Button className='btn btn-info' onClick={() => { handleShow(), detallesEmpleado(item) }}>Editar</Button>

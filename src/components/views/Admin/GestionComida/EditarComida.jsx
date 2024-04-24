@@ -12,30 +12,27 @@ const EditarComida = () => {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
     const { _id } = useParams();
     const [spinner, setSpinner] = useState(true);
+    const [comida, setComida] = useState()
     const navegar = useNavigate();
     //#endregion
     //#region Functions
     useEffect(() => {
         buscarComida(_id).then((respuesta) => {
-            if (respuesta) {
-                setValue('_id', respuesta._id);
-                setValue('nombre', respuesta.nombre);
-                setValue('precio', respuesta.precio);
-                setValue('imagen', respuesta.imagen);
-                setValue('descripcion', respuesta.descripcion);
-                setValue('categoria', respuesta.categoria);
+            if (respuesta.status==200) {
+                setComida(respuesta.data)
                 setSpinner(false)
+            }else{
+                Swal.fire("Error","No se pudo establecer conexion con  el servidor, intente nuevamente luego","error")
             }
         })
     }, [])
 
     const enviar = (productoEditado) => {
-        console.log(productoEditado);
-        console.log(productoEditado._id);
-        editarComida(productoEditado, productoEditado._id).then((respuesta) => {
-            if (respuesta.status === 201) {
+        productoEditado._id=_id
+        editarComida(productoEditado).then((respuesta) => {
+            if (respuesta.status == 201) {
                 Swal.fire('Comida Guardada', 'Actualizacion Exitosa', 'success')
-                navegar('/administrador');
+                navegar('/Administrador');
             } else {
                 Swal.fire('Error al Modificar', `El producto ${productoEditado.nombre} no se pudo modificar`, 'error');
             }
@@ -53,30 +50,11 @@ const EditarComida = () => {
                     </div>) :
                     <>
                         <Form onSubmit={handleSubmit(enviar)}>
-                            {/*             <Form.Group className="mb-3" controlId="formNombreProdcuto">
-                    <Form.Label>Codigo*</Form.Label>
-                    <Form.Control
-                        type="text"
-                        {...register("_id", {
-                            required: "El nombre de la comida es obligatorio",
-                            minLength: {
-                                value: 2,
-                                message: "La cantidad minima de caracteres es de 2 digitos",
-                            },
-                            maxLength: {
-                                value: 100,
-                                message: "La cantidad minima de caracteres es de 2 digitos",
-                            },
-                        })}
-                    />
-                    <Form.Text className="text-danger">
-                        {errors._id?.message}
-                    </Form.Text>
-                </Form.Group> */}
                             <Form.Group className="mb-3" controlId="formNombreProdcuto">
                                 <Form.Label>Comida*</Form.Label>
                                 <Form.Control
                                     type="text"
+                                    defaultValue={comida.nombre}
                                     {...register("nombre", {
                                         required: "El nombre de la comida es obligatorio",
                                         minLength: {
@@ -97,7 +75,7 @@ const EditarComida = () => {
                                 <Form.Label>Descripcion</Form.Label>
                                 <Form.Control
                                     type="text"
-                                    placeholder='Pj.Chipá'
+                                    defaultValue={comida.descripcion}
                                     {...register('descripcion', {
                                         required: "La descripcion es un campo obligatorio"
                                         , minLength: {
@@ -118,6 +96,7 @@ const EditarComida = () => {
                                 <Form.Label>Precio*</Form.Label>
                                 <Form.Control
                                     type="number"
+                                    defaultValue={comida.precio}
                                     {...register("precio", {
                                         required: "El precio del producto es obligatorio",
                                         min: {
@@ -138,6 +117,7 @@ const EditarComida = () => {
                                 <Form.Label>Imagen URL*</Form.Label>
                                 <Form.Control
                                     type="text"
+                                    defaultValue={comida.imagen}
                                     {...register("imagen", {
                                         required: "La imagen es obligatoria",
                                     })}
@@ -150,6 +130,7 @@ const EditarComida = () => {
                                 <Form.Label>Categoria*</Form.Label>
                                 <Form.Control
                                     type='text'
+                                    defaultValue={comida.categoria}
                                     {...register("categoria", {
                                         required: "La categoria es obligatoria",
                                     })}>
