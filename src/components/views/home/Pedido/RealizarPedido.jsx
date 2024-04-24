@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Container, Form } from 'react-bootstrap';
-import LocationPicker from 'react-location-picker';
-
+    
 const RealizarPedido = () => {
     const [total, setTotal] = useState((localStorage.getItem("Total")))
     const [ubicacion, setubicacion] = useState()
@@ -43,12 +42,7 @@ const RealizarPedido = () => {
                     <Form.Control
                         type='text'
                     />
-                    <LocationPicker
-                        containerElement={<div style={{ height: '100%' }} />}
-                        mapElement={<div style={{ height: '400px' }} />}
-                        defaultPosition={defaultPosition}
-                        onChange={handleLocationChange}
-                    />
+
                     <Form.Label>Forma de pago</Form.Label>
                     <Form.Control
                         type='text'
