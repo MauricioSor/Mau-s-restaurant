@@ -13,13 +13,13 @@ const AdminEmpleados = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [show, setShow] = useState(false);
     const [carga, setCarga] = useState(false)
+    
     const handleClose = () => {
         reset()
         setEmpleado("")
         setShow(false)
         setCarga(false)
     }
-
     const handleShow = () => (reset(), setShow(true));
     useEffect(() => {
         setEmpleado(true)

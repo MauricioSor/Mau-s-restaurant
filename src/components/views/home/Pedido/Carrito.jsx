@@ -11,8 +11,6 @@ const Carrito = () => {
     const [carga, setCarga] = useState(false)
     const ActivarCarga =()=>{setCarga(true)}
 
-    //useEffect(()=>{console.log(pedidos.length);},[])
-
     useEffect(() => {
         const pedido = JSON.parse(localStorage.getItem("pedido") || "[]");
         if (pedido.length > 0) {

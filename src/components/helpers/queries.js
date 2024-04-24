@@ -68,7 +68,7 @@ export const buscarComida = async (id) => {
 }
 export const crearComida = async (comida) => {
     try {
-        const consulta = await fetch(`${import.meta.env.VITE_PROD_API}/apiComidas/nuevo`, {
+        const consulta = await fetch(`${import.meta.env.VITE_PROD_API}/apiComidas/nueva`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
