@@ -8,10 +8,8 @@ const Mesas = () => {
     return (
         <Container>
             <h1>Mesas del salon</h1>
-            <Link className='btn btn-primary' to={"/user/RegistrarVenta"}>Registrar venta</Link>
-            <Table>
+            <Link className='btn btn-primary' to={"/Usuario/Mesas/RegistrarVenta"}>Registrar venta</Link>
             
-            </Table>
         </Container>
     );
 };

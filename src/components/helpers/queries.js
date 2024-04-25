@@ -211,5 +211,32 @@ export const listarRoles = async (usuario) => {
 };
 //#endregion
 //#region Endpoints de Clientes
-
+export const listarClientes = async () => {
+    try {
+        const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiClientes/`)
+        return consulta
+    } catch (error) {
+        console.log(error);
+    }
+};
+export const crearCliente = async () => {
+    try {
+        const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiClientes/nuevo`)
+        return consulta
+    } catch (error) {
+        console.log(error);
+    }
+};
+export const modificarCliente= async (cliente) => {
+    try {
+        const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiComprobantes/${cliente._id}`,{
+            nombre:cliente.nombre,
+            telefono:cliente.telefono,
+            direccion:cliente.direccion,
+        })
+        return consulta
+    } catch (error) {
+        console.log(error);
+    }
+};
 //#endregion
