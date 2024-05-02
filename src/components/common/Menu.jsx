@@ -1,3 +1,4 @@
+//#region Imports
 import React from 'react';
 import { Container, Nav, Navbar, Button, Modal, Form, Row } from 'react-bootstrap';
 import { NavLink, Link } from 'react-router-dom';
@@ -5,42 +6,72 @@ import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { iniciarSesion } from '../helpers/queries';
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2';
 
-const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
+//#endregion
+
+const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
+    //#region states
     const [show, setShow] = useState(false);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    const navegacion = useNavigate();
+    const rol = JSON.parse(sessionStorage.getItem("rol")) || null
+    //#endregion
+    //#region functions
     const enviarDatos = (usuario) => {
         iniciarSesion(usuario).then((respuesta) => {
-            respuesta ? (sessionStorage.setItem('usuario', JSON.stringify(respuesta)),setUsuarioLogueado(respuesta),reset(),navegacion('/Administrador')) : undefined
+            if (respuesta.status==200) {
+                sessionStorage.setItem('usuario', JSON.stringify(respuesta.data.usuario))
+                sessionStorage.setItem('rol', JSON.stringify(respuesta.data.rol.nombre))
+                setUsuarioLogueado(respuesta.data)
+                reset()
+                respuesta.data.rol.nombre=="Admin"?navegacion('/Administrador/'):navegacion("/Usuario/")
+                Swal.fire(`Bienvenido ${respuesta.data.usuario}`,"Iniciaste sesión","success")
+            } else {
+                Swal.fire(`Nombre de usuario o contraseña incorrectos`,"Verifique los datos e intente nuevamente","error")
+            }
         });
     }
-    const navegacion = useNavigate();
     const cerrarSesion = () => {
         sessionStorage.removeItem('usuario');
-        setUsuarioLogueado({});
+        sessionStorage.removeItem('rol');
+        setUsuarioLogueado();
+        Swal.fire(`Sesión cerrada`,"","success")
         navegacion('/');
     }
+    //#endregion
     return (
         <>
             <Navbar bg="primary" variant="dark" expand='lg'>
                 <Container>
-                    <Navbar.Brand as={Link} to="/">TusRecetas.com</Navbar.Brand>
+                    <Navbar.Brand as={Link} to="/">Mau's restobar</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="ms-auto">
-                        <NavLink className='nav-item nav-link' end to='/'>Inicio</NavLink>
-                        {
-                            (usuarioLogueado._id)?
-                                <>
-                                    <NavLink end className='nav-item nav-link' to='administrador/Registro'>Registro</NavLink>
-                                    <NavLink end className='nav-item nav-link' to='/administrador'>Administrador</NavLink>
-                                    <Button variant="primary" className='border' onClick={cerrarSesion}>Cerrar Sesion</Button>
-                                </>:<NavLink end className='nav-item nav-link' onClick={handleShow} >Iniciar Sesion</NavLink>
-                        }
-                    </Nav>
+                        <Nav className="ms-auto">
+                            <NavLink className='nav-item nav-link' end to='/'>Inicio</NavLink>
+                            {
+                                (usuarioLogueado) ?
+                                            (rol=="Admin")?
+                                            <>
+                                            <NavLink end className='nav-item nav-link' to='/Administrador/Empleados'>Empleados</NavLink>
+                                            <NavLink end className='nav-item nav-link' to='/Administrador/'>Comidas</NavLink>
+                                            <Button variant="primary" className='border' onClick={cerrarSesion}>Cerrar Sesion</Button>
+                                            </>:
+                                        <>
+                                            <NavLink end className='nav-item nav-link' to='/Usuario/AdminClientes'>Clientes</NavLink>
+                                            <NavLink end className='nav-item nav-link' to='/Usuario/Mesas'>Mesas</NavLink>
+                                            <NavLink end className='nav-item nav-link' to='/Usuario/'>Pedidos</NavLink>
+                                            <Button variant="primary" className='border' onClick={cerrarSesion}>Cerrar Sesion</Button>
+                                        </>
+                                        :
+                                        <>
+                                        <Button  className='nav-item nav-link' onClick={handleShow} >Iniciar Sesion</Button>
+                                        <NavLink end className='nav-item nav-link' to={"/MiCarrito"} >Mi Carrito</NavLink>
+                                        </>
+                            }
+                        </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
@@ -90,7 +121,7 @@ const Menu = ({ usuarioLogueado,setUsuarioLogueado }) => {
                         </Row>
                         <Form.Group className='text-end my-2 '>
                             <Button className='mx-1' variant='danger' onClick={handleClose}>Cancelar</Button>
-                            <Button className='mx-1' variant='primary' type='submit'onClick={handleClose}>Enviar</Button>
+                            <Button className='mx-1' variant='primary' type='submit' onClick={handleClose}>Enviar</Button>
                         </Form.Group>
                     </Form>
                 </Container>

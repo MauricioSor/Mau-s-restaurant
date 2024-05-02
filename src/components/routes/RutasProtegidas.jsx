@@ -1,11 +1,18 @@
 import { Navigate } from 'react-router-dom';
-const RutasProtegidas = ({ children }) => {
+import RutasAdministrador from './RutasAdministrador';
+import RutasUser from './RutasUser';
+
+const RutasProtegidas = () => {
     const usuarioLogueado = JSON.parse(sessionStorage.getItem('usuario')) || null;
+    const rol = JSON.parse(sessionStorage.getItem('rol')) || null;
     if (!usuarioLogueado) {
-        return <Navigate to='/'></Navigate>
+        return <Navigate to='/'/>
     } else {
-        return children
+        if(rol=="Admin"){
+            return <RutasAdministrador/>
+        }else{
+            return <RutasUser/>
+        }
     }
 };
-
 export default RutasProtegidas;

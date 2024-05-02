@@ -1,14 +1,18 @@
+//#region Imports
 import { Form, Button } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import Swal from 'sweetalert2';
-import { crearReceta } from '../../helpers/queries';
+import { crearComida } from '../../../helpers/queries';
 import { useNavigate } from 'react-router-dom';
+//#endregion
 const CrearComida = () => {
+//#region States
     const { register, handleSubmit, formState: { errors }, reset, } = useForm();
     const navegar = useNavigate();
+//#endregion
+//#region Functions
     const guardar = (comidaNueva) => {
-        console.log(comidaNueva);
-        crearReceta(comidaNueva).then((respuesta) => {
+        crearComida(comidaNueva).then((respuesta) => {
             if (respuesta.status === 201) {
                 Swal.fire('Comida Guardada', 'Guardado Exitoso', 'success')
                 navegar('/administrador')
@@ -17,6 +21,7 @@ const CrearComida = () => {
             }
         });
     }
+//#endregion
     return (
         <section className='container mainSection'>
             <h1 className='mt-4'>Nuevo Producto</h1>
@@ -115,26 +120,7 @@ const CrearComida = () => {
                         <option value="Sandwich">Sandwich</option>
                         <option value="Minutas">Minutas</option>
                         <option value="Guarnicion">Guarnicion</option>
-
                     </Form.Select>
-                    {/* <Form.Control
-                        type="text"
-                        placeholder='Ej: Bebida caliente'
-                        {...register('categoria', {
-                            required: "El nombre de categoria es obligatorio"
-                            , minLength: {
-                                value: 2,
-                                message: "La cantidad minima de caracteres es de 2 y maximo de 20"
-                            },
-                            maxLength: {
-                                value: 20
-                                , message: "La cantidad minima de caracteres es de 2 y maximo de 20"
-                            }
-                        })}
-                    />
-                    <Form.Text className="text-danger">
-                        {errors.categoria?.message}
-                    </Form.Text> */}
                 </Form.Group>
                 <Button className='mt-2' variant="primary" type='submit'>Guardar</Button>
             </Form>

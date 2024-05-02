@@ -1,117 +1,248 @@
-const URL_recetas_listar = import.meta.env.VITE_RECETAS_LISTA;
-const URL_receta_agregar = import.meta.env.VITE_RECETAS_AGREGAR;
-const URL_receta = import.meta.env.VITE_RECETAS_BUSCAR_BORRAR_EDITAR;
-const URL_usuario = import.meta.env.VITE_USUARIOS_BUSCAR_EDITAR_BORRAR
-const URL_usuarios_listar = import.meta.env.VITE_USUARIOS_LISTAR;
-const URL_usuario_crear=import.meta.env.VITE_USUARIOS_AGREGAR;
-
-import Swal from 'sweetalert2';
+//#region Imports Enviroments
+import axios from 'axios';
+//#endregion
+//#region Endpoints de Usuarios
 
 export const iniciarSesion = async (usuario) => {
     try {
-        const consulta = await fetch(URL_usuarios_listar);
-        const respuesta = await consulta.json();
-        const usuarioBuscado = respuesta.find((item) => item.email === usuario.email);
-        if (usuarioBuscado){
-            if (usuarioBuscado.contraseña === usuario.contraseña) {
-                Swal.fire({
-                    title: 'Inicio de Sesión Correcto!',
-                    text: 'Tienes acceso a la ventana de Administración',
-                    icon: 'success',
-                    confirmButtonText: 'Continuar'
-                });
-                return usuarioBuscado;
-            } else {
-                Swal.fire({
-                    title: '¡Contraseña Incorrecta!',
-                    text: 'Verifica tu contraseña y vuelve a intentarlo.',
-                    icon: 'error',
-                    confirmButtonText: 'Reintentar'
-                });
-                return null;
-            }
-        } else {
-            Swal.fire({
-                title: '¡Usuario No Registrado!',
-                text: 'Debes tener permisos para continuar',
-                icon: 'error',
-                confirmButtonText: 'Reintentar'
-            });
-            return null;
-        }
+        const consulta = await axios.post(`${import.meta.env.VITE_PROD_API}/apiUsuarios/autenticacion`,{
+            email:usuario.email,
+            contraseña:usuario.contraseña
+        })
+        return consulta
     } catch (error) {
         console.log(error);
     }
 };
-export const buscarcomidas = async () => {
+export const listarUsuarios = async () => {
     try {
-        const consulta = await fetch(URL_recetas_listar);
-        const respuesta = await consulta.json();
-        return respuesta;
+        const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiUsuarios/`)
+        return consulta
+    } catch (error) {
+        return(error);
+    }
+};
+export const crearUsuario = async (usuario) => {
+    try {
+        const consulta = await axios.post(`${import.meta.env.VITE_PROD_API}/apiUsuarios/nuevo`,usuario)
+        return consulta;
+    } catch (error) {
+        return(error);
+    }
+}
+export const modificarUsuario = async (usuario) => {
+    try {
+        const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}+/apiUsuarios/${usuario.id}`,{
+            
+        });
+        return consulta;
+    } catch (error) {
+        console.error("Error al modificar usuario:", error);
+    }
+}
+export const borrarUsuario = async (usuario) => {
+    try {
+        const consulta = await axios.delete(`${import.meta.env.VITE_PROD_API}/apiUsuarios/${usuario._id}`);
+        return consulta;
+    } catch (error) {
+        console.log(error);
+    }
+}
+//#endregion
+//#region Endpoints de Comidas 
+export const buscarComidas = async () => {
+    try {
+        const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiComidas/`);
+        return consulta;
+    } catch (error) {
+        return (error)
+    }
+}
+export const buscarComida = async (id) => {
+    try {
+        const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiComidas/${id}`);
+        return consulta;
     } catch (error) {
         console.log(error)
     }
 }
-export const buscarcomida = async (_id) => {
+export const crearComida = async (comida) => {
     try {
-        const consulta = await fetch(URL_receta+'/'+_id);
-        const respuesta = await consulta.json();
-        return respuesta;
+        const consulta = await fetch(`${import.meta.env.VITE_PROD_API}/apiComidas/nueva`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(comida)
+
+        });
+        return consulta;
     } catch (error) {
-        console.log(error)
-    }
-}
-export const crearReceta = async(comida)=>{
-    try{
-    const consulta = await fetch(URL_receta_agregar,{
-    method: "POST",
-    headers:{
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify(comida)
-    
-    });
-    return consulta;
-    }catch(error){
         console.log(error);
     }
 }
 
-export const editarReceta = async(comida,id)=>{
-    try{
-    const consulta = await fetch(URL_receta+'/'+id,{
-    method: "PUT",
-    headers:{
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify(comida)    
-    });
-    return consulta;
-    }catch(error){
-        console.log(error);
+export const editarComida = async (comida) => {
+    try {
+        const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiComidas/${comida._id}`,{body:comida});
+        return consulta;
+    } catch (error) {
+        return(error);
     }
 }
-export const borrarReceta = async(id)=>{
-    try{
-    const consulta = await fetch(URL_receta+'/'+id,{
-    method: "DELETE"
-    });
-    return consulta;
-    }catch(error){
-        console.log(error);
-    }
-}
-export const crearUsuario = async(usuario)=>{
-    try{
-        const consulta = await fetch(URL_usuario_crear,{
-            method: "POST",
-            headers:{
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(usuario)
+export const borrarComida = async (id) => {
+    try {
+        const consulta = await fetch(`${import.meta.env.VITE_PROD_API}/apiComidas/${id}`, {
+            method: "DELETE"
         });
         return consulta;
-    }catch(error){
+    } catch (error) {
         console.log(error);
     }
 }
+//#endregion
+//#region Endpoints de Pedidos
+export const buscarPedido = async (pedido) => {
+    try {
+        const consulta = await axios.post(`${import.meta.env.VITE_PROD_API}/apiPedidos/${pedido}`,{
+            email:pedido.email,
+            contraseña:pedido.contraseña
+        })
+        return consulta
+    } catch (error) {
+        console.log(error);
+    }
+};
+export const listarPedidos = async () => {
+    try {
+        const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiPedidos/`)
+        return consulta
+    } catch (error) {
+        return(error);
+    }
+};
+export const listarPedidosPorEstado = async (estadoEnviado) => {
+    try {
+        const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiPedidos/filtro/${estadoEnviado}`);
+        return consulta
+    } catch (error) {
+        return(error);
+    }
+};
+export const crearPedido = async (pedido) => {
+    try {
+        const consulta = await axios.post(`${import.meta.env.VITE_PROD_API}/apiPedidos/nuevo`,pedido)
+        return consulta;
+    } catch (error) {
+        return(error);
+    }
+}
+export const modificarPedido = async (pedido) => {
+    try {
+        const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiPedidos/${pedido._id}`,{body:pedido});
+        return consulta;
+    } catch (error) {
+        console.error("Error al modificar pedido:", error);
+    }
+}
+export const borrarPedido = async (pedido) => {
+    try {
+        const consulta = await axios.delete(`${import.meta.env.VITE_PROD_API}/apiPedidos/${pedido._id}`);
+        return consulta;
+    } catch (error) {
+        console.log(error);
+    }
+}
+//#endregion
+//#region Endpoints de Comprobantes
+export const listarComprobantes = async () => {
+    try {
+        const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiComprobantes/`)
+        return consulta
+    } catch (error) {
+        console.log(error);
+    }
+};
+export const buscarComprobante = async (comprobante) => {
+    try {
+        const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiComprobantes/${comprobante}`)
+        return consulta
+    } catch (error) {
+        console.log(error);
+    }
+};
+export const modificarComprobante = async (comprobante) => {
+    try {
+        const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiComprobantes/${comprobante.id}`,{
+            cliente:comprobante.cliente,
+            total:comprobante.total,
+            pago:comprobante.pago,
+            mesa:comprobante.mesa
+        })
+        return consulta
+    } catch (error) {
+        console.log(error);
+    }
+};
+export const borrarComprobante = async (id) => {
+    try {
+        const consulta = await axios.delete(`${import.meta.env.VITE_PROD_API}/apiComprobantes/${id}`)
+        return consulta
+    } catch (error) {
+        console.log(error);
+    }
+};
+export const crearComprobante = async (comprobante) => {
+    try {
+        const consulta = await axios.post(`${import.meta.env.VITE_PROD_API}/apiComprobantes/`,{
+            cliente:comprobante.cliente,
+            total:comprobante.total,
+            pago:comprobante.pago,
+            mesa:comprobante.mesa
+        })
+        return consulta
+    } catch (error) {
+        console.log(error);
+    }
+};
+//#endregion
+//#region Endpoints de Roles
+export const listarRoles = async (usuario) => {
+    try {
+        const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiRoles/`)
+        return consulta
+    } catch (error) {
+        console.log(error);
+    }
+};
+//#endregion
+//#region Endpoints de Clientes
+export const listarClientes = async () => {
+    try {
+        const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiClientes/`)
+        return consulta
+    } catch (error) {
+        console.log(error);
+    }
+};
+export const crearCliente = async () => {
+    try {
+        const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiClientes/nuevo`)
+        return consulta
+    } catch (error) {
+        console.log(error);
+    }
+};
+export const modificarCliente= async (cliente) => {
+    try {
+        const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiComprobantes/${cliente._id}`,{
+            nombre:cliente.nombre,
+            telefono:cliente.telefono,
+            direccion:cliente.direccion,
+        })
+        return consulta
+    } catch (error) {
+        console.log(error);
+    }
+};
+//#endregion
