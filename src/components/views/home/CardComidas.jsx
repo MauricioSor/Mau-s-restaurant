@@ -7,7 +7,7 @@ const CardComidas = ({ recetas }) => {
 
     const realizarPedido = (comida) => {
         let pedidoExistente = JSON.parse(localStorage.getItem("pedido")) || [];
-        pedidoExistente.push(comida._id);
+        pedidoExistente.push(comida);
         localStorage.setItem("pedido", JSON.stringify(pedidoExistente));
         setTimeout(() => {
             Swal.fire({title:"Agregado al carrito de compras",timer:900,icon:"success"})

@@ -102,7 +102,6 @@ export const borrarComida = async (id) => {
 }
 //#endregion
 //#region Endpoints de Pedidos
-
 export const buscarPedido = async (pedido) => {
     try {
         const consulta = await axios.post(`${import.meta.env.VITE_PROD_API}/apiPedidos/${pedido}`,{
@@ -122,6 +121,14 @@ export const listarPedidos = async () => {
         return(error);
     }
 };
+export const listarPedidosPorEstado = async (estadoEnviado) => {
+    try {
+        const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiPedidos/filtro/${estadoEnviado}`);
+        return consulta
+    } catch (error) {
+        return(error);
+    }
+};
 export const crearPedido = async (pedido) => {
     try {
         const consulta = await axios.post(`${import.meta.env.VITE_PROD_API}/apiPedidos/nuevo`,pedido)
@@ -132,7 +139,7 @@ export const crearPedido = async (pedido) => {
 }
 export const modificarPedido = async (pedido) => {
     try {
-        const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiPedidos/${pedido._id}`);
+        const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiPedidos/${pedido._id}`,{body:pedido});
         return consulta;
     } catch (error) {
         console.error("Error al modificar pedido:", error);
@@ -146,7 +153,6 @@ export const borrarPedido = async (pedido) => {
         console.log(error);
     }
 }
-
 //#endregion
 //#region Endpoints de Comprobantes
 export const listarComprobantes = async () => {

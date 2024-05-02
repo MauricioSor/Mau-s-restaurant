@@ -14,6 +14,8 @@ const Pedido = ({ item, borrar,cargarPedido }) => {
         <tr>
             { carga?(
                 <>
+                {console.log(item)}
+                    <td>{item.estado}</td>
                     <td>{item.cliente.nombre}</td>
                     <td>{item.cliente.direccion}</td>
                     <td>{detalle}</td>
