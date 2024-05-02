@@ -95,22 +95,6 @@ const RegistrarUsuario = () => {
                                 <Form.Text className='text-danger'>
                                     {errors.contraseña?.message}
                                 </Form.Text>
-{/*                                 <Form.Control
-                                    className='d-none'
-                                    value="empleado"
-                                    {...register("rol", {
-                                        required: "El campo es obligatorio"
-                                        , minLength: {
-                                            value: 8,
-                                            message: "La cantidad minima de caracteres es 8"
-                                        }
-                                        , maxLength: {
-                                            value: 30
-                                            , message: "La cantidad maxima de caracteres es 20"
-                                        }
-                                    })
-                                    }
-                                /> */}
                             </Form.Group>
                             <div className="text-center">
                                 <Button

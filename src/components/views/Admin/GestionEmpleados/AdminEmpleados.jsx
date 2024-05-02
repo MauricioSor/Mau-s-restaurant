@@ -21,8 +21,7 @@ const AdminEmpleados = () => {
         setCarga(false)
     }
     const handleShow = () => (reset(), setShow(true));
-    useEffect(() => {
-        setEmpleado(true)
+    const cargarUsuarios=()=>{
         listarUsuarios().then((resp) => {
             if (resp.status == 200) {
                 setSpinner(false)
@@ -31,6 +30,10 @@ const AdminEmpleados = () => {
                 return (Swal.fire("Error", "Ocurrió un error al conectar con el servidor. Intente nuevamente luego", "error"))
             }
         })
+    }
+    useEffect(() => {
+        setEmpleado(true)
+        cargarUsuarios();
     }, [])
     const detallesEmpleado = (empleado) => {
         setEmpleado(empleado)
@@ -56,6 +59,7 @@ const AdminEmpleados = () => {
                 setSpinner(false)
                 handleClose();
                 Swal.fire("Modificado exitosamente", "", "success")
+                cargarUsuarios();
                 setEmpleado("")
             } else {
                 Swal.fire("error", "Error al modificar,intente nuevamente mas tarde", "error")
@@ -102,6 +106,15 @@ const AdminEmpleados = () => {
                                         <>
                                             <Form onSubmit={handleSubmit(modificarEmpleado)}>
                                                 <Form.Group>
+                                                <Form.Label>Legajo</Form.Label>
+                                                    <Form.Control
+                                                        type="text"
+                                                        defaultValue={empleado._id}
+                                                        {...register("_id", {
+                                                            required: "El campo debe tenerun nombre"
+                                                        })
+                                                        }
+                                                    />
                                                     <Form.Label>Nombre</Form.Label>
                                                     <Form.Control
                                                         type="text"
@@ -141,7 +154,17 @@ const AdminEmpleados = () => {
                                                     <Form.Control
                                                         type="text"
                                                         defaultValue={empleado.rol.nombre}
-                                                        {...register("rol", {
+                                                        value={empleado.rol.nombre}
+                                                        {...register("rol.nombre", {
+                                                            required: "El campo debe tener un rol"
+                                                        })
+                                                        }
+                                                    />
+                                                    <Form.Control
+                                                        type="text"
+                                                        className='d-none'
+                                                        defaultValue={empleado.rol._id}
+                                                        {...register("rol._id", {
                                                             required: "El campo debe tener un rol"
                                                         })
                                                         }

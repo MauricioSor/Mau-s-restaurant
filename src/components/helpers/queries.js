@@ -31,9 +31,10 @@ export const crearUsuario = async (usuario) => {
     }
 }
 export const modificarUsuario = async (usuario) => {
+    console.log(usuario)
     try {
-        const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}+/apiUsuarios/${usuario.id}`,{
-            
+        const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiUsuarios/${usuario._id}`,{
+            usuario
         });
         return consulta;
     } catch (error) {
