@@ -11,7 +11,7 @@ const Empleados = ({ item, detallesEmpleado, handleShow,borrar }) => {
                     <>
                         <td>{item.nombre}</td>
                         <td>{item.email}</td>
-                        <td>{item.contraseña}</td>
+                        <td>**********</td>
                         <td>{item.rol.nombre}</td>
                         <td>{
                             <>

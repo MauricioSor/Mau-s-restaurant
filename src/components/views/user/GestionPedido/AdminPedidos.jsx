@@ -12,8 +12,7 @@ const AdminPedidos = () => {
     const [show, setShow] = useState(false);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [carga, setCarga] = useState(false)
-    const [estado, setEstado] = useState()
-    const inicial="Pendiente"
+    const [estado, setEstado] = useState("")
     const handleClose = () => {
         reset()
         setShow(false)
@@ -22,27 +21,32 @@ const AdminPedidos = () => {
     }
     const handleShow = () => (reset(), setShow(true));
     useEffect(() => {
-        estado == "Todos" ? (
-            listarPedidos().then((resp) => {
-                if (resp.status == 200) {
-                    setPedidos(resp.data)
-                    setSpinner(true)
-                }
-            })
-        ) : (
-            listarPedidosPorEstado("Pendiente").then((resp) => {
-                console.log(resp.data);
-                if (resp.status == 200) {
-                    setPedidos(resp.data)
-/*                     resp.data.map((item)=>{
-                        console.log(item);
-                        setPedidos(item)
-                    }) */
-                }
-                setSpinner(true)
-            })
-        )
+        cargarPedidos("Pendiente")
+    }, [])
+    useEffect(() => {
+        if(estado!==""){
+            setSpinner(false)
+            estado!=="Todos"?cargarPedidos(estado):cargarTodos();
+        }else{
+            <></>
+        }
     }, [estado])
+    const cargarPedidos=(estado)=>{
+        listarPedidosPorEstado(estado).then((resp) => {
+            if (resp.status == 200) {
+                setPedidos(resp.data)
+                setSpinner(true)
+            }
+        })
+    }
+    const cargarTodos=(estado)=>{
+        listarPedidos().then((resp) => {
+            if (resp.status == 200) {
+                setPedidos(resp.data)
+                setSpinner(true)
+            }
+        })
+    }
     const cargarPedido = (pedido, detalle) => {
         pedido.detalle = detalle
         setPedido(pedido)
@@ -51,6 +55,7 @@ const AdminPedidos = () => {
     }
     const filtrarEstado = (estado) => {
         setEstado(estado)
+        setSpinner(false)
     }
     return (
         <>
@@ -63,8 +68,8 @@ const AdminPedidos = () => {
                         </div>
                         <div className="col-md-auto bg-white">
                             <select className="form-control" onChange={(e) => filtrarEstado(e.target.value)}>
-                                <option value="Entregado">Entregado</option>
                                 <option value="Pendiente">Pendiente</option>
+                                <option value="Entregado">Entregado</option>
                                 <option value="Cancelado">Cancelado</option>
                                 <option value="Todos">Todos</option>
                             </select>
@@ -73,7 +78,6 @@ const AdminPedidos = () => {
                 </section>
                 {
                     spinner ? (
-                        <>
                         <Table>
                             <thead>
                                 <tr>
@@ -89,15 +93,12 @@ const AdminPedidos = () => {
                             <tbody>
                                 {
                                     pedidos.map((item, index) => (
-                                        <Pedido key={index} handleShow={handleShow} cargarPedido={cargarPedido} item={item} />
+                                        <Pedido key={index}  handleShow={handleShow} cargarPedido={cargarPedido} item={item} />
                                     ))
                                 }
                             </tbody>
                         </Table>
-                        </>
-                    ) : (
-                        <></>
-                    )
+                    ) : <></>
                 }
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>

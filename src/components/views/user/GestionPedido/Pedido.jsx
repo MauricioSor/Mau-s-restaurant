@@ -5,11 +5,13 @@ const Pedido = ({ item, borrar,cargarPedido }) => {
     const [detalle, setDetalle] = useState([])
     const [carga, setCarga] = useState(false)
     useEffect(()=>{
+        console.log(item);
         (item.detalle).map((pedidos)=>{
             setDetalle((anterior)=>([...anterior,","+pedidos.nombre]))
         })
         setCarga(true)
-    },[item])
+        
+    },[])
     return (
         <tr>
             { carga?(
