@@ -233,9 +233,10 @@ export const buscarCliente = async (cliente) => {
         return(error);
     }
 };
-export const crearCliente = async () => {
+export const crearCliente = async (cliente) => {
     try {
-        const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiClientes/nuevo`)
+        console.log(cliente);
+        const consulta = await axios.post(`${import.meta.env.VITE_PROD_API}/apiClientes/nuevo`,{cliente})
         return consulta
     } catch (error) {
         console.log(error);

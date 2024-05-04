@@ -41,9 +41,6 @@ const AdminClientes = () => {
             }
         })
     }
-    const borrarCliente=(cliente)=>{
-        
-    }
     return (
         <Container>
             <h1>Clientes</h1>
