@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Container, Form, Modal, Table } from 'react-bootstrap';
 import Cliente from "./Cliente"
-import { listarClientes } from '../../../helpers/queries';
+import { listarClientes, modificarCliente } from '../../../helpers/queries';
 import { useForm } from 'react-hook-form';
-
+import Swal from 'sweetalert2';
 const AdminClientes = () => {
     const [clientes, setClientes] = useState()
     const [cliente, setCliente] = useState()
@@ -31,6 +31,18 @@ const AdminClientes = () => {
         setCliente(cliente)
         setCarga(true)
         handleShow();
+    }
+    const editarliente = (cliente) => {
+        modificarCliente(cliente).then((resp)=>{
+            if(resp.status==201){
+                Swal.fire("Modificación exitosa","","success")
+            }else{
+                Swal.fire("Error al modificar el cliente","","error")
+            }
+        })
+    }
+    const borrarCliente=(cliente)=>{
+        
     }
     return (
         <Container>
@@ -61,53 +73,61 @@ const AdminClientes = () => {
                 ) : <></>
             }
             <Modal show={show} onHide={handleClose}>
-                {carga?
-                <>
-                <Modal.Header closeButton>
-                    <Modal.Title>Cliente {cliente._id}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                                <>
-                                    <Form onSubmit={handleSubmit()}>
-                                        <Form.Group>
-                                            <Form.Label>Nombre</Form.Label>
-                                            <Form.Control
-                                                type="text"
-                                                defaultValue={cliente.nombre}
-                                                {...register("nombre", {
-                                                    required: "El campo debe tenerun nombre"
-                                                })
-                                                }
-                                            />
-                                            <Form.Text className="text-danger">
-                                                {errors.nombre?.message}
-                                            </Form.Text>
-                                            <Form.Label>Teléfono</Form.Label>
-                                            <Form.Control
-                                                type="text"
-                                                defaultValue={cliente.telefono}
-                                                {...register("telefono", {
-                                                    required: "El campo debe tener un correo"
-                                                })}
-                                            />
-                                            <Form.Text className="text-danger">
-                                                {errors.telefono?.message}
-                                            </Form.Text>
-                                            <Form.Label>Dirección</Form.Label>
-                                            <Form.Control
-                                                type="text"
-                                                defaultValue={cliente.direccion}
-                                                {...register("detalle", {
-                                                    required: "El campo debe tener una contraseña"
-                                                })
-                                                }
-                                            />
-                                        </Form.Group>
-                                        <Button type='submit' variant='primary'>Guardar cambios</Button>
-                                    </Form>
-                                </>
-                </Modal.Body>
-                </>:<></>
+                {carga ?
+                    <>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Cliente {cliente._id}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <>
+                                <Form onSubmit={handleSubmit(editarliente)}>
+                                    <Form.Group>
+                                        <Form.Control
+                                            className='d-none'
+                                            defaultValue={cliente._id}
+                                            {...register("_id", {
+                                                required: "El campo debe tenerun nombre"
+                                            })
+                                            }
+                                        />
+                                        <Form.Label>Nombre</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            defaultValue={cliente.nombre}
+                                            {...register("nombre", {
+                                                required: "El campo debe tenerun nombre"
+                                            })
+                                            }
+                                        />
+                                        <Form.Text className="text-danger">
+                                            {errors.nombre?.message}
+                                        </Form.Text>
+                                        <Form.Label>Teléfono</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            defaultValue={cliente.telefono}
+                                            {...register("telefono", {
+                                                required: "El campo debe tener un correo"
+                                            })}
+                                        />
+                                        <Form.Text className="text-danger">
+                                            {errors.telefono?.message}
+                                        </Form.Text>
+                                        <Form.Label>Dirección</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            defaultValue={cliente.direccion}
+                                            {...register("direccion", {
+                                                required: "El campo debe tener una contraseña"
+                                            })
+                                            }
+                                        />
+                                    </Form.Group>
+                                    <Button type='submit'className='mt-4' variant='primary'>Guardar cambios</Button>
+                                </Form>
+                            </>
+                        </Modal.Body>
+                    </> : <></>
                 }
             </Modal>
         </Container>

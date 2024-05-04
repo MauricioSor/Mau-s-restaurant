@@ -32,7 +32,6 @@ const Carrito = () => {
     useEffect(() => {
         const pedidos = JSON.parse(localStorage.getItem("pedido") || "[]");
         pedidos.length>1?(ActivarCarga(),setPedidos(filtrarYContarRepetidos(pedidos))):<></>;
-        //console.log(filtrarYContarRepetidos(pedidos));
     }, []);
     return (
         <Container>

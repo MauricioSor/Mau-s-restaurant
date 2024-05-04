@@ -14,7 +14,6 @@ const Pedido = ({ item, borrar, cargarPedido,cargarPedidos }) => {
     }, [])
     const cambiarEstado =(pedido,estado)=>{
         pedido.estado=estado
-        console.log(pedido);
         modificarPedido(pedido).then((resp)=>{
             if(resp.status==201){
                 Swal.fire("Modificado Exitosamente","","success")
@@ -28,7 +27,6 @@ const Pedido = ({ item, borrar, cargarPedido,cargarPedidos }) => {
         <tr>
             {carga ? (
                 <>
-                    {console.log(item)}
                     <td>{item.estado}</td>
                     <td>{item.cliente.nombre}</td>
                     <td>{item.cliente.direccion}</td>

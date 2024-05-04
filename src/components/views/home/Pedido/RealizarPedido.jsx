@@ -15,7 +15,6 @@ const RealizarPedido = () => {
     
     const cargarCliente=(id)=>{
     buscarCliente(id).then((resp)=>{
-        console.log(resp);
         if(resp.status==200){
             setClienteDatos(resp.data)
             setCargaCliente(true)

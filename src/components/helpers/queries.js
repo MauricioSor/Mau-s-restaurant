@@ -31,7 +31,6 @@ export const crearUsuario = async (usuario) => {
     }
 }
 export const modificarUsuario = async (usuario) => {
-    console.log(usuario)
     try {
         const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiUsuarios/${usuario._id}`,{
             usuario
@@ -140,7 +139,6 @@ export const crearPedido = async (pedido) => {
 }
 export const modificarPedido = async (pedido) => {
     try {
-        console.log(pedido);
         const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiPedidos/${pedido._id}`,{body:pedido});
         return consulta;
     } catch (error) {
@@ -245,14 +243,12 @@ export const crearCliente = async () => {
 };
 export const modificarCliente= async (cliente) => {
     try {
-        const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiComprobantes/${cliente._id}`,{
-            nombre:cliente.nombre,
-            telefono:cliente.telefono,
-            direccion:cliente.direccion,
-        })
+        const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiClientes/${cliente._id}`,{cliente})
+        console.log(consulta);
         return consulta
     } catch (error) {
         console.log(error);
     }
 };
+
 //#endregion
