@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Container, Form, Modal, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { listarPedidos, listarPedidosPorEstado } from '../../../helpers/queries';
+import { listarPedidos, listarPedidosPorEstado, modificarPedido } from '../../../helpers/queries';
 import Pedido from './Pedido';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 
 const AdminPedidos = () => {
     const [pedidos, setPedidos] = useState([])
@@ -20,18 +21,21 @@ const AdminPedidos = () => {
         setCarga(false)
     }
     const handleShow = () => (reset(), setShow(true));
+
     useEffect(() => {
         cargarPedidos("Pendiente")
     }, [])
+
     useEffect(() => {
-        if(estado!==""){
+        if (estado !== "") {
             setSpinner(false)
-            estado!=="Todos"?cargarPedidos(estado):cargarTodos();
-        }else{
+            estado !== "Todos" ? cargarPedidos(estado) : cargarTodos();
+        } else {
             <></>
         }
     }, [estado])
-    const cargarPedidos=(estado)=>{
+
+    const cargarPedidos = (estado) => {
         listarPedidosPorEstado(estado).then((resp) => {
             if (resp.status == 200) {
                 setPedidos(resp.data)
@@ -39,7 +43,7 @@ const AdminPedidos = () => {
             }
         })
     }
-    const cargarTodos=(estado)=>{
+    const cargarTodos = () => {
         listarPedidos().then((resp) => {
             if (resp.status == 200) {
                 setPedidos(resp.data)
@@ -48,7 +52,7 @@ const AdminPedidos = () => {
         })
     }
     const cargarPedido = (pedido, detalle) => {
-        pedido.detalle = detalle
+        pedido.detalle.nombres = detalle
         setPedido(pedido)
         setCarga(true)
         handleShow();
@@ -56,6 +60,19 @@ const AdminPedidos = () => {
     const filtrarEstado = (estado) => {
         setEstado(estado)
         setSpinner(false)
+    }
+    const cargarModificacionPedido = (pedido) => {
+        console.log(pedido);
+        modificarPedido(pedido).then((resp) => {
+            console.log(resp.status);
+            if (resp.status == 201) {
+                handleClose()
+                Swal.fire("Modificacion de pedido exitosa", "", "success")
+                cargarPedidos("Pendiente")
+            } else {
+                Swal.fire("Error", "Ocurrió un error al conectar con el servidor", "error")
+            }
+        })
     }
     return (
         <>
@@ -109,8 +126,15 @@ const AdminPedidos = () => {
                             carga ?
                                 (
                                     <>
-                                        <Form onSubmit={handleSubmit()}>
+                                        <Form onSubmit={handleSubmit(cargarModificacionPedido)}>
+                                            {console.log(pedido)}
                                             <Form.Group>
+                                                <Form.Control
+                                                    type="text"
+                                                    className='d-none'
+                                                    defaultValue={pedido._id}
+                                                    {...register("_id")}
+                                                />
                                                 <Form.Label>Nombre</Form.Label>
                                                 <Form.Control
                                                     type="text"
@@ -137,11 +161,12 @@ const AdminPedidos = () => {
                                                 <Form.Label>Detalle</Form.Label>
                                                 <Form.Control
                                                     type="text"
+                                                    defaultValue={pedido.detalle.nombres}
+                                                />
+                                                <Form.Control
+                                                    type="text"
+                                                    className='d-none'
                                                     defaultValue={pedido.detalle}
-                                                    {...register("detalle", {
-                                                        required: "El campo debe tener una contraseña"
-                                                    })
-                                                    }
                                                 />
                                                 <Form.Text className="text-danger">
                                                     {errors.detalle?.message}

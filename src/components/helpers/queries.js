@@ -139,6 +139,7 @@ export const crearPedido = async (pedido) => {
 }
 export const modificarPedido = async (pedido) => {
     try {
+        console.log(pedido);
         const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiPedidos/${pedido._id}`,{body:pedido});
         return consulta;
     } catch (error) {
