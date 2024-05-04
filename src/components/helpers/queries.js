@@ -140,6 +140,7 @@ export const crearPedido = async (pedido) => {
 }
 export const modificarPedido = async (pedido) => {
     try {
+        console.log(pedido);
         const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiPedidos/${pedido._id}`,{body:pedido});
         return consulta;
     } catch (error) {
@@ -224,6 +225,14 @@ export const listarClientes = async () => {
         return consulta
     } catch (error) {
         console.log(error);
+    }
+};
+export const buscarCliente = async (cliente) => {
+    try {
+        const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiClientes/${cliente._id}`)
+        return consulta
+    } catch (error) {
+        return(error);
     }
 };
 export const crearCliente = async () => {

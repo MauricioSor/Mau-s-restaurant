@@ -69,7 +69,7 @@ const AdminPedidos = () => {
                         <div className="col-md-auto bg-white">
                             <select className="form-control" onChange={(e) => filtrarEstado(e.target.value)}>
                                 <option value="Pendiente">Pendiente</option>
-                                <option value="Entregado">Entregado</option>
+                                <option value="Enviado">Enviado</option>
                                 <option value="Cancelado">Cancelado</option>
                                 <option value="Todos">Todos</option>
                             </select>
@@ -93,7 +93,7 @@ const AdminPedidos = () => {
                             <tbody>
                                 {
                                     pedidos.map((item, index) => (
-                                        <Pedido key={index}  handleShow={handleShow} cargarPedido={cargarPedido} item={item} />
+                                        <Pedido key={index} cargarPedidos={cargarPedidos} handleShow={handleShow} cargarPedido={cargarPedido} item={item} />
                                     ))
                                 }
                             </tbody>
