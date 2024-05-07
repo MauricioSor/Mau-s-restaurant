@@ -17,7 +17,7 @@ const Pedido = ({ item, borrar, cargarPedido,cargarPedidos }) => {
         modificarPedido(pedido).then((resp)=>{
             if(resp.status==201){
                 Swal.fire("Modificado Exitosamente","","success")
-                cargarPedidos("Pendiente");
+                cargarPedidos("Cancelado");
             }else{
                 Swal.fire("Error","Error al conectar con el servidor","error")
             }

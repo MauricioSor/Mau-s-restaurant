@@ -246,11 +246,29 @@ export const crearCliente = async (cliente) => {
 export const modificarCliente= async (cliente) => {
     try {
         const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiClientes/${cliente._id}`,{cliente})
-        console.log(consulta);
         return consulta
     } catch (error) {
         console.log(error);
     }
 };
 
+//#endregion
+//#region Mesas
+export const listarMesas = async () => {
+    try {
+        const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiMesas/`)
+        return consulta
+    } catch (error) {
+        console.log(error);
+    }
+};
+export const modificarMesa= async (mesa) => {
+    try {
+        console.log(mesa);
+        const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiMesas/${mesa._id}`,{mesa})
+        return consulta
+    } catch (error) {
+        console.log(error);
+    }
+};
 //#endregion

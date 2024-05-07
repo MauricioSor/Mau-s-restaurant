@@ -4,7 +4,8 @@ import AdminPedidos from '../views/user/GestionPedido/AdminPedidos';
 import RegistrarVenta from '../views/user/GestionVentas/RegistrarVenta';
 import RegistrarCliente from "../views/user/GestionClientes/RegistrarCliente"
 import AdminClientes from  "../views/user/GestionClientes/AdminClientes"
-import Mesas from "../views/user/GestionVentas/Mesas"
+import AdminMesas from '../views/user/GestionVentas/AdminMesas';
+
 const RutasUser = () => {
     return (
         <>
@@ -12,7 +13,7 @@ const RutasUser = () => {
             <Route exact path='/' element={<AdminPedidos/>}/>
             <Route exact path='/AdminClientes' element={<AdminClientes/>}/>
             <Route exact path='/AdminClientes/RegistrarCliente' element={<RegistrarCliente/>}/>
-            <Route exact path='/Mesas' element={<Mesas/>}/>
+            <Route exact path='/Mesas' element={<AdminMesas/>}/>
             <Route exact path='/Mesas/RegistrarVenta' element={<RegistrarVenta/>}/>
         </Routes>
         </>

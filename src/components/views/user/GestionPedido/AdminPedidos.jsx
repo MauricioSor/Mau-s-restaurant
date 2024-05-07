@@ -14,6 +14,7 @@ const AdminPedidos = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [carga, setCarga] = useState(false)
     const [estado, setEstado] = useState("")
+
     const handleClose = () => {
         reset()
         setShow(false)
@@ -37,7 +38,7 @@ const AdminPedidos = () => {
 
     const cargarPedidos = (estado) => {
         listarPedidosPorEstado(estado).then((resp) => {
-            if (resp.status == 200) {
+            if (resp.status == 201) {
                 setPedidos(resp.data)
                 setSpinner(true)
             }
@@ -62,13 +63,11 @@ const AdminPedidos = () => {
         setSpinner(false)
     }
     const cargarModificacionPedido = (pedido) => {
-        console.log(pedido);
         modificarPedido(pedido).then((resp) => {
-            console.log(resp.status);
             if (resp.status == 201) {
                 handleClose()
                 Swal.fire("Modificacion de pedido exitosa", "", "success")
-                cargarPedidos("Pendiente")
+                cargarTodos();
             } else {
                 Swal.fire("Error", "Ocurrió un error al conectar con el servidor", "error")
             }

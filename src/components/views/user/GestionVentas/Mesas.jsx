@@ -1,16 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { Container,Table } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container, Col } from 'react-bootstrap';
 
-const Mesas = () => {
-
-    
+const Mesas = ({ item, index, mostrarDatos }) => {
+    const [colorEstado, setColorEstado] = useState()
+    useEffect(() => {
+    color(item.estado);
+    }, [])
+    const color = (mesa) => {
+        switch (mesa) {
+            case "Libre":
+            setColorEstado("green")
+                break;
+                case "Ocupado":
+                setColorEstado("yellow")
+                break;
+                case "Reservado":
+            setColorEstado("red")
+                break;
+            default:
+                setColorEstado("green")
+                break;
+        }
+    }
     return (
-        <Container>
-            <h1>Mesas del salon</h1>
-            <Link className='btn btn-primary' to={"/Usuario/Mesas/RegistrarVenta"}>Registrar venta</Link>
-            
-        </Container>
+        <Col className='col-4'>
+            <div className='d-flex flex-column'>
+                {
+                    <button className="py-4" style={{ backgroundColor:colorEstado}} onClick={() => mostrarDatos(item)}>Mesa {item._id}<br /></button>
+                }
+            </div>
+        </Col>
     );
 };
 

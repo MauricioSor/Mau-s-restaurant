@@ -67,7 +67,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                                         </>
                                         :
                                         <>
-                                        <Button  className='nav-item nav-link' onClick={handleShow} >Iniciar Sesion</Button>
+                                        <NavLink end className='nav-item nav-link' onClick={handleShow} >Iniciar Sesion</NavLink>
                                         <NavLink end className='nav-item nav-link' to={"/MiCarrito"} >Mi Carrito</NavLink>
                                         </>
                             }
