@@ -110,17 +110,14 @@ const AdminEmpleados = () => {
                                                     <Form.Control
                                                         type="text"
                                                         defaultValue={empleado._id}
-                                                        {...register("_id", {
-                                                            required: "El campo debe tenerun nombre"
-                                                        })
-                                                        }
+                                                        {...register("_id", {})}
                                                     />
                                                     <Form.Label>Nombre</Form.Label>
                                                     <Form.Control
                                                         type="text"
                                                         defaultValue={empleado.nombre}
                                                         {...register("nombre", {
-                                                            required: "El campo debe tenerun nombre"
+                                                            required: "El campo debe tener un nombre"
                                                         })
                                                         }
                                                     />
@@ -164,10 +161,7 @@ const AdminEmpleados = () => {
                                                         type="text"
                                                         className='d-none'
                                                         defaultValue={empleado.rol._id}
-                                                        {...register("rol._id", {
-                                                            required: "El campo debe tener un rol"
-                                                        })
-                                                        }
+                                                        {...register("rol._id", {})}
                                                     />
                                                     <Form.Text className="text-danger">
                                                         {errors.rol?.message}

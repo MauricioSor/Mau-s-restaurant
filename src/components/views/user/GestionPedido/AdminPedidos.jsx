@@ -38,7 +38,7 @@ const AdminPedidos = () => {
 
     const cargarPedidos = (estado) => {
         listarPedidosPorEstado(estado).then((resp) => {
-            if (resp.status == 201) {
+            if (resp.status == 200) {
                 setPedidos(resp.data)
                 setSpinner(true)
             }
@@ -73,6 +73,7 @@ const AdminPedidos = () => {
             }
         })
     }
+
     return (
         <>
             <Container>
@@ -139,7 +140,7 @@ const AdminPedidos = () => {
                                                     type="text"
                                                     defaultValue={pedido.cliente.nombre}
                                                     {...register("nombre", {
-                                                        required: "El campo debe tenerun nombre"
+                                                        required: "El campo debe tener un nombre"
                                                     })
                                                     }
                                                 />
@@ -151,9 +152,12 @@ const AdminPedidos = () => {
                                                     type="text"
                                                     defaultValue={pedido.cliente.telefono}
                                                     {...register("telefono", {
-                                                        required: "El campo debe tener un correo"
+                                                        required: "El campo debe tener un telefono"
                                                     })}
                                                 />
+                                                <Form.Text className='text-danger'>
+                                                    {errors.telefono?.message}
+                                                </Form.Text>
                                                 <Form.Text className="text-danger">
                                                     {errors.telefono?.message}
                                                 </Form.Text>
@@ -162,6 +166,9 @@ const AdminPedidos = () => {
                                                     type="text"
                                                     defaultValue={pedido.detalle.nombres}
                                                 />
+                                                <Form.Text className='text-danger'>
+                                                    {errors.nombre?.message}
+                                                </Form.Text>
                                                 <Form.Control
                                                     type="text"
                                                     className='d-none'
@@ -175,7 +182,7 @@ const AdminPedidos = () => {
                                                     type="text"
                                                     defaultValue={pedido.total}
                                                     {...register("total", {
-                                                        required: "El campo debe tener un rol"
+                                                        required: "El campo debe tener un total"
                                                     })
                                                     }
                                                 />

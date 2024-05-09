@@ -1,11 +1,10 @@
 //#region Imports
 import React from 'react';
 import { Container, Carousel, Spinner } from 'react-bootstrap';
-import { buscarComidas } from '../../helpers/queries';
+import { buscarComidas } from '../../../helpers/queries';
 import { useState, useEffect } from 'react';
 import CardComidas from './CardComidas';
 import Swal from 'sweetalert2';
-
 //#endregion
 
 const Principal = () => {

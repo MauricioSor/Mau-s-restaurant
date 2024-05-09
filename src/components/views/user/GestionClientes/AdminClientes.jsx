@@ -33,11 +33,11 @@ const AdminClientes = () => {
         handleShow();
     }
     const editarliente = (cliente) => {
-        modificarCliente(cliente).then((resp)=>{
-            if(resp.status==201){
-                Swal.fire("Modificación exitosa","","success")
-            }else{
-                Swal.fire("Error al modificar el cliente","","error")
+        modificarCliente(cliente).then((resp) => {
+            if (resp.status == 201) {
+                Swal.fire("Modificación exitosa", "", "success")
+            } else {
+                Swal.fire("Error al modificar el cliente", "", "error")
             }
         })
     }
@@ -82,17 +82,14 @@ const AdminClientes = () => {
                                         <Form.Control
                                             className='d-none'
                                             defaultValue={cliente._id}
-                                            {...register("_id", {
-                                                required: "El campo debe tenerun nombre"
-                                            })
-                                            }
+                                            {...register("_id")}
                                         />
                                         <Form.Label>Nombre</Form.Label>
                                         <Form.Control
                                             type="text"
                                             defaultValue={cliente.nombre}
                                             {...register("nombre", {
-                                                required: "El campo debe tenerun nombre"
+                                                required: "El campo debe tener un nombre"
                                             })
                                             }
                                         />
@@ -104,7 +101,7 @@ const AdminClientes = () => {
                                             type="text"
                                             defaultValue={cliente.telefono}
                                             {...register("telefono", {
-                                                required: "El campo debe tener un correo"
+                                                required: "El campo debe tener un telefono"
                                             })}
                                         />
                                         <Form.Text className="text-danger">
@@ -115,12 +112,15 @@ const AdminClientes = () => {
                                             type="text"
                                             defaultValue={cliente.direccion}
                                             {...register("direccion", {
-                                                required: "El campo debe tener una contraseña"
+                                                required: "El campo debe tener una direccion"
                                             })
                                             }
                                         />
+                                        <Form.Text className='text-danger'>
+                                            {errors.direccion?.message}
+                                        </Form.Text>
                                     </Form.Group>
-                                    <Button type='submit'className='mt-4' variant='primary'>Guardar cambios</Button>
+                                    <Button type='submit' className='mt-4' variant='primary'>Guardar cambios</Button>
                                 </Form>
                             </>
                         </Modal.Body>

@@ -33,10 +33,10 @@ const AdminMesas = () => {
     }
     const modificarDatos = (mesa) => {
         if (mesa.estado == "Libre") {
-            mesa.total=""
+            mesa.total = ""
             mesa.pago = ""
         }
-        modificarMesa(mesa).then((resp) => {
+        modificarMesa(datosMesa._id, mesa).then((resp) => {
             handleClose();
             if (resp.status == 201) {
                 Swal.fire("Exito", "Modificacion exitosa", "success")
@@ -87,30 +87,34 @@ const AdminMesas = () => {
                                 <>
                                     <Form onSubmit={handleSubmit(modificarDatos)}>
                                         <Form.Group>
-                                            <Form.Control
+                                            {/*                                             <Form.Control
                                                 type="text"
                                                 className='d-none'
                                                 defaultValue={datosMesa._id}
                                                 {...register("_id")}
-                                            />
+                                            /> */}
                                             <Form.Label>Estado</Form.Label>
                                             <Form.Select
                                                 {...register("estado", {
-                                                    required: "El campo debe tenerun nombre"
+                                                    required: "El campo debe tener un estado"
                                                 })} onChange={(e) => handleEstado(e.target.value)}>
-                                                <option value="Libre">Libre</option>
-                                                <option value="Ocupado">Ocupado</option>
-                                                <option value="Reservado">Reservado</option>
+                                                <option defaultValue={datosMesa.estado}>{datosMesa.estado}</option>
+                                                {datosMesa.estado !== "Libre" && <option value="Libre">Libre</option>}
+                                                {datosMesa.estado !== "Ocupado" && <option value="Ocupado">Ocupado</option>}
+                                                {datosMesa.estado !== "Reservado" && <option value="Reservado">Reservado</option>}
                                             </Form.Select>
+                                            <Form.Text className='text-danger'>
+                                                {errors.estado?.message}
+                                            </Form.Text>
                                             {
-                                                estadoMesa !== "Libre" ?
+                                                estadoMesa == "Ocupado" ?
                                                     (<>
                                                         <Form.Label>Forma de pago</Form.Label>
                                                         <Form.Control
                                                             type="text"
                                                             defaultValue={datosMesa.pago}
                                                             {...register("pago", {
-                                                                required: "El campo debe tenerun nombre"
+                                                                required: "El campo debe tener un pago"
                                                             })
                                                             }
                                                         />
@@ -122,7 +126,7 @@ const AdminMesas = () => {
                                                             type="text"
                                                             defaultValue={datosMesa.total}
                                                             {...register("total", {
-                                                                required: "El campo debe tener un rol"
+                                                                required: "El campo debe tener un total"
                                                             })
                                                             }
                                                         />

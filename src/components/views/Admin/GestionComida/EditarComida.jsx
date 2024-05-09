@@ -51,20 +51,12 @@ const EditarComida = () => {
                     <>
                         <Form onSubmit={handleSubmit(enviar)}>
                             <Form.Group className="mb-3" controlId="formNombreProdcuto">
-                                <Form.Label>Comida*</Form.Label>
+                                <Form.Label>Comida</Form.Label>
                                 <Form.Control
                                     type="text"
                                     defaultValue={comida.nombre}
                                     {...register("nombre", {
                                         required: "El nombre de la comida es obligatorio",
-                                        minLength: {
-                                            value: 2,
-                                            message: "La cantidad minima de caracteres es de 2 digitos",
-                                        },
-                                        maxLength: {
-                                            value: 100,
-                                            message: "La cantidad minima de caracteres es de 2 digitos",
-                                        },
                                     })}
                                 />
                                 <Form.Text className="text-danger">
@@ -78,14 +70,6 @@ const EditarComida = () => {
                                     defaultValue={comida.descripcion}
                                     {...register('descripcion', {
                                         required: "La descripcion es un campo obligatorio"
-                                        , minLength: {
-                                            value: 20,
-                                            message: "La cantidad minima de caracteres es de 2"
-                                        },
-                                        maxLength: {
-                                            value: 500
-                                            , message: "La cantidad maxima es de 500"
-                                        }
                                     })}
                                 />
                                 <Form.Text className="text-danger">
@@ -93,20 +77,12 @@ const EditarComida = () => {
                                 </Form.Text>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formPrecio">
-                                <Form.Label>Precio*</Form.Label>
+                                <Form.Label>Precio</Form.Label>
                                 <Form.Control
                                     type="number"
                                     defaultValue={comida.precio}
                                     {...register("precio", {
-                                        required: "El precio del producto es obligatorio",
-                                        min: {
-                                            value: 1,
-                                            message: "El precio minimo es de $1",
-                                        },
-                                        max: {
-                                            value: 999999,
-                                            message: "El precio maximo es de $999999",
-                                        },
+                                        required: "El precio del producto es obligatorio"
                                     })}
                                 />
                                 <Form.Text className="text-danger">
@@ -127,7 +103,7 @@ const EditarComida = () => {
                                 </Form.Text>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formPrecio">
-                                <Form.Label>Categoria*</Form.Label>
+                                <Form.Label>Categoria</Form.Label>
                                 <Form.Control
                                     type='text'
                                     defaultValue={comida.categoria}

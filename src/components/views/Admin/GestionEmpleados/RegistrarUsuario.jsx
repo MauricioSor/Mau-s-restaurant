@@ -32,7 +32,7 @@ const RegistrarUsuario = () => {
                     <div className='col-12 col-sm-8 col-md-6 col-xl-4'>
                         <Form onSubmit={handleSubmit(cargar)}>
                             <Form.Group className="mb-2">
-                                <Form.Label>Nombre*</Form.Label>
+                                <Form.Label>Nombre</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="Ingrese un nombre de usuario"
@@ -53,22 +53,13 @@ const RegistrarUsuario = () => {
                                 {errors.nombre?.message}
                             </Form.Text>
                             <Form.Group className="mb-2">
-                                <Form.Label>Correo electrónico*</Form.Label>
+                                <Form.Label>Correo electrónico</Form.Label>
                                 <Form.Control
                                     type='String'
                                     placeholder="Ingrese un email"
                                     {...register("email", {
                                         required: "Ël campo es obligatorio"
-                                        , minLength: {
-                                            value: 6,
-                                            message: "La cantidad minima de caracteres es 6"
-                                        },
-                                        maxLength: {
-                                            value: 30,
-                                            message: "La cantidad maxima de caracteres es 25"
-                                        }
-                                    })
-                                    }
+                                    })}
                                 />
                                 <Form.Text className='text-danger'>
                                     {errors.email?.message}
@@ -80,16 +71,7 @@ const RegistrarUsuario = () => {
                                     type="password"
                                     placeholder="Ingrese un password"
                                     {...register("contraseña", {
-                                        required: "El campo es obligatorio"
-                                        , minLength: {
-                                            value: 8,
-                                            message: "La cantidad minima de caracteres es 8"
-                                        }
-                                        , maxLength: {
-                                            value: 30
-                                            , message: "La cantidad maxima de caracteres es 20"
-                                        }
-                                    })
+                                        required: "El campo es obligatorio"})
                                     }
                                 />
                                 <Form.Text className='text-danger'>

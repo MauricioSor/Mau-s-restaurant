@@ -55,14 +55,6 @@ const CrearComida = () => {
                         placeholder='Ej: 1200'
                         {...register('precio', {
                             required: "El precio de la Comida es obligatorio"
-                            , min: {
-                                value: 20,
-                                message: "La cantidad minima es de $20"
-                            },
-                            max: {
-                                value: 100000
-                                , message: "La cantidad maxima es de $10000"
-                            }
                         })}
                     />
                     <Form.Text className="text-danger">
@@ -89,14 +81,6 @@ const CrearComida = () => {
                         placeholder='Pj.Chipá'
                         {...register('descripcion', {
                             required: "La descripcion es un campo obligatorio"
-                            , minLength: {
-                                value: 20,
-                                message: "La cantidad minima de caracteres es de 2"
-                            },
-                            maxLength: {
-                                value: 500
-                                , message: "La cantidad maxima es de 500"
-                            }
                         })}
                     />
                     <Form.Text className="text-danger">

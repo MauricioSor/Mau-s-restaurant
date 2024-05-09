@@ -12,6 +12,7 @@ export const iniciarSesion = async (usuario) => {
         return consulta
     } catch (error) {
         console.log(error);
+        return error;
     }
 };
 export const listarUsuarios = async () => {
@@ -262,10 +263,9 @@ export const listarMesas = async () => {
         console.log(error);
     }
 };
-export const modificarMesa= async (mesa) => {
+export const modificarMesa= async (id,mesa) => {
     try {
-        console.log(mesa);
-        const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiMesas/${mesa._id}`,{mesa})
+        const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiMesas/${id}`,{mesa})
         return consulta
     } catch (error) {
         console.log(error);

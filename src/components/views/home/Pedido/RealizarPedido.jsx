@@ -13,7 +13,7 @@ const RealizarPedido = () => {
     const [clienteDatos, setClienteDatos] = useState("")
     const [cargaCliente, setCargaCliente] = useState(false)
 
-    
+
     const cargarCliente = (id) => {
         buscarCliente(id).then((resp) => {
             if (resp.status == 200) {
@@ -24,17 +24,17 @@ const RealizarPedido = () => {
             }
         })
     }
-    const registroCompleto=(cliente)=>{
+    const registroCompleto = (cliente) => {
         console.log(cliente);
-        crearCliente(cliente).then((resp)=>{
+        crearCliente(cliente).then((resp) => {
             console.log(resp);
-            if(resp.status==200){
-                
-                cliente._id=(resp.data)
+            if (resp.status == 200) {
+
+                cliente._id = (resp.data)
                 console.log(cliente)
                 registrarPedido(cliente)
-            }else{
-                Swal.fire("Error","Ocurrió un error inesperado al conectar con el servidor","error")
+            } else {
+                Swal.fire("Error", "Ocurrió un error inesperado al conectar con el servidor", "error")
             }
         })
     }
@@ -58,7 +58,7 @@ const RealizarPedido = () => {
 
     const registrarPedido = (pedido) => {
         pedido.estado = "Pendiente"
-        pedido.cliente = (clienteDatos._id!=""?(pedido._id ): (clienteDatos._id))
+        pedido.cliente = (clienteDatos._id != "" ? (pedido._id) : (clienteDatos._id))
         pedido.hora = hora();
         pedido.detalle = JSON.parse(localStorage.getItem("pedido"))
         pedido.total = total
@@ -94,17 +94,7 @@ const RealizarPedido = () => {
                                         type='text'
                                         disabled={(cargaCliente)}
                                         placeholder="Ingrese un nombre de usuario"
-                                        {...register('_id', {
-                                            required: "El nombre es obligatorio"
-                                            , minLength: {
-                                                value: 2,
-                                                message: "Debe tener mas de 2 caracteres"
-                                            },
-                                            maxLength: {
-                                                value: 30,
-                                                message: "Debe tener menos de 25 caracteres"
-                                            }
-                                        })}
+                                        {...register('_id')}
                                     />
                                     <Button variant='warning' className='ms-1' type='submit'>Cargar</Button>
                                 </Form.Group>
@@ -132,38 +122,6 @@ const RealizarPedido = () => {
                                             value={clienteDatos.direccion}
                                         />
                                         <h2 className='fs-2 text-center'>Datos del pedido</h2>
-                                        {/*                                         <Form.Label>Forma de pago</Form.Label>
-                                        <Form.Control
-                                            type='text'
-                                            placeholder="Ingrese un nombre de usuario"
-                                            {...register('nombre', {
-                                                required: "El nombre es obligatorio"
-                                                , minLength: {
-                                                    value: 2,
-                                                    message: "Debe tener mas de 2 caracteres"
-                                                },
-                                                maxLength: {
-                                                    value: 30,
-                                                    message: "Debe tener menos de 25 caracteres"
-                                                }
-                                            })}
-                                        />
-                                        <Form.Label>Aclaraciones:</Form.Label>
-                                        <Form.Control
-                                            type='text'
-                                            placeholder="Ingrese un nombre de usuario"
-                                            {...register('nombre', {
-                                                required: "El nombre es obligatorio"
-                                                , minLength: {
-                                                    value: 2,
-                                                    message: "Debe tener mas de 2 caracteres"
-                                                },
-                                                maxLength: {
-                                                    value: 30,
-                                                    message: "Debe tener menos de 25 caracteres"
-                                                }
-                                            })}
-                                        /> */}
                                         <Form.Label>Total: {total}</Form.Label>
                                         <Button type="submit" variant="primary">Realizar Pedido!</Button>
                                     </Form>
@@ -176,47 +134,40 @@ const RealizarPedido = () => {
                                 <Form.Control
                                     type='text'
                                     {...register('nombre', {
-                                            required: "El nombre es obligatorio"
-                                            , minLength: {
-                                                value: 2,
-                                                message: "Debe tener mas de 2 caracteres"
-                                            },
-                                            maxLength: {
-                                                value: 30,
-                                                message: "Debe tener menos de 25 caracteres"
-                                            }
-                                        })}
+                                        required: "El nombre es obligatorio"
+                                    })}
                                 />
+                                <Form.Text className='text-danger'>
+                                    {errors.nombre?.message}
+                                </Form.Text>
                                 <Form.Label>Telefono</Form.Label>
                                 <Form.Control
                                     type='text'
                                     {...register('telefono', {
-                                            required: "El nombre es obligatorio"
-                                            , minLength: {
-                                                value: 2,
-                                                message: "Debe tener mas de 2 caracteres"
-                                            },
-                                            maxLength: {
-                                                value: 30,
-                                                message: "Debe tener menos de 25 caracteres"
-                                            }
-                                        })}
+                                        required: "El nombre es obligatorio"
+                                        , minLength: {
+                                            value: 2,
+                                            message: "Debe tener mas de 2 caracteres"
+                                        },
+                                        maxLength: {
+                                            value: 30,
+                                            message: "Debe tener menos de 25 caracteres"
+                                        }
+                                    })}
                                 />
+                                <Form.Text className='text-danger'>
+                                    {errors.telefono?.message}
+                                </Form.Text>
                                 <Form.Label>Direccion</Form.Label>
                                 <Form.Control
                                     type='text'
                                     {...register('direccion', {
-                                            required: "El nombre es obligatorio"
-                                            , minLength: {
-                                                value: 2,
-                                                message: "Debe tener mas de 2 caracteres"
-                                            },
-                                            maxLength: {
-                                                value: 30,
-                                                message: "Debe tener menos de 25 caracteres"
-                                            }
-                                        })}
+                                        required: "La direccion es un campo obligatorio"
+                                    })}
                                 />
+                                <Form.Text className='text-danger'>
+                                    {errors.direccion?.message}
+                                </Form.Text>
                                 <Form.Label>Total: {total}</Form.Label>
                                 <Button type="submit" variant="primary">Realizar Pedido!</Button>
                             </Form>

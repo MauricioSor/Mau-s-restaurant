@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Spinner, Card, Container, Col, Row,Badge,Button } from 'react-bootstrap'
-import { buscarComida } from "../../helpers/queries";
-import RealizarPedido from "./Pedido/RealizarPedido";
+import { buscarComida } from "../../../helpers/queries";
+import RealizarPedido from "../Pedido/RealizarPedido";
 //#endregion
 
 const Detalle = () => {
