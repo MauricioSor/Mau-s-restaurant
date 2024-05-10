@@ -43,7 +43,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
     //#endregion
     return (
         <>
-            <Navbar bg="primary" variant="dark" expand='lg'>
+            <Navbar bg="primary" expand='md' variant="dark" expand='lg site-wrap' >
                 <Container>
                     <Navbar.Brand as={Link} to="/">Mau's restobar</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
