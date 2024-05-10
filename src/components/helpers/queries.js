@@ -1,7 +1,5 @@
-//#region Imports Enviroments
 import axios from 'axios';
-//#endregion
-//#region Endpoints de Usuarios
+//#region Api de Usuarios
 
 export const iniciarSesion = async (usuario) => {
     try {
@@ -50,7 +48,7 @@ export const borrarUsuario = async (usuario) => {
     }
 }
 //#endregion
-//#region Endpoints de Comidas 
+//#region Api de Comidas 
 export const buscarComidas = async () => {
     try {
         const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiComidas/`);
@@ -102,7 +100,7 @@ export const borrarComida = async (id) => {
     }
 }
 //#endregion
-//#region Endpoints de Pedidos
+//#region Api de Pedidos
 export const buscarPedido = async (pedido) => {
     try {
         const consulta = await axios.post(`${import.meta.env.VITE_PROD_API}/apiPedidos/${pedido}`,{
@@ -156,7 +154,7 @@ export const borrarPedido = async (pedido) => {
     }
 }
 //#endregion
-//#region Endpoints de Comprobantes
+//#region Api de Comprobantes
 export const listarComprobantes = async () => {
     try {
         const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiComprobantes/`)
@@ -201,7 +199,7 @@ export const crearComprobante = async (comprobante) => {
     }
 };
 //#endregion
-//#region Endpoints de Roles
+//#region Api de Roles
 export const listarRoles = async (usuario) => {
     try {
         const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiRoles/`)
@@ -211,7 +209,7 @@ export const listarRoles = async (usuario) => {
     }
 };
 //#endregion
-//#region Endpoints de Clientes
+//#region Api de Clientes
 export const listarClientes = async () => {
     try {
         const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiClientes/`)
@@ -247,7 +245,7 @@ export const modificarCliente= async (cliente) => {
 };
 
 //#endregion
-//#region Mesas
+//#region Api de Mesas
 export const listarMesas = async () => {
     try {
         const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiMesas/`)

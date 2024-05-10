@@ -1,4 +1,4 @@
-//#region Imports
+//#region imports
 import { Routes, Route } from "react-router-dom";
 import Administrador from "../views/Admin/GestionComida/AdminDashBoard";
 import CrearComida from "../views/Admin/GestionComida/CrearComida";

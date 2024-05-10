@@ -1,19 +1,20 @@
+//#region imports
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import { buscarCliente, crearCliente, crearPedido } from '../../../helpers/queries';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
-
+//#endregion
 const RealizarPedido = () => {
+    //#region hooks
     const [total, setTotal] = useState((localStorage.getItem("Total")))
-    const [ubicacion, setubicacion] = useState()
     const { register, handleSubmit, formState: { errors }, reset, } = useForm();
     const [cliente, setCliente] = useState(false)
     const [clienteDatos, setClienteDatos] = useState("")
     const [cargaCliente, setCargaCliente] = useState(false)
-
-
+    //#endregion
+    //#region funciones
     const cargarCliente = (id) => {
         buscarCliente(id).then((resp) => {
             if (resp.status == 200) {
@@ -29,7 +30,6 @@ const RealizarPedido = () => {
         crearCliente(cliente).then((resp) => {
             console.log(resp);
             if (resp.status == 200) {
-
                 cliente._id = (resp.data)
                 console.log(cliente)
                 registrarPedido(cliente)
@@ -38,24 +38,6 @@ const RealizarPedido = () => {
             }
         })
     }
-    useEffect(() => {
-        Swal.fire({
-            title: "Es cliente asociado de Mau's restobar?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Si!",
-            cancelButtonText: "Aun no"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                setCliente(true);
-            } else {
-                setCliente(false);
-            }
-        });
-    }, [])
-
     const registrarPedido = (pedido) => {
         pedido.estado = "Pendiente"
         pedido.cliente = (clienteDatos._id != "" ? (pedido._id) : (clienteDatos._id))
@@ -80,6 +62,24 @@ const RealizarPedido = () => {
         const fechaParseada = (diaActual + "/" + mesActual + "/" + añoActual + "-" + hora + ":" + minutos);
         return fechaParseada
     }
+    useEffect(() => {
+        Swal.fire({
+            title: "Es cliente asociado de Mau's restobar?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Si!",
+            cancelButtonText: "Aun no"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setCliente(true);
+            } else {
+                setCliente(false);
+            }
+        });
+    }, [])
+    //#endregion
     return (
         <Container>
             <h1 className='fs-1'>Realizar pedido</h1>

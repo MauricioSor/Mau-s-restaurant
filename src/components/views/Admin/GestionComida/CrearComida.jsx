@@ -5,7 +5,6 @@ import Swal from 'sweetalert2';
 import { crearComida } from '../../../helpers/queries';
 import { useNavigate } from 'react-router-dom';
 //#endregion
-
 const CrearComida = () => {
     //#region hooks
     const { register, handleSubmit, formState: { errors }, reset, } = useForm();

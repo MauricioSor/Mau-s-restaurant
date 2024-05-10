@@ -1,9 +1,9 @@
 //#region imports
 import React, { useEffect, useState } from 'react';
-import { Container, Col } from 'react-bootstrap';
+import {Col } from 'react-bootstrap';
 //#endregion
 
-const Mesas = ({ item, index, mostrarDatos }) => {
+const Mesas = ({ item, mostrarDatos }) => {
     const [colorEstado, setColorEstado] = useState()
     
     //#region funciones

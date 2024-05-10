@@ -1,6 +1,6 @@
-//#region Imports
+//#region imports
 import React from 'react';
-import { Container, Carousel, Spinner } from 'react-bootstrap';
+import { Carousel } from 'react-bootstrap';
 import { buscarComidas } from '../../../helpers/queries';
 import { useState, useEffect } from 'react';
 import CardComidas from './CardComidas';
@@ -11,12 +11,8 @@ const Principal = () => {
     //#region hooks
     const [mostrarSpinner, setMostrarSpinner] = useState(true);
     const [recetas, setRecetas] = useState("");
-    const [pedidos, setPedidos] = useState("")
     //#endregion
     //#region Functions
-    const agregarPedido=(pedido)=>{
-        setPedidos(pedido)
-    }
     const buscarRecetas = () => {
         buscarComidas().then((respuesta) => {
             setRecetas(respuesta.data);
@@ -53,7 +49,7 @@ const Principal = () => {
                                     </Carousel.Item>
                                 ))}
                         </Carousel>
-                        <CardComidas agregarPedido={agregarPedido} recetas={recetas} />
+                        <CardComidas recetas={recetas} />
                     </>
             }
         </>

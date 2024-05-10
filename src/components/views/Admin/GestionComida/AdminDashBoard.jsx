@@ -6,10 +6,9 @@ import { Link } from "react-router-dom";
 import DetalleComida from "./DetalleComida";
 import { buscarComidas } from "../../../helpers/queries";
 //#endregion
-
 const Administrador = () => {
     const [comidas, setComidas] = useState([]);
-
+    
     useEffect(() => {
         buscarComidas().then((respuesta) => {
             if(respuesta.status==200){

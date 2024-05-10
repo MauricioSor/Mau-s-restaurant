@@ -1,4 +1,4 @@
-//#region Imports
+//#region imports
 import { Form, Button } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { crearUsuario } from '../../../helpers/queries';
@@ -6,11 +6,11 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 //#endregion
 const RegistrarUsuario = () => {
-    //#region States
+    //#region hooks
     const { register, handleSubmit, formState: { errors }, reset, } = useForm();
     const navegacion = useNavigate();
     //#endregion
-    //#region Functions
+    //#region funciones
     const cargar = (usuario) => {
         usuario.rol="662722f03488bf7046be0a0a"
         crearUsuario(usuario).then((respuesta) => {

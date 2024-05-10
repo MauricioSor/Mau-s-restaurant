@@ -1,20 +1,23 @@
+//#region imports
 import React, { useEffect, useState } from 'react';
-import { Button, Container, Nav, Modal, Spinner, Table, Form } from 'react-bootstrap';
-import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { Button, Container, Modal, Table, Form } from 'react-bootstrap';
+import { Link} from 'react-router-dom';
 import Empleados from './Empleados';
 import { borrarUsuario, listarUsuarios, modificarUsuario } from '../../../helpers/queries';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 import SpinnerCustom from '../../../common/SpinnerCustom';
-
+//#endregion
 const AdminEmpleados = () => {
+    //#region hooks
     const [empleados, setEmpleados] = useState([])
     const [empleado, setEmpleado] = useState("");
     const [spinner, setSpinner] = useState(true)
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [show, setShow] = useState(false);
     const [carga, setCarga] = useState(false)
-    
+    //#endregion
+    //#region funciones
     const handleClose = () => {
         reset()
         setEmpleado("")
@@ -32,10 +35,6 @@ const AdminEmpleados = () => {
             }
         })
     }
-    useEffect(() => {
-        setEmpleado(true)
-        cargarUsuarios();
-    }, [])
     const detallesEmpleado = (empleado) => {
         setEmpleado(empleado)
         setCarga(true)
@@ -67,6 +66,11 @@ const AdminEmpleados = () => {
             }
         })
     }
+    useEffect(() => {
+        setEmpleado(true)
+        cargarUsuarios();
+    }, [])
+    //#endregion
     return (
         <Container>
             <Container className='d-flex justify-content-between my-5'>

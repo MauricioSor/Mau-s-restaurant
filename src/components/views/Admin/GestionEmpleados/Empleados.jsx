@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { Button, Carousel, Form, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { borrarUsuario } from '../../../helpers/queries';
-import Swal from 'sweetalert2';
+//#region imports
+import React from 'react';
+import { Button} from 'react-bootstrap';
+//#endregion
 
 const Empleados = ({ item, detallesEmpleado, handleShow,borrar }) => {
     return (

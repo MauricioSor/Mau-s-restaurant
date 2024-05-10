@@ -1,7 +1,6 @@
 //#region imports
 import React, { useEffect, useState } from 'react';
 import { Button, Container, Form, Modal, Table } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { listarPedidos, listarPedidosPorEstado, modificarPedido } from '../../../helpers/queries';
 import Pedido from './Pedido';
 import { useForm } from 'react-hook-form';

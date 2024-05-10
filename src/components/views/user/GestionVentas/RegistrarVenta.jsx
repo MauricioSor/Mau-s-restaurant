@@ -5,15 +5,16 @@ import { useForm } from 'react-hook-form';
 import { crearComprobante, listarClientes, listarUsuarios } from '../../../helpers/queries';
 import Swal from 'sweetalert2';
 import SpinnerCustom from '../../../common/SpinnerCustom';
+import { useNavigate } from 'react-router-dom';
 //#endregion
 const RegistrarVenta = (props) => {
-
     //#region hooks
     const [datosMesa, setDatosMesa] = useState(JSON.parse(localStorage.getItem("DatosMesa")) || null)
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [mosos, setMosos] = useState([""])
     const [clientes, setClientes] = useState([""])
     const [spinner, setspinner] = useState(false)
+    const navegar=useNavigate();
     //#endregion
     //#region funciones
     const cargarMosos = () => {
@@ -37,22 +38,21 @@ const RegistrarVenta = (props) => {
             }
         })
     }
+    const registrarDatosVenta = async (venta) => {
+        venta.mesa = parseInt(venta.mesa)
+        crearComprobante(venta).then((resp) => {
+            if (resp.status == 200) {
+                Swal.fire("Venta registrada", "", "success")
+                navegar("/Usuario/Mesas")
+            } else {
+                Swal.fire("Error", "", "error")
+            }
+        })
+    }
     useEffect(() => {
         cargarMosos();
         cargarClientes();
     }, [])
-    const registrarDatosVenta = async(venta) => {
-        console.log(venta);
-        venta.mesa=parseInt(venta.mesa)
-        crearComprobante(venta).then((resp)=>{
-            if(resp.status==200){
-                Swal.fire("Success","","success")
-                
-            }else{
-                Swal.fire("Error","","error")
-            }
-        })
-    }
     //#endregion
     return (
         <Container>
@@ -140,7 +140,7 @@ const RegistrarVenta = (props) => {
                         </Container>
                     </Form>
                 </>
-                ) : <SpinnerCustom/>
+                ) : <SpinnerCustom />
             }
         </Container>
     );

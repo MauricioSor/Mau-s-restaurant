@@ -1,14 +1,13 @@
-import { useEffect, useState, Image } from "react";
+//#region imports
+import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-
+//#endregion
 const MiCarrito = ({ item }) => {
+    //#region hooks
     const [precio, setPrecio] = useState((item.precio) * (item.cantidad))
     const [cantidad, setcantidad] = useState(item.cantidad)
-
-    useEffect(() => {
-        calcularPrecio();
-    }, [cantidad])
-
+    //#endregion
+    //#region funciones
     const calcularPrecio = () => {
         const nuevoPrecio = item.precio * cantidad;
         setPrecio(nuevoPrecio);
@@ -18,7 +17,10 @@ const MiCarrito = ({ item }) => {
         localStorage.setItem("Total", "");
         localStorage.setItem("Total", precio)
     }, [precio])
-
+    useEffect(() => {
+        calcularPrecio();
+    }, [cantidad])
+    //#endregion
     return (
         <tr>
             {

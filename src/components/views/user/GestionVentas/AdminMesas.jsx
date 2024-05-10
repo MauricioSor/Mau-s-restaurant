@@ -1,17 +1,16 @@
 //#region imports
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Form, Button, Modal, Table, Col } from 'react-bootstrap';
-import { Link, NavLink, Navigate } from 'react-router-dom';
+import { Container, Row, Form, Button, Modal} from 'react-bootstrap';
+import { Link, NavLink } from 'react-router-dom';
 import Mesas from './Mesas';
 import { useForm } from 'react-hook-form';
-import { listarMesas, listarUsuarios, modificarMesa } from '../../../helpers/queries';
+import { listarMesas, modificarMesa } from '../../../helpers/queries';
 import Swal from 'sweetalert2';
 import SpinnerCustom from '../../../common/SpinnerCustom';
 //#endregion
 
 const AdminMesas = () => {
     //#region hooks
-    const [estado, setEstado] = useState("Libre")
     const [show, setShow] = useState(false);
     const [carga, setCarga] = useState(false)
     const [mesas, setMesas] = useState()
