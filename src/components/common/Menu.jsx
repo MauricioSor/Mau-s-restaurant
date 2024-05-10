@@ -15,7 +15,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const navegacion = useNavigate();
-    const [navbarExpanded, setNavbarExpanded] = useState();
+    const [navbarExpanded, setNavbarExpanded] = useState(false);
     const rol = JSON.parse(sessionStorage.getItem("rol")) || null
     //#endregion
     //#region funciones
@@ -44,12 +44,9 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
 	const handleNavLinkClick = () => {
 	setNavbarExpanded(false);
 	};
-	const handleMenuButtonClick  = ()=>{
-		setNavbarExpanded(true);
-		if(navbarExpanded==true){
-			setNavbarExpanded(false);
-		}
-	}
+    const handleMenuButtonClick = () => {
+        setNavbarExpanded(!navbarExpanded);
+    };
     //#endregion
     return (
         <>
@@ -66,7 +63,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                                             <>
                                             <NavLink onClick={handleNavLinkClick} end className='nav-item nav-link' to='/Administrador/Empleados'>Empleados</NavLink>
                                             <NavLink onClick={handleNavLinkClick} end className='nav-item nav-link' to='/Administrador/'>Comidas</NavLink>
-                                            <Button variant="primary" className='border' onClick={cerrarSesion,handleMenuButtonClick}>Cerrar Sesion</Button>
+                                            <Button variant="primary" className='border' onClick={() => { cerrarSesion(); handleMenuButtonClick(); }}>Cerrar Sesion</Button>
                                             </>:
                                         <>
                                             <NavLink onClick={handleNavLinkClick} end className='nav-item nav-link' to='/Usuario/AdminClientes'>Clientes</NavLink>
