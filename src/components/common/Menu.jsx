@@ -40,13 +40,19 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
         Swal.fire(`Sesión cerrada`,"","success")
         navegacion('/');
     }
+    	const handleMenuButtonClick  = ()=>{
+		setNavbarExpanded(true);
+		if(navbarExpanded==true){
+			setNavbarExpanded(false);
+		}
+	}
     //#endregion
     return (
         <>
             <Navbar bg="primary" expand='md' variant="dark" expand='lg site-wrap' >
                 <Container>
                     <Navbar.Brand as={Link} to="/">Mau's restobar</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={handleMenuButtonClick}/>
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
                             <NavLink className='nav-item nav-link' end to='/'>Inicio</NavLink>
@@ -54,15 +60,15 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                                 (usuarioLogueado) ?
                                             (rol=="Admin")?
                                             <>
-                                            <NavLink end className='nav-item nav-link' to='/Administrador/Empleados'>Empleados</NavLink>
-                                            <NavLink end className='nav-item nav-link' to='/Administrador/'>Comidas</NavLink>
-                                            <Button variant="primary" className='border' onClick={cerrarSesion}>Cerrar Sesion</Button>
+                                            <NavLink onClick={handleMenuButtonClick} end className='nav-item nav-link' to='/Administrador/Empleados'>Empleados</NavLink>
+                                            <NavLink onClick={handleMenuButtonClick} end className='nav-item nav-link' to='/Administrador/'>Comidas</NavLink>
+                                            <Button variant="primary" className='border' onClick={cerrarSesion,handleMenuButtonClick}>Cerrar Sesion</Button>
                                             </>:
                                         <>
-                                            <NavLink end className='nav-item nav-link' to='/Usuario/AdminClientes'>Clientes</NavLink>
-                                            <NavLink end className='nav-item nav-link' to='/Usuario/Mesas'>Mesas</NavLink>
-                                            <NavLink end className='nav-item nav-link' to='/Usuario/'>Pedidos</NavLink>
-                                            <Button variant="primary" className='border' onClick={cerrarSesion}>Cerrar Sesion</Button>
+                                            <NavLink onClick={handleMenuButtonClick} end className='nav-item nav-link' to='/Usuario/AdminClientes'>Clientes</NavLink>
+                                            <NavLink onClick={handleMenuButtonClick} end className='nav-item nav-link' to='/Usuario/Mesas'>Mesas</NavLink>
+                                            <NavLink onClick={handleMenuButtonClick} end className='nav-item nav-link' to='/Usuario/'>Pedidos</NavLink>
+                                            <Button variant="primary" className='border' onClick={cerrarSesion,handleMenuButtonClick}>Cerrar Sesion</Button>
                                         </>
                                         :
                                         <>
