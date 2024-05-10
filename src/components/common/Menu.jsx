@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
 
 //#endregion
-
 const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
     //#region states
     const [show, setShow] = useState(false);
@@ -20,7 +19,8 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
     const rol = JSON.parse(sessionStorage.getItem("rol")) || null
     //#endregion
     //#region functions
-    const enviarDatos = (usuario) => {
+    const enviarDatos = (usuario,e) => {
+        e.preventDefault();
         iniciarSesion(usuario).then((respuesta) => {
             if (respuesta.status==200) {
                 sessionStorage.setItem('usuario', JSON.stringify(respuesta.data.usuario))

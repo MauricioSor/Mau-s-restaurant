@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Form, Button, Modal, Table, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { fila1 } from '../../../Mesas';
+import { Link, NavLink, Navigate } from 'react-router-dom';
 import Mesas from './Mesas';
 import { useForm } from 'react-hook-form';
-import { listarMesas, modificarMesa } from '../../../helpers/queries';
+import { listarMesas, listarUsuarios, modificarMesa } from '../../../helpers/queries';
 import Swal from 'sweetalert2';
 
 const AdminMesas = () => {
@@ -15,19 +14,21 @@ const AdminMesas = () => {
     const [spinner, setSpinner] = useState(false)
     const [estadoMesa, setEstadoMesa] = useState("")
     const [datosMesa, setDatosMesa] = useState("")
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();    
 
     const handleClose = () => {
         reset()
         setShow(false)
         setDatosMesa("")
         setCarga(false)
+        localStorage.removeItem("DatosMesa")
     }
     const handleEstado = (estado) => setEstadoMesa(estado);
     const handleShow = () => (reset(), setShow(true));
     const mostrarDatos = (mesa) => {
         setDatosMesa(mesa)
         setEstadoMesa(mesa.estado)
+        localStorage.setItem("DatosMesa",JSON.stringify(mesa));
         setCarga(true)
         handleShow()
     }
@@ -53,14 +54,15 @@ const AdminMesas = () => {
             }
         })
     }
+
     useEffect(() => {
-        cargarMesas()
+        cargarMesas();
     }, [])
     return (
         <>
             <Container>
                 <h1>Mesas del salon</h1>
-                <Link className='btn btn-primary' to={"/Usuario/Mesas/RegistrarVenta"}>Registrar venta</Link>
+                <Link className='btn btn-primary' to={"/Usuario/Mesas/Informe"}>Informe de ventas</Link>
                 <Container fluid className='bg-secondary py-1'>
                     <Row>
                         {
@@ -87,12 +89,6 @@ const AdminMesas = () => {
                                 <>
                                     <Form onSubmit={handleSubmit(modificarDatos)}>
                                         <Form.Group>
-                                            {/*                                             <Form.Control
-                                                type="text"
-                                                className='d-none'
-                                                defaultValue={datosMesa._id}
-                                                {...register("_id")}
-                                            /> */}
                                             <Form.Label>Estado</Form.Label>
                                             <Form.Select
                                                 {...register("estado", {
@@ -118,16 +114,23 @@ const AdminMesas = () => {
                                                             })
                                                             }
                                                         />
+                                                        <Form.Label>Detalle</Form.Label>
+                                                        <Form.Control
+                                                            type="text"
+                                                            defaultValue={datosMesa.detalle}
+                                                            {...register("detalle", {
+                                                                required: "El campo debe tener el detalle cargado"
+                                                            })
+                                                            }
+                                                        />
                                                         <Form.Text className="text-danger">
-                                                            {errors.pago?.message}
+                                                            {errors.detalle?.message}
                                                         </Form.Text>
                                                         <Form.Label>Total</Form.Label>
                                                         <Form.Control
                                                             type="text"
                                                             defaultValue={datosMesa.total}
-                                                            {...register("total", {
-                                                                required: "El campo debe tener un total"
-                                                            })
+                                                            {...register("total", )
                                                             }
                                                         />
                                                         <Form.Text className="text-danger">
@@ -137,7 +140,13 @@ const AdminMesas = () => {
                                                     <></>
                                             }
                                         </Form.Group>
-                                        <Button type='submit' variant='primary'>Guardar cambios</Button>
+                                        <Container className='d-flex justify-content-end mt-4'>
+                                            <Button type='submit' variant='primary'>Guardar cambios</Button>
+                                            {estadoMesa == "Ocupado" ?
+                                                (<NavLink  to="/Usuario/Mesas/RegistrarVenta" className="ms-2 btn btn-warning" variant='warning'>Registrar venta</NavLink>) :                                                
+                                                <></>
+                                            }
+                                        </Container>
                                     </Form>
                                 </>
                             ) :

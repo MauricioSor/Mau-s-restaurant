@@ -162,7 +162,7 @@ export const listarComprobantes = async () => {
         const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiComprobantes/`)
         return consulta
     } catch (error) {
-        console.log(error);
+        return (error);
     }
 };
 export const buscarComprobante = async (comprobante) => {
@@ -170,20 +170,17 @@ export const buscarComprobante = async (comprobante) => {
         const consulta = await axios.get(`${import.meta.env.VITE_PROD_API}/apiComprobantes/${comprobante}`)
         return consulta
     } catch (error) {
-        console.log(error);
+        return (error);
     }
 };
 export const modificarComprobante = async (comprobante) => {
     try {
-        const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiComprobantes/${comprobante.id}`,{
-            cliente:comprobante.cliente,
-            total:comprobante.total,
-            pago:comprobante.pago,
-            mesa:comprobante.mesa
+        const consulta = await axios.put(`${import.meta.env.VITE_PROD_API}/apiComprobantes/${comprobante._id}`,{
+            comprobante
         })
         return consulta
     } catch (error) {
-        console.log(error);
+        return (error);
     }
 };
 export const borrarComprobante = async (id) => {
@@ -191,20 +188,16 @@ export const borrarComprobante = async (id) => {
         const consulta = await axios.delete(`${import.meta.env.VITE_PROD_API}/apiComprobantes/${id}`)
         return consulta
     } catch (error) {
-        console.log(error);
+        return (error);
     }
 };
 export const crearComprobante = async (comprobante) => {
     try {
-        const consulta = await axios.post(`${import.meta.env.VITE_PROD_API}/apiComprobantes/`,{
-            cliente:comprobante.cliente,
-            total:comprobante.total,
-            pago:comprobante.pago,
-            mesa:comprobante.mesa
-        })
+        
+        const consulta = await axios.post(`${import.meta.env.VITE_PROD_API}/apiComprobantes/crear/`,{comprobante})
         return consulta
     } catch (error) {
-        console.log(error);
+        return (error);
     }
 };
 //#endregion
