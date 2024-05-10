@@ -95,7 +95,7 @@ const AdminPedidos = () => {
                 </section>
                 {
                     spinner ? (
-                        <Table>
+                        <Table responsive striped bordered hover className="text-center">
                             <thead>
                                 <tr>
                                     <th>Estado</th>

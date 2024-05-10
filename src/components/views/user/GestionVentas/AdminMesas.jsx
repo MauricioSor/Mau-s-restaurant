@@ -62,7 +62,7 @@ const AdminMesas = () => {
         <>
             <Container>
                 <h1>Mesas del salon</h1>
-                <Link className='btn btn-primary' to={"/Usuario/Mesas/Informe"}>Informe de ventas</Link>
+                <Link className='btn btn-primary my-3' to={"/Usuario/Mesas/Informe"}>Informe de ventas</Link>
                 <Container fluid className='bg-secondary py-1'>
                     <Row>
                         {
