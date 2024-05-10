@@ -59,9 +59,7 @@ const Carrito = () => {
                             </Table>
                             <NavLink className='btn btn-primary' to={"/RealizarPedido"}>Realizar pedido</NavLink>
                         </>) :
-                        (<Container className='d-flex justify-content-center my-5'>
-                            Cargando<Spinner variant='primary' className='ms-3' />
-                        </Container>)
+                        (<SpinnerCustom/>)
                     }
                 </>) :
                 <h2>Vaya! Parece que aún no te has decidido... De cualquier forma, aqui estaremos para usted.</h2>

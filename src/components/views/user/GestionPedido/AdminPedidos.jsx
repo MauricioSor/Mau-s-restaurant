@@ -78,10 +78,10 @@ const AdminPedidos = () => {
         <>
             <Container>
                 <h1>Administrar pedidos</h1>
-                <section className='text-center align-items-center  my-1'>
-                    <div className="ms-1 row">
-                        <div className="col-md-auto bg-white">
-                            <p className='text-black mt-1'>Estado: </p>
+                <section className='text-center container d-flex align-items-center my-1'>
+                    <div className=" bg-white border rounded  p-1 align-items-center ms-1 row">
+                        <div className="col-md-auto">
+                            <p className='text-black my-auto text-end'>Estado: </p>
                         </div>
                         <div className="col-md-auto bg-white">
                             <select className="form-control" onChange={(e) => filtrarEstado(e.target.value)}>
@@ -115,7 +115,7 @@ const AdminPedidos = () => {
                                 }
                             </tbody>
                         </Table>
-                    ) : <></>
+                    ) : <SpinnerCustom/>
                 }
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
@@ -126,8 +126,7 @@ const AdminPedidos = () => {
                             carga ?
                                 (
                                     <>
-                                        <Form onSubmit={handleSubmit(cargarModificacionPedido)}>
-                                            {console.log(pedido)}
+                                        <Form className='d-flex flex-column' onSubmit={handleSubmit(cargarModificacionPedido)}>
                                             <Form.Group>
                                                 <Form.Control
                                                     type="text"
@@ -194,7 +193,7 @@ const AdminPedidos = () => {
                                         </Form>
                                     </>
                                 ) :
-                                <></>
+                                <SpinnerCustom/>
                         }
                     </Modal.Body>
                 </Modal>

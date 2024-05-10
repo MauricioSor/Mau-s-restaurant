@@ -32,9 +32,7 @@ const Principal = () => {
         <>
             {
                 mostrarSpinner ?
-                    (<div className="my-5 d-flex justify-content-center">
-                        <Spinner animation='border' variant='primary' />
-                    </div>) :
+                    (<SpinnerCustom/>) :
                     <>
                         <Carousel style={{ width: '100' }}>
                             {

@@ -134,7 +134,7 @@ const RegistrarVenta = (props) => {
                         </Container>
                     </Form>
                 </>
-                ) : <></>
+                ) : <SpinnerCustom/>
             }
         </Container>
     );

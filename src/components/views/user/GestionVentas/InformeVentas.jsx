@@ -61,7 +61,7 @@ const InformeVentas = () => {
                                 }
                             </tbody>
                         </Table>
-                    ) : <></>
+                    ) : <SpinnerCustom/>
                 }
             </Container>
             <Modal show={show} onHide={handleClose}>
@@ -78,37 +78,44 @@ const InformeVentas = () => {
                                             <Form.Label>Cliente</Form.Label>
                                             <Form.Control
                                                 type="text"
+                                                disabled={true}
                                                 defaultValue={comprobanteDatos.cliente.nombre}
                                             />
                                             <Form.Label>Nro. de socio</Form.Label>
                                             <Form.Control
                                                 type="text"
+                                                disabled={true}
                                                 defaultValue={comprobanteDatos.cliente._id}
                                             />
                                             <Form.Label>Detalle</Form.Label>
                                             <Form.Control
                                                 type="text"
+                                                disabled={true}
                                                 defaultValue={comprobanteDatos.detalle}
                                             />
                                             <Form.Label>Total</Form.Label>
                                             <Form.Control
                                                 type="text"
+                                                disabled={true}
                                                 defaultValue={comprobanteDatos.total}
                                             />
                                             <Form.Label>Pago</Form.Label>
                                             <Form.Control
                                                 type="text"
+                                                disabled={true}
                                                 className='d-none'
                                                 defaultValue={comprobanteDatos.pago}
                                             />
                                             <Form.Label>Mesa</Form.Label>
                                             <Form.Control
                                                 type="text"
+                                                disabled={true}
                                                 defaultValue={comprobanteDatos.total}
                                             />
                                             <Form.Label>Empleado</Form.Label>
                                             <Form.Control
                                                 type="text"
+                                                disabled={true}
                                                 defaultValue={comprobanteDatos.usuario._id}
                                             />
                                         </Form.Group>
@@ -116,7 +123,7 @@ const InformeVentas = () => {
                                     </Form>
                                 </>
                             ) :
-                            <></>
+                            <SpinnerCustom/>
                     }
                 </Modal.Body>
             </Modal>

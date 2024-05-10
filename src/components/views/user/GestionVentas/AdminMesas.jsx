@@ -72,7 +72,7 @@ const AdminMesas = () => {
                                         <Mesas item={item} index={index} mostrarDatos={mostrarDatos} />
                                     ))
                                 ) : (
-                                    <></>
+                                    <SpinnerCustom/>
                                 )
                         }
                     </Row>
@@ -87,7 +87,7 @@ const AdminMesas = () => {
                         carga ?
                             (
                                 <>
-                                    <Form onSubmit={handleSubmit(modificarDatos)}>
+                                    <Form className='d-flex flex-column' onSubmit={handleSubmit(modificarDatos)}>
                                         <Form.Group>
                                             <Form.Label>Estado</Form.Label>
                                             <Form.Select

@@ -39,7 +39,7 @@ const Pedido = ({ item, borrar, cargarPedido,cargarPedidos }) => {
                                 (<Button variant="primary" onClick={() => cambiarEstado(item,"Enviado")}>
                             Completar</Button>)
                         ):<></>}
-                            <Button className='btn btn-info' onClick={() => { cargarPedido(item, detalle) }}>Modificar</Button>
+                            <Button className='btn btn-info' onClick={() => { cargarPedido(item, detalle) }}>Ver detalles</Button>
                             <Button className='btn btn-danger' type='submit'
                                 onClick={() => {
                                     Swal.fire({

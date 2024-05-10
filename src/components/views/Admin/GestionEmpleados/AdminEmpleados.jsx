@@ -5,6 +5,7 @@ import Empleados from './Empleados';
 import { borrarUsuario, listarUsuarios, modificarUsuario } from '../../../helpers/queries';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
+import SpinnerCustom from '../../../common/SpinnerCustom';
 
 const AdminEmpleados = () => {
     const [empleados, setEmpleados] = useState([])
@@ -73,9 +74,7 @@ const AdminEmpleados = () => {
                 <Link className="btn btn-primary text-center align-self-center" to="/administrador/Registro" >Registrar empleado</Link>
             </Container>
             {spinner ?
-                <Container className='d-flex justify-content-center align-items-center'>
-                    <Spinner variant='primary' />
-                </Container> :
+                <SpinnerCustom />:
                 <>
                     <Table responsive striped bordered hover className="text-center">
                         <thead>
@@ -104,7 +103,7 @@ const AdminEmpleados = () => {
                                 carga ?
                                     (
                                         <>
-                                            <Form onSubmit={handleSubmit(modificarEmpleado)}>
+                                            <Form className='d-flex flex-column' onSubmit={handleSubmit(modificarEmpleado)}>
                                                 <Form.Group>
                                                 <Form.Label>Legajo</Form.Label>
                                                     <Form.Control
@@ -167,11 +166,11 @@ const AdminEmpleados = () => {
                                                         {errors.rol?.message}
                                                     </Form.Text>
                                                 </Form.Group>
-                                                <Button type='submit' variant='primary'>Guardar cambios</Button>
+                                                <Button type='submit' className='mt-3' variant='primary'>Guardar cambios</Button>
                                             </Form>
                                         </>
                                     ) :
-                                    <></>
+                                    <SpinnerCustom/>
                             }
                         </Modal.Body>
                     </Modal>

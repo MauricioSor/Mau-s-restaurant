@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { buscarComida, editarComida } from '../../../helpers/queries';
 import Swal from 'sweetalert2';
 import { useState, useEffect } from 'react';
+import SpinnerCustom from '../../../common/SpinnerCustom';
 //#endregion
 
 const EditarComida = () => {
@@ -45,9 +46,7 @@ const EditarComida = () => {
             <hr />
             {
                 spinner ?
-                    (<div className='d-flex justify-content-center'>
-                        <Spinner></Spinner>
-                    </div>) :
+                    (<SpinnerCustom/>) :
                     <>
                         <Form onSubmit={handleSubmit(enviar)}>
                             <Form.Group className="mb-3" controlId="formNombreProdcuto">

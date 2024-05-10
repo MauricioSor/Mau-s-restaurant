@@ -18,15 +18,14 @@ const AdminClientes = () => {
         setCarga(false)
     }
     const handleShow = () => (reset(), setShow(true));
-    useEffect(() => {
+    const cargarClientes = () => {
         listarClientes().then((resp) => {
             if (resp.status == 200) {
                 setClientes(resp.data)
                 setSpinner(true)
             }
         })
-    }, [])
-
+    }
     const cargarCliente = (cliente) => {
         setCliente(cliente)
         setCarga(true)
@@ -36,11 +35,17 @@ const AdminClientes = () => {
         modificarCliente(cliente).then((resp) => {
             if (resp.status == 201) {
                 Swal.fire("Modificación exitosa", "", "success")
+                handleClose();
+                cargarClientes();
             } else {
                 Swal.fire("Error al modificar el cliente", "", "error")
+                handleClose();
             }
         })
     }
+    useEffect(() => {
+        cargarClientes();
+    }, [])
     return (
         <Container>
             <h1>Clientes</h1>
@@ -67,7 +72,7 @@ const AdminClientes = () => {
                             </tbody>
                         </Table>
                     </>
-                ) : <></>
+                ) : <SpinnerCustom/>
             }
             <Modal show={show} onHide={handleClose}>
                 {carga ?
@@ -77,7 +82,7 @@ const AdminClientes = () => {
                         </Modal.Header>
                         <Modal.Body>
                             <>
-                                <Form onSubmit={handleSubmit(editarliente)}>
+                                <Form className='d-flex flex-column' onSubmit={handleSubmit(editarliente)}>
                                     <Form.Group>
                                         <Form.Control
                                             className='d-none'
@@ -124,7 +129,7 @@ const AdminClientes = () => {
                                 </Form>
                             </>
                         </Modal.Body>
-                    </> : <></>
+                    </> : <SpinnerCustom/>
                 }
             </Modal>
         </Container>
