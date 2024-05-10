@@ -1,4 +1,4 @@
-//#region Imports
+//#region imports
 import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { borrarComida } from '../../../helpers/queries';
@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 //#endregion
 
 const DetalleComida = ({ item }) => {
-    //#region Functions
+    //#region funciones
     const borrar = (comida) => {
         Swal.fire({
             title: 'Estas Seguro?',

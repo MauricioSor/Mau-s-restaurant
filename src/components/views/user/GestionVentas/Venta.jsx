@@ -1,5 +1,7 @@
+//#region imports
 import React from 'react';
 import { Button } from 'react-bootstrap';
+//#endregion
 
 const Venta = ({ item, cargarComprobante }) => {
     return (

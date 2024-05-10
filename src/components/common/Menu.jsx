@@ -1,4 +1,4 @@
-//#region Imports
+//#region imports
 import React from 'react';
 import { Container, Nav, Navbar, Button, Modal, Form, Row } from 'react-bootstrap';
 import { NavLink, Link } from 'react-router-dom';
@@ -7,10 +7,9 @@ import { useForm } from "react-hook-form";
 import { iniciarSesion } from '../helpers/queries';
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
-
 //#endregion
 const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
-    //#region states
+    //#region hooks
     const [show, setShow] = useState(false);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const handleClose = () => setShow(false);
@@ -18,7 +17,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
     const navegacion = useNavigate();
     const rol = JSON.parse(sessionStorage.getItem("rol")) || null
     //#endregion
-    //#region functions
+    //#region funciones
     const enviarDatos = (usuario,e) => {
         e.preventDefault();
         iniciarSesion(usuario).then((respuesta) => {

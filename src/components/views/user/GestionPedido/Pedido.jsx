@@ -1,17 +1,16 @@
+//#region imports
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { modificarPedido } from '../../../helpers/queries';
+//#endregion
 
 const Pedido = ({ item, borrar, cargarPedido,cargarPedidos }) => {
+    //#region hooks
     const [detalle, setDetalle] = useState([])
     const [carga, setCarga] = useState(false)
-    useEffect(() => {
-        (item.detalle).map((pedidos) => {
-            setDetalle((anterior) => ([...anterior, "," + pedidos.nombre]))
-        })
-        setCarga(true)
-    }, [])
+    //#endregion
+    //#region funciones
     const cambiarEstado =(pedido,estado)=>{
         pedido.estado=estado
         modificarPedido(pedido).then((resp)=>{
@@ -23,6 +22,13 @@ const Pedido = ({ item, borrar, cargarPedido,cargarPedidos }) => {
             }
         })
     }
+    useEffect(() => {
+        (item.detalle).map((pedidos) => {
+            setDetalle((anterior) => ([...anterior, "," + pedidos.nombre]))
+        })
+        setCarga(true)
+    }, [])
+    //#endregion
     return (
         <tr>
             {carga ? (

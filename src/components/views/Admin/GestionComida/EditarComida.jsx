@@ -1,4 +1,4 @@
-//#region Imports
+//#region imports
 import { Form, Button, Spinner } from 'react-bootstrap';
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -9,25 +9,14 @@ import SpinnerCustom from '../../../common/SpinnerCustom';
 //#endregion
 
 const EditarComida = () => {
-    //#region States
+    //#region hooks
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
     const { _id } = useParams();
     const [spinner, setSpinner] = useState(true);
     const [comida, setComida] = useState()
     const navegar = useNavigate();
     //#endregion
-    //#region Functions
-    useEffect(() => {
-        buscarComida(_id).then((respuesta) => {
-            if (respuesta.status==200) {
-                setComida(respuesta.data)
-                setSpinner(false)
-            }else{
-                Swal.fire("Error","No se pudo establecer conexion con  el servidor, intente nuevamente luego","error")
-            }
-        })
-    }, [])
-
+    //#region funciones
     const enviar = (productoEditado) => {
         productoEditado._id=_id
         editarComida(productoEditado).then((respuesta) => {
@@ -39,6 +28,16 @@ const EditarComida = () => {
             }
         })
     }
+    useEffect(() => {
+        buscarComida(_id).then((respuesta) => {
+            if (respuesta.status==200) {
+                setComida(respuesta.data)
+                setSpinner(false)
+            }else{
+                Swal.fire("Error","No se pudo establecer conexion con  el servidor, intente nuevamente luego","error")
+            }
+        })
+    }, [])
 //#endregion
     return (
         <section className='container mainSection'>

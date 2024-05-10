@@ -1,4 +1,4 @@
-//#region Imports
+//#region imports
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 import Menu from './components/common/Menu'
@@ -16,7 +16,7 @@ import Detalle from './components/views/home/Cliente/Detalle'
 
 //#endregion
 function App() {
-  //#region States
+  //#region hooks
   const usuarioSessionStorage = JSON.parse(sessionStorage.getItem('usuario')) || null;
   const [usuarioLogueado, setUsuarioLogueado] = useState(usuarioSessionStorage);
   //#endregion

@@ -3,6 +3,7 @@ import { Button, Container, Spinner, Table } from 'react-bootstrap';
 import MiCarrito from './MiCarrito';
 import { NavLink } from 'react-router-dom';
 import { buscarComida } from '../../../helpers/queries';
+import SpinnerCustom from '../../../common/SpinnerCustom';
 
 const Carrito = () => {
 

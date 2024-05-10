@@ -5,14 +5,16 @@ import Swal from 'sweetalert2';
 //#endregion
 const CardComidas = ({ recetas }) => {
 
+    //#region funciones
     const realizarPedido = (comida) => {
-        let pedidoExistente = JSON.parse(localStorage.getItem("pedido")) || [];
+        const pedidoExistente = JSON.parse(localStorage.getItem("pedido")) || [];
         pedidoExistente.push(comida);
         localStorage.setItem("pedido", JSON.stringify(pedidoExistente));
         setTimeout(() => {
             Swal.fire({title:"Agregado al carrito de compras",timer:900,icon:"success"})
         }, 1200);
     }
+    //#endregion
     return (
         <>
             <div>

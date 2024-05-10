@@ -1,16 +1,21 @@
+//#region imports
 import React, { useEffect, useState } from 'react';
 import { Button, Container, Form, Modal, Table } from 'react-bootstrap';
 import { listarComprobantes } from '../../../helpers/queries';
 import Swal from 'sweetalert2';
 import Venta from "./Venta"
+import SpinnerCustom from '../../../common/SpinnerCustom';
+//#endregion
 
 const InformeVentas = () => {
+    //#region hooks
     const [spinner, setspinner] = useState(false)
     const [carga, setCarga] = useState(false)
     const [comprobantes, setcomprobantes] = useState("")
     const [comprobanteDatos, setComprobanteDatos] = useState("")
     const [show, setShow] = useState(false)
-
+    //#endregion
+    //#region funciones
     const handleClose = () => {
         setShow(false)
         setComprobanteDatos("")
@@ -35,6 +40,7 @@ const InformeVentas = () => {
     useEffect(() => {
         cargarComprobantes();
     }, [])
+    //#endregion
     return (
         <>
             <Container>
@@ -61,7 +67,7 @@ const InformeVentas = () => {
                                 }
                             </tbody>
                         </Table>
-                    ) : <SpinnerCustom/>
+                    ) : <SpinnerCustom />
                 }
             </Container>
             <Modal show={show} onHide={handleClose}>
@@ -123,7 +129,7 @@ const InformeVentas = () => {
                                     </Form>
                                 </>
                             ) :
-                            <SpinnerCustom/>
+                            <SpinnerCustom />
                     }
                 </Modal.Body>
             </Modal>

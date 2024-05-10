@@ -1,8 +1,12 @@
+//#region imports
 import React, { useEffect, useState } from 'react';
 import { Container, Col } from 'react-bootstrap';
+//#endregion
 
 const Mesas = ({ item, index, mostrarDatos }) => {
     const [colorEstado, setColorEstado] = useState()
+    
+    //#region funciones
     useEffect(() => {
     color(item.estado);
     }, [])
@@ -22,6 +26,7 @@ const Mesas = ({ item, index, mostrarDatos }) => {
                 break;
         }
     }
+    //#endregion
     return (
         <Col className='col-4'>
             <div className='d-flex flex-column'>

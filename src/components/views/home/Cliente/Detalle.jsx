@@ -1,19 +1,18 @@
-//#region Imports
+//#region imports
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {  Card, Container, Col, Row,Badge,Button } from 'react-bootstrap'
 import { buscarComida } from "../../../helpers/queries";
-
+import SpinnerCustom from "../../../common/SpinnerCustom";
 //#endregion
 
 const Detalle = () => {
-//#region States
+//#region hooks
     const { id } = useParams();
     const [comida, setComida] = useState([]);
     const [mostrarSpinner, setMostrarSpinner] = useState(true);
-    const [badge,setBadge]=useState();
 //#endregion
-//#region Functions
+//#region funciones
     const buscarComidas = () => {
         buscarComida(id).then((respuesta) => {
             if(respuesta.status)
@@ -25,9 +24,6 @@ const Detalle = () => {
         setMostrarSpinner(true);
         buscarComidas(id);
     }, [])
-    const realizarPedido=()=>{
-        localStorage.setItem("pedido",comida)
-    }
 //#endregion
     return (
         <>

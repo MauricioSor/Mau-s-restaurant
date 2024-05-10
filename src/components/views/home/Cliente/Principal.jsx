@@ -4,11 +4,11 @@ import { Container, Carousel, Spinner } from 'react-bootstrap';
 import { buscarComidas } from '../../../helpers/queries';
 import { useState, useEffect } from 'react';
 import CardComidas from './CardComidas';
-import Swal from 'sweetalert2';
+import SpinnerCustom from '../../../common/SpinnerCustom';
 //#endregion
 
 const Principal = () => {
-    //#region States
+    //#region hooks
     const [mostrarSpinner, setMostrarSpinner] = useState(true);
     const [recetas, setRecetas] = useState("");
     const [pedidos, setPedidos] = useState("")

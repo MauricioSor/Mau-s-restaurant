@@ -1,3 +1,4 @@
+//#region imports
 import React, { useEffect, useState } from 'react';
 import { Button, Container, Form, Modal, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -5,8 +6,11 @@ import { listarPedidos, listarPedidosPorEstado, modificarPedido } from '../../..
 import Pedido from './Pedido';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import SpinnerCustom from '../../../common/SpinnerCustom';
+//#endregion
 
 const AdminPedidos = () => {
+    //#region hooks
     const [pedidos, setPedidos] = useState([])
     const [spinner, setSpinner] = useState(false)
     const [pedido, setPedido] = useState("")
@@ -14,7 +18,8 @@ const AdminPedidos = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [carga, setCarga] = useState(false)
     const [estado, setEstado] = useState("")
-
+    //#endregion
+    //#region funciones
     const handleClose = () => {
         reset()
         setShow(false)
@@ -22,20 +27,6 @@ const AdminPedidos = () => {
         setCarga(false)
     }
     const handleShow = () => (reset(), setShow(true));
-
-    useEffect(() => {
-        cargarPedidos("Pendiente")
-    }, [])
-
-    useEffect(() => {
-        if (estado !== "") {
-            setSpinner(false)
-            estado !== "Todos" ? cargarPedidos(estado) : cargarTodos();
-        } else {
-            <></>
-        }
-    }, [estado])
-
     const cargarPedidos = (estado) => {
         listarPedidosPorEstado(estado).then((resp) => {
             if (resp.status == 200) {
@@ -73,6 +64,18 @@ const AdminPedidos = () => {
             }
         })
     }
+    useEffect(() => {
+        cargarPedidos("Pendiente")
+    }, [])
+    useEffect(() => {
+        if (estado !== "") {
+            setSpinner(false)
+            estado !== "Todos" ? cargarPedidos(estado) : cargarTodos();
+        } else {
+            <></>
+        }
+    }, [estado])
+    //#endregion
 
     return (
         <>

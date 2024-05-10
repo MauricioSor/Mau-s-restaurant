@@ -5,12 +5,13 @@ import Swal from 'sweetalert2';
 import { crearComida } from '../../../helpers/queries';
 import { useNavigate } from 'react-router-dom';
 //#endregion
+
 const CrearComida = () => {
-//#region States
+    //#region hooks
     const { register, handleSubmit, formState: { errors }, reset, } = useForm();
     const navegar = useNavigate();
-//#endregion
-//#region Functions
+    //#endregion
+    //#region funciones
     const guardar = (comidaNueva) => {
         crearComida(comidaNueva).then((respuesta) => {
             if (respuesta.status === 201) {
@@ -21,7 +22,7 @@ const CrearComida = () => {
             }
         });
     }
-//#endregion
+    //#endregion
     return (
         <section className='container mainSection'>
             <h1 className='mt-4'>Nuevo Producto</h1>
@@ -90,8 +91,8 @@ const CrearComida = () => {
                 <Form.Group>
                     <Form.Label>Categoria</Form.Label>
                     <Form.Select aria-label="Default select example"
-                        {...register('categoria',{
-                        required:"Debe seleccionar una categoria"
+                        {...register('categoria', {
+                            required: "Debe seleccionar una categoria"
                         })
                         }>
                         <option>Seleccione una categoria</option>

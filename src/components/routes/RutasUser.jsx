@@ -1,3 +1,4 @@
+//#region imports
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AdminPedidos from '../views/user/GestionPedido/AdminPedidos';
@@ -6,7 +7,7 @@ import RegistrarCliente from "../views/user/GestionClientes/RegistrarCliente"
 import AdminClientes from  "../views/user/GestionClientes/AdminClientes"
 import AdminMesas from '../views/user/GestionVentas/AdminMesas';
 import InformeVentas from '../views/user/GestionVentas/InformeVentas';
-
+//#endregion
 const RutasUser = () => {
     return (
         <>

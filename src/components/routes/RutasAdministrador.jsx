@@ -5,7 +5,6 @@ import CrearComida from "../views/Admin/GestionComida/CrearComida";
 import EditarComida from "../views/Admin/GestionComida/EditarComida";
 import RegistrarUsuario from "../views/Admin/GestionEmpleados/RegistrarUsuario";
 import AdminEmpleados from "../views/Admin/GestionEmpleados/AdminEmpleados";
-
 //#endregion
 const RutasAdministrador = () => {
     return (

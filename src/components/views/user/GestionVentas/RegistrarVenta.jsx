@@ -1,16 +1,21 @@
+//#region imports
 import React, { useEffect, useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { crearComprobante, listarClientes, listarUsuarios } from '../../../helpers/queries';
 import Swal from 'sweetalert2';
-
+import SpinnerCustom from '../../../common/SpinnerCustom';
+//#endregion
 const RegistrarVenta = (props) => {
+
+    //#region hooks
     const [datosMesa, setDatosMesa] = useState(JSON.parse(localStorage.getItem("DatosMesa")) || null)
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [mosos, setMosos] = useState([""])
     const [clientes, setClientes] = useState([""])
     const [spinner, setspinner] = useState(false)
-    
+    //#endregion
+    //#region funciones
     const cargarMosos = () => {
         listarUsuarios().then((resp) => {
             if (resp.status == 200) {
@@ -48,6 +53,7 @@ const RegistrarVenta = (props) => {
             }
         })
     }
+    //#endregion
     return (
         <Container>
             <h1 className='fs-1 mb-3'>Registro de Ventas</h1>
