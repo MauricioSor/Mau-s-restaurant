@@ -1,5 +1,5 @@
 //#region imports
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Nav, Navbar, Button, Modal, Form, Row } from 'react-bootstrap';
 import { NavLink, Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -19,18 +19,19 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
     const rol = JSON.parse(sessionStorage.getItem("rol")) || null
     //#endregion
     //#region funciones
-    const enviarDatos = (usuario,e) => {
-        e.preventDefault();
+    const enviarDatos = (usuario) => {
         iniciarSesion(usuario).then((respuesta) => {
-            if (respuesta.status==200) {
+            if (respuesta.status == 200) {
                 sessionStorage.setItem('usuario', JSON.stringify(respuesta.data.usuario))
                 sessionStorage.setItem('rol', JSON.stringify(respuesta.data.rol.nombre))
                 setUsuarioLogueado(respuesta.data)
                 reset()
-                respuesta.data.rol.nombre=="Admin"?navegacion('/Administrador/'):navegacion("/Usuario/")
-                Swal.fire(`Bienvenido ${respuesta.data.usuario}`,"Iniciaste sesión","success")
+                respuesta.data.rol.nombre == "Admin" ? navegacion('/Administrador/') : navegacion("/Usuario/")
+                handleClose();
+                handleNavLinkClick();
+                Swal.fire(`Bienvenido ${respuesta.data.usuario}`, "Iniciaste sesión", "success")
             } else {
-                Swal.fire(`Nombre de usuario o contraseña incorrectos`,"Verifique los datos e intente nuevamente","error")
+                Swal.fire(`Nombre de usuario o contraseña incorrectos`, "Verifique los datos e intente nuevamente", "error")
             }
         });
     }
@@ -38,44 +39,45 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
         sessionStorage.removeItem('usuario');
         sessionStorage.removeItem('rol');
         setUsuarioLogueado();
-        Swal.fire(`Sesión cerrada`,"","success")
+        handleNavLinkClick();
+        Swal.fire(`Sesión cerrada`, "", "success")
         navegacion('/');
     }
-	const handleNavLinkClick = () => {
-	setNavbarExpanded(false);
-	};
+    const handleNavLinkClick = () => {
+        setNavbarExpanded(false);
+    };
     const handleMenuButtonClick = () => {
         setNavbarExpanded(!navbarExpanded);
     };
     //#endregion
     return (
         <>
-            <Navbar bg="primary" expand='md' variant="dark" expand='lg site-wrap' >
+            <Navbar collapseOnSelect bg="primary" expanded={navbarExpanded}className='site-wrap ' expand='md' variant="dark" >
                 <Container>
                     <Navbar.Brand as={Link} to="/">Mau's restobar</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={handleMenuButtonClick}/>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={handleMenuButtonClick} />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
-                            <NavLink className='nav-item nav-link' end to='/'>Inicio</NavLink>
+                            <NavLink className='nav-item nav-link'onClick={handleNavLinkClick} end to='/'>Inicio</NavLink>
                             {
                                 (usuarioLogueado) ?
-                                            (rol=="Admin")?
-                                            <>
+                                    (rol == "Admin") ?
+                                        <>
                                             <NavLink onClick={handleNavLinkClick} end className='nav-item nav-link' to='/Administrador/Empleados'>Empleados</NavLink>
                                             <NavLink onClick={handleNavLinkClick} end className='nav-item nav-link' to='/Administrador/'>Comidas</NavLink>
                                             <Button variant="primary" className='border' onClick={() => { cerrarSesion(); handleMenuButtonClick(); }}>Cerrar Sesion</Button>
-                                            </>:
+                                        </> :
                                         <>
                                             <NavLink onClick={handleNavLinkClick} end className='nav-item nav-link' to='/Usuario/AdminClientes'>Clientes</NavLink>
                                             <NavLink onClick={handleNavLinkClick} end className='nav-item nav-link' to='/Usuario/Mesas'>Mesas</NavLink>
                                             <NavLink onClick={handleNavLinkClick} end className='nav-item nav-link' to='/Usuario/'>Pedidos</NavLink>
-                                            <Button variant="primary" className='border' onClick={cerrarSesion,handleNavLinkClick}>Cerrar Sesion</Button>
+                                            <Button variant="primary" className='border' onClick={cerrarSesion}>Cerrar Sesion</Button>
                                         </>
-                                        :
-                                        <>
-                                        <NavLink end className='nav-item nav-link' onClick={handleShow,handleNavLinkClick} >Iniciar Sesion</NavLink>
+                                    :
+                                    <>
+                                        <NavLink end className='nav-item nav-link' onClick={handleShow} >Iniciar Sesion</NavLink>
                                         <NavLink onClick={handleNavLinkClick} end className='nav-item nav-link' to={"/MiCarrito"} >Mi Carrito</NavLink>
-                                        </>
+                                    </>
                             }
                         </Nav>
                     </Navbar.Collapse>
@@ -127,7 +129,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                         </Row>
                         <Form.Group className='text-end my-2 '>
                             <Button className='mx-1' variant='danger' onClick={handleClose}>Cancelar</Button>
-                            <Button className='mx-1' variant='primary' type='submit' onClick={handleClose}>Enviar</Button>
+                            <Button className='mx-1' variant='primary' type='submit'>Enviar</Button>
                         </Form.Group>
                     </Form>
                 </Container>
