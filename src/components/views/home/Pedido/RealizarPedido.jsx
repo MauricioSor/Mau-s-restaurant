@@ -17,7 +17,7 @@ const RealizarPedido = () => {
     const navegar=useNavigate();
     //#endregion
     //#region funciones
-    const cargarCliente = (id) => {
+    const cargarCliente =(id) => {
         buscarCliente(id).then((resp) => {
             if (resp.status == 200) {
                 setClienteDatos(resp.data)
@@ -38,12 +38,15 @@ const RealizarPedido = () => {
         })
     }
     const registrarPedido = (pedido) => {
-        console.log(pedido);
         pedido.estado = "Pendiente"
         pedido.cliente = (clienteDatos._id != "" ? (pedido._id) : (clienteDatos._id))
         pedido.hora = hora();
         pedido.detalle = JSON.parse(localStorage.getItem("pedido"))
         pedido.total = total
+        pedido.direccion=(clienteDatos.direccion)
+        pedido._id=undefined
+        pedido.telefono=(clienteDatos.telefono)
+        pedido.nombre=(clienteDatos.nombre)
         crearPedido(pedido).then((resp) => {
             if (resp.status == 201) {
                 Swal.fire("Pedido realizado!", "En minutos nos estaremos contanctando para avisarle cuando salga su pedido", "success");
@@ -95,43 +98,37 @@ const RealizarPedido = () => {
                                     <Form.Control
                                         type='text'
                                         disabled={cargaCliente}
-                                        placeholder="Ingrese un nombre de usuario"
-                                        {...register('_id')}
+                                        placeholder="Ingrese un codigo de usuario"
+                                        {...register('_id', {
+                                            required: "El codigo es obligatorio"
+                                        })}
                                     />
                                     <Button variant='warning' className='ms-1' type='submit'>Cargar</Button>
                                 </Form.Group>
                             </Form>
                             {cargaCliente ?
-                                (<>{/* Aqui cuando se cargan los datos del cliente */}
+                                (<>
                                     <h2 className='fs-2 text-center'>Datos de envío</h2>
                                     <Form onSubmit={handleSubmit(registrarPedido)}>
                                         <Form.Label>Nombre</Form.Label>
                                         <Form.Control
                                             type='text'
-                                            
-                                            value={clienteDatos.nombre}
-                                            {...register('nombre',)}
+                                            defaultValue={clienteDatos.nombre}
                                         />
                                         <Form.Label>Telefono</Form.Label>
                                         <Form.Control
                                             type='text'
-                                            
-                                            value={clienteDatos.telefono}
-                                            {...register('telefono')}
+                                            defaultValue={clienteDatos.telefono}
                                         />
                                         <Form.Label>Direccion</Form.Label>
                                         <Form.Control
                                             type='text'
-                                            
-                                            value={clienteDatos.direccion}
-                                            {...register('direccion')}
+                                            defaultValue={clienteDatos.direccion}
                                         />
-                                        <div className='d-flex flex-column'>
                                         <Form.Label>Total: {total}</Form.Label>
                                         <Button type="submit" variant="primary">Realizar Pedido!</Button>
-                                        </div>
                                     </Form>
-                                </>) : (<>{/* Aqui no se hace nada */}</>)
+                                </>) : (<></>)
                             }
                         </>) : (<>
                             {/* NO clientes */}
