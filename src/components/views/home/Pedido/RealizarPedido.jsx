@@ -125,8 +125,10 @@ const RealizarPedido = () => {
                                             type='text'
                                             defaultValue={clienteDatos.direccion}
                                         />
+                                        <div className='d-flex flex-column'>
                                         <Form.Label>Total: {total}</Form.Label>
                                         <Button type="submit" variant="primary">Realizar Pedido!</Button>
+                                        </div>
                                     </Form>
                                 </>) : (<></>)
                             }
