@@ -5,6 +5,7 @@ import { Container, Form, Button } from 'react-bootstrap';
 import { buscarCliente, crearCliente, crearPedido } from '../../../helpers/queries';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 //#endregion
 const RealizarPedido = () => {
     //#region hooks
@@ -13,6 +14,7 @@ const RealizarPedido = () => {
     const [cliente, setCliente] = useState(false)
     const [clienteDatos, setClienteDatos] = useState("")
     const [cargaCliente, setCargaCliente] = useState(false)
+    const navegar=useNavigate();
     //#endregion
     //#region funciones
     const cargarCliente = (id) => {
@@ -26,12 +28,9 @@ const RealizarPedido = () => {
         })
     }
     const registroCompleto = (cliente) => {
-        console.log(cliente);
         crearCliente(cliente).then((resp) => {
-            console.log(resp);
             if (resp.status == 200) {
                 cliente._id = (resp.data)
-                console.log(cliente)
                 registrarPedido(cliente)
             } else {
                 Swal.fire("Error", "Ocurrió un error inesperado al conectar con el servidor", "error")
@@ -47,6 +46,8 @@ const RealizarPedido = () => {
         crearPedido(pedido).then((resp) => {
             if (resp.status == 201) {
                 Swal.fire("Pedido realizado!", "En minutos nos estaremos contanctando para avisarle cuando salga su pedido", "success");
+                localStorage.removeItem("pedido")
+                navegar("/");
             } else {
                 Swal.fire("Error", "Ocurrió un error inesperado, intente nuevamente mas tarde", "error")
             }
@@ -92,7 +93,7 @@ const RealizarPedido = () => {
                                 <Form.Group className='d-flex'>
                                     <Form.Control
                                         type='text'
-                                        disabled={(cargaCliente)}
+                                        disabled={cargaCliente}
                                         placeholder="Ingrese un nombre de usuario"
                                         {...register('_id')}
                                     />
@@ -106,24 +107,25 @@ const RealizarPedido = () => {
                                         <Form.Label>Nombre</Form.Label>
                                         <Form.Control
                                             type='text'
-                                            disabled="true"
+                                            disabled={true}
                                             value={clienteDatos.nombre}
                                         />
                                         <Form.Label>Telefono</Form.Label>
                                         <Form.Control
                                             type='text'
-                                            disabled="true"
+                                            disabled={true}
                                             value={clienteDatos.telefono}
                                         />
                                         <Form.Label>Direccion</Form.Label>
                                         <Form.Control
                                             type='text'
-                                            disabled="true"
+                                            disabled={true}
                                             value={clienteDatos.direccion}
                                         />
-                                        <h2 className='fs-2 text-center'>Datos del pedido</h2>
+                                        <div className='d-flex flex-column'>
                                         <Form.Label>Total: {total}</Form.Label>
                                         <Button type="submit" variant="primary">Realizar Pedido!</Button>
+                                        </div>
                                     </Form>
                                 </>) : (<>{/* Aqui no se hace nada */}</>)
                             }
@@ -168,8 +170,10 @@ const RealizarPedido = () => {
                                 <Form.Text className='text-danger'>
                                     {errors.direccion?.message}
                                 </Form.Text>
+                                <div className='d-flex flex-column'>
                                 <Form.Label>Total: {total}</Form.Label>
                                 <Button type="submit" variant="primary">Realizar Pedido!</Button>
+                                </div>
                             </Form>
                         </>)
                 }

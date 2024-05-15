@@ -19,11 +19,12 @@ function App() {
   //#region hooks
   const usuarioSessionStorage = JSON.parse(sessionStorage.getItem('usuario')) || null;
   const [usuarioLogueado, setUsuarioLogueado] = useState(usuarioSessionStorage);
+  const loginUsuario=(usuario)=>setUsuarioLogueado(usuario)
   //#endregion
   return (
     <>
       <BrowserRouter>
-        <Menu usuarioLogueado={usuarioLogueado} setUsuarioLogueado={setUsuarioLogueado} />
+        <Menu usuarioLogueado={usuarioLogueado} loginUsuario={loginUsuario} />
         <Routes>
           <Route exact path='/' element={<Principal />} />
           <Route exact path='/detalle/:id' element={<Detalle />} />

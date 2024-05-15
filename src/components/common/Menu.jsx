@@ -8,7 +8,7 @@ import { iniciarSesion } from '../helpers/queries';
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
 //#endregion
-const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
+const Menu = ({ usuarioLogueado, loginUsuario }) => {
     //#region hooks
     const [show, setShow] = useState(false);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -24,7 +24,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
             if (respuesta.status == 200) {
                 sessionStorage.setItem('usuario', JSON.stringify(respuesta.data.usuario))
                 sessionStorage.setItem('rol', JSON.stringify(respuesta.data.rol.nombre))
-                setUsuarioLogueado(respuesta.data)
+                loginUsuario(respuesta.data)
                 reset()
                 respuesta.data.rol.nombre == "Admin" ? navegacion('/Administrador/') : navegacion("/Usuario/")
                 handleClose();
@@ -38,7 +38,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
     const cerrarSesion = () => {
         sessionStorage.removeItem('usuario');
         sessionStorage.removeItem('rol');
-        setUsuarioLogueado();
+        loginUsuario();
         handleNavLinkClick();
         Swal.fire(`Sesión cerrada`, "", "success")
         navegacion('/');
