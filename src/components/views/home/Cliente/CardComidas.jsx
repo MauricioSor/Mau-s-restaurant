@@ -30,8 +30,8 @@ const CardComidas = ({ recetas }) => {
                                 <Card.Img variant="top" src={item.imagen} style={{ height: '180px' }} />
                                 <Card.Body className='d-flex flex-column'>
                                     <Card.Title className='text-center'>{item.nombre}</Card.Title>
-                                    <Card.Text className='text-truncate'>
-                                        <p className='text-center'><strong >${item.precio}</strong></p>
+                                    <Card.Text className='text-truncate text-center'>
+                                        <span className='text-center'><strong>${item.precio}</strong></span>
                                     </Card.Text>
                                     <div className='text-center'>
                                         <Button

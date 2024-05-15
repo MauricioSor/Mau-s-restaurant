@@ -37,9 +37,10 @@ const AdminMesas = () => {
         handleShow()
     }
     const modificarDatos = (mesa) => {
-        if (mesa.estado == "Libre") {
+        if (mesa.estado == "Libre"||mesa.estado == "Reservado") {
             mesa.total = ""
             mesa.pago = ""
+            mesa.detalle=""
         }
         modificarMesa(datosMesa._id, mesa).then((resp) => {
             handleClose();
@@ -73,7 +74,7 @@ const AdminMesas = () => {
                             spinner ?
                                 (
                                     mesas.map((item, index) => (
-                                        <Mesas item={item} index={index} mostrarDatos={mostrarDatos} />
+                                        <Mesas item={item} index={index} key={index} mostrarDatos={mostrarDatos} />
                                     ))
                                 ) : (
                                     <SpinnerCustom/>

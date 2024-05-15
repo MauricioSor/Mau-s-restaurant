@@ -154,7 +154,6 @@ const AdminEmpleados = () => {
                                                     <Form.Control
                                                         type="text"
                                                         defaultValue={empleado.rol.nombre}
-                                                        value={empleado.rol.nombre}
                                                         {...register("rol.nombre", {
                                                             required: "El campo debe tener un rol"
                                                         })

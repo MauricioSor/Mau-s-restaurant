@@ -41,9 +41,9 @@ const Detalle = () => {
                                         <Card.Title className="text-center display-4">{comida.nombre}</Card.Title>
                                         <Card.Body>
                                             <Card.Text>
-                                                <p>Precio:{comida.precio}</p>
+                                                <span>Precio:{comida.precio}</span>
                                                 <br />
-                                                <p className="text-start">{comida.descripcion}</p>
+                                                <span className="text-start">{comida.descripcion}</span>
                                                 <br />
                                             </Card.Text>
                                             <Card.Footer className="align-self-start">
