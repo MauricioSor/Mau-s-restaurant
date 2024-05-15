@@ -16,13 +16,11 @@ const Carrito = () => {
     function filtrarYContarRepetidos(array) {
         // Creamos un objeto para llevar un registro de cuántas veces aparece cada objeto
         const contador = {};
-
         // Iteramos sobre el array para contar la cantidad de cada objeto
         array.forEach(objeto => {
             const clave = JSON.stringify(objeto); // Convertimos el objeto a una cadena JSON para usarlo como clave
             contador[clave] = (contador[clave] || 0) + 1; // Incrementamos el contador para esta clave
         });
-
         // Filtramos los objetos repetidos y creamos un nuevo array con el campo 'cantidad'
         const resultados = Object.keys(contador).map(clave => {
             const objeto = JSON.parse(clave); // Convertimos la clave de vuelta a un objeto
@@ -33,7 +31,7 @@ const Carrito = () => {
     }
     useEffect(() => {
         const pedidos = JSON.parse(localStorage.getItem("pedido") || "[]");
-        pedidos.length > 1 ? (ActivarCarga(), setPedidos(filtrarYContarRepetidos(pedidos))) : <></>;
+        pedidos.length > 0 ? (ActivarCarga(), setPedidos(filtrarYContarRepetidos(pedidos))) : <></>;
     }, []);
     //#endregion
     return (

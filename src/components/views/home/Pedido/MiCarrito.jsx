@@ -8,10 +8,16 @@ const MiCarrito = ({ item }) => {
     const [cantidad, setcantidad] = useState(item.cantidad)
     //#endregion
     //#region funciones
+    const agregar=(cantidad)=>{
+        //
+        //const pedido=localStorage.getItem("pedido");
+        //pedido.push(cantidad)
+        //console.log(pedido);
+        console.log(cantidad);
+    }
     const calcularPrecio = () => {
         const nuevoPrecio = item.precio * cantidad;
         setPrecio(nuevoPrecio);
-
     };
     useEffect(() => {
         localStorage.setItem("Total", "");
@@ -33,9 +39,10 @@ const MiCarrito = ({ item }) => {
                     </td>
                     <td >{item.precio}$</td>
                     <td >
-                        <input type="number" min={0}
+                        <input className="text-center" type="number" min={0}
                             defaultValue={cantidad}
-                            onChange={(e) => { setcantidad(e.target.value) }}
+                            disabled={true}
+                            onChange={(e) => { setcantidad(e.target.value)}}
                         />
                     </td>
                     <td >{precio}$</td>

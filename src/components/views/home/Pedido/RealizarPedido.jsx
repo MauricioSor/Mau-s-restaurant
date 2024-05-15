@@ -38,6 +38,7 @@ const RealizarPedido = () => {
         })
     }
     const registrarPedido = (pedido) => {
+        console.log(pedido);
         pedido.estado = "Pendiente"
         pedido.cliente = (clienteDatos._id != "" ? (pedido._id) : (clienteDatos._id))
         pedido.hora = hora();
@@ -107,20 +108,23 @@ const RealizarPedido = () => {
                                         <Form.Label>Nombre</Form.Label>
                                         <Form.Control
                                             type='text'
-                                            disabled={true}
+                                            
                                             value={clienteDatos.nombre}
+                                            {...register('nombre',)}
                                         />
                                         <Form.Label>Telefono</Form.Label>
                                         <Form.Control
                                             type='text'
-                                            disabled={true}
+                                            
                                             value={clienteDatos.telefono}
+                                            {...register('telefono')}
                                         />
                                         <Form.Label>Direccion</Form.Label>
                                         <Form.Control
                                             type='text'
-                                            disabled={true}
+                                            
                                             value={clienteDatos.direccion}
+                                            {...register('direccion')}
                                         />
                                         <div className='d-flex flex-column'>
                                         <Form.Label>Total: {total}</Form.Label>
