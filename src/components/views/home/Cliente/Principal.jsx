@@ -1,10 +1,13 @@
 //#region imports
 import React from 'react';
-import { Carousel } from 'react-bootstrap';
+import { Carousel, Spinner } from 'react-bootstrap';
 import { buscarComidas } from '../../../helpers/queries';
 import { useState, useEffect } from 'react';
 import CardComidas from './CardComidas';
 import SpinnerCustom from '../../../common/SpinnerCustom';
+import Skeleton from "react-loading-skeleton"
+import CardComidasSkeleton from './CardComidasSkeleton';
+import CarouselSkeleton from './CarouselSkeleton';
 //#endregion
 
 const Principal = () => {
@@ -28,7 +31,12 @@ const Principal = () => {
         <>
             {
                 mostrarSpinner ?
-                    (<SpinnerCustom/>) :
+                    (
+                        <>
+                            <CarouselSkeleton />
+                            <CardComidasSkeleton />
+                        </>
+                    ) :
                     <>
                         <Carousel style={{ width: '100' }}>
                             {
