@@ -18,7 +18,6 @@ const Menu = () => {
     const navegacion = useNavigate();
     const{state}=useContext(authContext)
     const [navbarExpanded, setNavbarExpanded] = useState(false);
-    const rol = JSON.parse(sessionStorage.getItem("rol")) || null
     //#endregion
     //#region funciones
     const enviarDatos = async (usuario) => {

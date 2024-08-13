@@ -13,7 +13,7 @@ import RealizarPedido from './components/views/home/Pedido/RealizarPedido'
 import RutasUser from './components/routes/RutasUser'
 import Principal from './components/views/home/Cliente/Principal'
 import Detalle from './components/views/home/Cliente/Detalle'
-import { authContext } from './context/authContext'
+import { AuthContext } from './context/AuthContext'
 
 //#endregion
 function App() {
