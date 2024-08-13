@@ -1,5 +1,5 @@
 import React, { Children, useReducer, useState } from 'react';
-import { authContext } from '../context/authContext';
+import { AuthContext } from '../context/AuthContext';
 import { AuthReducer } from '../reducers/authReducer';
 import { iniciarSesion } from '../components/helpers/queries';
 
@@ -47,7 +47,7 @@ const AuthProvider = ({ children }) => {
         }
     }
     return (
-        <authContext.Provider
+        <AuthContext.Provider
             value={{
                 login,
                 state,
@@ -55,7 +55,7 @@ const AuthProvider = ({ children }) => {
                 checkSession
             }}>
             {children}
-        </authContext.Provider>
+        </AuthContext.Provider>
     );
 };
 

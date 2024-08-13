@@ -17,7 +17,7 @@ import { AuthContext } from './context/AuthContext'
 
 //#endregion
 function App() {
-  const { state, checkSession } = useContext(authContext)
+  const { state, checkSession } = useContext(AuthContext)
   
   useEffect(() => {
     checkSession()

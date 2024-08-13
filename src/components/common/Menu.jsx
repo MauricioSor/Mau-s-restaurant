@@ -6,17 +6,17 @@ import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
-import { authContext } from '../../context/authContext';
+import { AuthContext } from '../../context/AuthContext';
 //#endregion
 const Menu = () => {
     //#region hooks
-    const { login, logout } = useContext(authContext)
+    const { login, logout } = useContext(AuthContext)
     const [show, setShow] = useState(false);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const navegacion = useNavigate();
-    const{state}=useContext(authContext)
+    const{state}=useContext(AuthContext)
     const [navbarExpanded, setNavbarExpanded] = useState(false);
     //#endregion
     //#region funciones
