@@ -7,7 +7,7 @@ const CarouselSkeleton = () => {
         <>
             <Carousel style={{ width: '100%' }}>
                 <Carousel.Item>
-                    <div className='d-flex justify-content-center align-items-center fluid' fluid style={{ height: '400px' }}>
+                    <div className='d-flex justify-content-center align-items-center fluid'  style={{ height: '400px' }}>
                         <Spinner animation='grow' variant='primary' style={{minWidth:"30vh",minHeight:"30vh"}} />
                     </div>
                 </Carousel.Item>

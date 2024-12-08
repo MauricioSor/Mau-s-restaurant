@@ -1,46 +1,47 @@
 //#region imports
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Container, Nav, Navbar, Button, Modal, Form, Row } from 'react-bootstrap';
 import { NavLink, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
-import { iniciarSesion } from '../helpers/queries';
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../context/AuthContext';
 //#endregion
-const Menu = ({ usuarioLogueado, loginUsuario }) => {
+const Menu = () => {
     //#region hooks
+    const { login, logout } = useContext(AuthContext)
     const [show, setShow] = useState(false);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const navegacion = useNavigate();
+    const{state}=useContext(AuthContext)
     const [navbarExpanded, setNavbarExpanded] = useState(false);
-    const rol = JSON.parse(sessionStorage.getItem("rol")) || null
     //#endregion
     //#region funciones
-    const enviarDatos = (usuario) => {
-        iniciarSesion(usuario).then((respuesta) => {
-            if (respuesta.status == 200) {
-                sessionStorage.setItem('usuario', JSON.stringify(respuesta.data.usuario))
-                sessionStorage.setItem('rol', JSON.stringify(respuesta.data.rol.nombre))
-                loginUsuario(respuesta.data)
-                reset()
-                respuesta.data.rol.nombre == "Admin" ? navegacion('/Administrador/') : navegacion("/Usuario/")
-                handleClose();
-                handleNavLinkClick();
-                Swal.fire(`Bienvenido ${respuesta.data.usuario}`, "Iniciaste sesión", "success")
+    const enviarDatos = async (usuario) => {
+        try {
+            await login(usuario);
+            const nombre = JSON.parse(sessionStorage.getItem("usuario"));
+            const rol = JSON.parse(sessionStorage.getItem("rol"));
+            reset();            
+            if (rol === "Admin") {
+                navegacion('/Administrador/');
             } else {
-                Swal.fire(`Nombre de usuario o contraseña incorrectos`, "Verifique los datos e intente nuevamente", "error")
+                navegacion("/Usuario/");
             }
-        });
+            handleClose();
+            handleNavLinkClick();
+            Swal.fire(`Bienvenido ${nombre}`, "Iniciaste sesión", "success");
+        } catch (error) {
+            Swal.fire(`Nombre de usuario o contraseña incorrectos`, "Verifique los datos e intente nuevamente", "error");
+        }
     }
     const cerrarSesion = () => {
-        sessionStorage.removeItem('usuario');
-        sessionStorage.removeItem('rol');
-        loginUsuario();
+        logout();
         handleNavLinkClick();
-        Swal.fire(`Sesión cerrada`, "", "success")
+        Swal.fire(`Sesión cerrada`, "", "success");
         navegacion('/');
     }
     const handleNavLinkClick = () => {
@@ -52,16 +53,16 @@ const Menu = ({ usuarioLogueado, loginUsuario }) => {
     //#endregion
     return (
         <>
-            <Navbar collapseOnSelect bg="primary" expanded={navbarExpanded}className='site-wrap ' expand='md' variant="dark" >
+            <Navbar collapseOnSelect bg="primary" expanded={navbarExpanded} className='site-wrap ' expand='md' variant="dark" >
                 <Container>
                     <Navbar.Brand as={Link} to="/">Mau's restobar</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={handleMenuButtonClick} />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
-                            <NavLink className='nav-item nav-link'onClick={handleNavLinkClick} end to='/'>Inicio</NavLink>
+                            <NavLink className='nav-item nav-link' onClick={handleNavLinkClick} end to='/'>Inicio</NavLink>
                             {
-                                (usuarioLogueado) ?
-                                    (rol == "Admin") ?
+                                (state.isAuth) ?
+                                    (state.rol == "Admin") ?
                                         <>
                                             <NavLink onClick={handleNavLinkClick} end className='nav-item nav-link' to='/Administrador/Empleados'>Empleados</NavLink>
                                             <NavLink onClick={handleNavLinkClick} end className='nav-item nav-link' to='/Administrador/'>Comidas</NavLink>

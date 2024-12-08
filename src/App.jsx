@@ -5,7 +5,7 @@ import Menu from './components/common/Menu'
 import Footer from './components/common/Footer'
 import Error from './components/views/Error'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import RutasProtegidas from './components/routes/RutasProtegidas'
 import RutasAdministrador from './components/routes/RutasAdministrador'
 import Carrito from './components/views/home/Pedido/Carrito'
@@ -13,24 +13,20 @@ import RealizarPedido from './components/views/home/Pedido/RealizarPedido'
 import RutasUser from './components/routes/RutasUser'
 import Principal from './components/views/home/Cliente/Principal'
 import Detalle from './components/views/home/Cliente/Detalle'
+import { AuthContext } from './context/AuthContext'
 
 //#endregion
 function App() {
-  //#region hooks
-  const usuarioSessionStorage = JSON.parse(sessionStorage.getItem('usuario')) || null;
-  const [usuarioLogueado, setUsuarioLogueado] = useState(usuarioSessionStorage);
-  const loginUsuario = (usuario) => setUsuarioLogueado(usuario)
-  const ip = () => {
-    const direccion=window.location.hostname;
-    console.log(direccion);
-  }
-useEffect(()=>{
-ip()
-},[])  //#endregion
+  const { state, checkSession } = useContext(AuthContext)
+  
+  useEffect(() => {
+    checkSession()
+  }, [])
+  //#endregion
   return (
     <>
       <BrowserRouter>
-        <Menu usuarioLogueado={usuarioLogueado} loginUsuario={loginUsuario} />
+        <Menu state={state} />
         <Routes>
           <Route exact path='/' element={<Principal />} />
           <Route exact path='/detalle/:id' element={<Detalle />} />
